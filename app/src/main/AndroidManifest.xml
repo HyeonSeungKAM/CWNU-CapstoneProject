@@ -3,7 +3,24 @@
     package="com.example.registerloginexample">
 
     <!--인터넷 권한 선언 -->
+
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 블루투스 통신에 필요원 권한 선언 -->
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false"/>
+
+
+
+    <!-- android:usesCleartextTraffic="true" 서버 php로 넘어가기 위해 필수로 필요 -->
 
     <application
         android:allowBackup="true"
@@ -28,3 +45,4 @@
     </application>
 
 </manifest>
+

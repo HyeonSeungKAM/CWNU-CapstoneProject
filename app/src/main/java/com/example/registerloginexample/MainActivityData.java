@@ -1,13 +1,13 @@
 package com.example.registerloginexample;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivityData extends AppCompatActivity {
 
     // 서버에서 가져온 내용 보여주기
     @Override

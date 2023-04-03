@@ -40,7 +40,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
+        
+        //로그인 버튼을 클릭 시 수행
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,12 +56,25 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
                             if (success) { // 로그인에 성공한 경우
+                                String binName = jsonObject.getString("binName");
                                 String userID = jsonObject.getString("userID");
-                                String userPass = jsonObject.getString("userPassword");
+                                String userName = jsonObject.getString("userName");
+                                String glass = jsonObject.getString("glass");
+                                String plastic = jsonObject.getString("plastic");
+                                String paper = jsonObject.getString("paper");
+                                String plastic_bag = jsonObject.getString("plastic_bag");
+
                                 Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("binName",binName);
                                 intent.putExtra("userID",userID);
-                                intent.putExtra("userPass",userPass);
+                                intent.putExtra("userName",userName);
+                                intent.putExtra("glass",glass);
+                                intent.putExtra("plastic",plastic);
+                                intent.putExtra("paper",paper);
+                                intent.putExtra("plastic_bag",plastic_bag);
+
+
                                 startActivity(intent);
 
                             } else { // 로그인에 실패한 경우
