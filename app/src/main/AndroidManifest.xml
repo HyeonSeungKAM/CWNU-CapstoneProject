@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.registerloginexample">
+    package="com.example.ElectricCommerce">
 
     <!--인터넷 권한 선언 -->
 
@@ -39,9 +39,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SellActivity"/>
+        <activity android:name=".ListActivity"/>
     </application>
 
 </manifest>
