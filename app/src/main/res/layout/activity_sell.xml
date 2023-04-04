@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Sell 페이지"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,37 +24,131 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:text="유리병"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+
     <TextView
-        android:id="@+id/glass_per_kg"
+        android:id="@+id/glass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:hint="kg당 유리병 가격"
-        android:textSize="24sp"
+        android:layout_marginEnd="4dp"
+        android:text="TextView"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
+        app:layout_constraintEnd_toStartOf="@+id/textView27"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="@+id/textView7"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="kg"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/glass"
+        app:layout_constraintEnd_toStartOf="@+id/glass_per_kg"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
-        android:text="/ Kg"
-        android:textSize="24sp"
+        android:text="원/Kg"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/glass_per_kg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/glass_per_kg"
-        app:layout_constraintTop_toTopOf="@+id/glass_per_kg"
-        app:layout_constraintVertical_bias="1.0"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
+    <TextView
+        android:id="@+id/metal_per_kg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="100"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/paper_per_kg"
+        tools:layout_editor_absoluteX="294dp" />
+
+    <TextView
+        android:id="@+id/plastic_per_kg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="50"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView28"
+        app:layout_constraintStart_toEndOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/glass_per_kg"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/glass_per_kg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="50"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView27"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="305dp" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="원/Kg"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/paper_per_kg"
+        app:layout_constraintEnd_toEndOf="@+id/textView23"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/plastic_per_kg"
+        app:layout_constraintTop_toBottomOf="@+id/textView23"
+        app:layout_constraintVertical_bias="0.584" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="원/Kg"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView24"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView24"
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+    <TextView
+        android:id="@+id/paper_per_kg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
+        android:text="10"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView29"
+        app:layout_constraintTop_toBottomOf="@+id/plastic_per_kg" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="원/Kg"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/plastic_per_kg"
+        app:layout_constraintEnd_toEndOf="@+id/textView22"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView22"
+        app:layout_constraintTop_toBottomOf="@+id/textView22"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView14"
@@ -63,7 +157,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="총합계 :"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -72,7 +166,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="유리병 가격 합계"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.119"
@@ -85,37 +179,38 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:text="플라스틱"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
+
     <TextView
-        android:id="@+id/plastic_per_kg"
+        android:id="@+id/plastic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:hint="kg당 플라스틱 가격"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="84dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/glass"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/glass"
+        app:layout_constraintTop_toBottomOf="@+id/glass" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="kg"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/plastic"
+        app:layout_constraintEnd_toEndOf="@+id/textView27"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView27"
+        app:layout_constraintTop_toTopOf="@+id/plastic"
         app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:text="/ Kg"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/plastic_per_kg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/plastic_per_kg"
-        app:layout_constraintVertical_bias="1.0" />
-
 
     <TextView
         android:id="@+id/textView16"
@@ -124,7 +219,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="총합계 :"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -134,7 +229,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:hint="플라스틱 가격 합계"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView16"
         app:layout_constraintStart_toEndOf="@+id/textView16"
         app:layout_constraintTop_toTopOf="@+id/textView16"
@@ -145,39 +240,37 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:text="종이"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
+
     <TextView
-        android:id="@+id/paper_per_kg"
+        android:id="@+id/paper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:hint="kg당 종이 가격"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView9"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="@+id/textView9"
+        android:layout_marginTop="80dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/plastic"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/plastic"
+        app:layout_constraintTop_toBottomOf="@+id/plastic" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="kg"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/paper"
+        app:layout_constraintEnd_toEndOf="@+id/textView28"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView28"
+        app:layout_constraintTop_toTopOf="@+id/paper"
         app:layout_constraintVertical_bias="0.0" />
-
-
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="/ Kg"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/paper_per_kg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
-        app:layout_constraintStart_toEndOf="@+id/paper_per_kg"
-        app:layout_constraintTop_toTopOf="@+id/paper_per_kg"
-        app:layout_constraintVertical_bias="1.0" />
-
 
     <TextView
         android:id="@+id/textView18"
@@ -186,7 +279,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="총합계 :"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -196,7 +289,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="136dp"
         android:hint="종이 가격 합계"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.607"
@@ -213,36 +306,36 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
         android:text="고철"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
+
     <TextView
-        android:id="@+id/metal_per_kg"
+        android:id="@+id/metal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:hint="kg당 고철 가격"
-        android:textSize="24sp"
+        android:text="TextView"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toTopOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintEnd_toEndOf="@+id/paper"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/paper"
+        app:layout_constraintTop_toBottomOf="@+id/paper"
+        app:layout_constraintVertical_bias="0.964" />
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="/ Kg"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/metal_per_kg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintStart_toEndOf="@+id/metal_per_kg"
-        app:layout_constraintTop_toTopOf="@+id/metal_per_kg"
-        app:layout_constraintVertical_bias="1.0" />
-
+        android:text="kg"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/metal"
+        app:layout_constraintEnd_toEndOf="@+id/textView29"
+        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintStart_toStartOf="@+id/textView29"
+        app:layout_constraintTop_toTopOf="@+id/metal"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView21"
@@ -251,7 +344,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="18dp"
         android:text="총합계 :"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -260,7 +353,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="고철 가격 합계"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView21"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.109"
@@ -275,7 +368,7 @@
         android:layout_marginStart="136dp"
         android:layout_marginTop="52dp"
         android:text="총합계:"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_totalMetalPrice" />
@@ -286,7 +379,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="104dp"
         android:hint="총합계"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView26"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView26"
@@ -298,7 +391,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
         android:text="판매하기"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView26"
@@ -310,11 +402,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:text="취소"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_sellContinue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_sellContinue"
         app:layout_constraintTop_toTopOf="@+id/btn_sellContinue" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
