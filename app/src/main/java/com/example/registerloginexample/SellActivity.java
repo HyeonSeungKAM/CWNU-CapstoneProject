@@ -34,10 +34,26 @@ public class SellActivity extends AppCompatActivity {
         String paper = sellActivityintent.getStringExtra("paper");
         String metal = sellActivityintent.getStringExtra("metal");
 
+        float glassF = Float.parseFloat(glass);
+        float plasticF = Float.parseFloat(plastic);
+        float paperF = Float.parseFloat(paper);
+        float metalF = Float.parseFloat(metal);
+
+        String glassT = Float.toString(glassF * 50);
+        String plasticT = Float.toString(plasticF * 50);
+        String paperT = Float.toString(paperF * 10);
+        String metalT = Float.toString(metalF * 500);
+
         tv_glass.setText(glass);
         tv_plastic.setText(plastic);
         tv_paper.setText(paper);
         tv_metal.setText(metal);
+
+        tv_totalGlassPrice.setText(glassT);
+        tv_totalPlasticPrice.setText(plasticT);
+        tv_totalPaperPrice.setText(paperT);
+        tv_totalMetalPrice.setText(metalT);
+
 
         btn_sellContinue = findViewById(R.id.btn_sellContinue); // 판매하기
         btn_cancel = findViewById(R.id.btn_cancel); // 목록
