@@ -23,16 +23,21 @@ public class SellActivity extends AppCompatActivity {
         TextView tv_totalPaperPrice = findViewById(R.id.tv_totalPaperPrice);
         TextView tv_totalMetalPrice = findViewById(R.id.tv_totalMetalPrice);
 
+        TextView tv_glass = findViewById(R.id.tv_glass);
+        TextView tv_plastic = findViewById(R.id.tv_plastic);
+        TextView tv_paper = findViewById(R.id.tv_paper);
+        TextView tv_metal = findViewById(R.id.tv_metal);
+
         Intent sellActivityintent = getIntent();
         String glass = sellActivityintent.getStringExtra("glass");
         String plastic = sellActivityintent.getStringExtra("plastic");
         String paper = sellActivityintent.getStringExtra("paper");
         String metal = sellActivityintent.getStringExtra("metal");
 
-        tv_totalGlassPrice.setText(glass);
-        tv_totalPlasticPrice.setText(plastic);
-        tv_totalPaperPrice.setText(paper);
-        tv_totalMetalPrice.setText(metal);
+        tv_glass.setText(glass);
+        tv_plastic.setText(plastic);
+        tv_paper.setText(paper);
+        tv_metal.setText(metal);
 
         btn_sellContinue = findViewById(R.id.btn_sellContinue); // 판매하기
         btn_cancel = findViewById(R.id.btn_cancel); // 목록

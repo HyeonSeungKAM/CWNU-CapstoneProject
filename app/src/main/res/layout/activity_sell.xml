@@ -30,7 +30,7 @@
 
 
     <TextView
-        android:id="@+id/glass"
+        android:id="@+id/tv_glass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
@@ -38,7 +38,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintEnd_toStartOf="@+id/textView27"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.72"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="@+id/textView7"
         app:layout_constraintVertical_bias="0.0" />
@@ -50,105 +50,56 @@
         android:layout_marginEnd="20dp"
         android:text="kg"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/glass"
-        app:layout_constraintEnd_toStartOf="@+id/glass_per_kg"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_glass"
+        app:layout_constraintEnd_toStartOf="@+id/textView22"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:text="원/Kg"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="32dp"
+        android:text="50원/Kg"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/glass_per_kg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/glass_per_kg"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/metal_per_kg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:text="100"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/paper_per_kg"
-        tools:layout_editor_absoluteX="294dp" />
-
-    <TextView
-        android:id="@+id/plastic_per_kg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="50"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView28"
-        app:layout_constraintStart_toEndOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/glass_per_kg"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/glass_per_kg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="50"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView27"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="305dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="원/Kg"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="32dp"
+        android:text="10원/Kg"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/paper_per_kg"
-        app:layout_constraintEnd_toEndOf="@+id/textView23"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/plastic_per_kg"
-        app:layout_constraintTop_toBottomOf="@+id/textView23"
-        app:layout_constraintVertical_bias="0.584" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
     <TextView
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="원/Kg"
+        android:layout_marginEnd="28dp"
+        android:text="500원/Kg"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView24"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView24"
-        app:layout_constraintTop_toBottomOf="@+id/textView24" />
-
-    <TextView
-        android:id="@+id/paper_per_kg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="80dp"
-        android:text="10"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/textView29"
-        app:layout_constraintTop_toBottomOf="@+id/plastic_per_kg" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView24"
+        app:layout_constraintVertical_bias="0.003" />
 
     <TextView
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="원/Kg"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="28dp"
+        android:text="50원/Kg"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/plastic_per_kg"
-        app:layout_constraintEnd_toEndOf="@+id/textView22"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView22"
-        app:layout_constraintTop_toBottomOf="@+id/textView22"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView14"
@@ -156,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="총합계 :"
+        android:text="합계 :"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -187,17 +138,16 @@
 
 
     <TextView
-        android:id="@+id/plastic"
+        android:id="@+id/tv_plastic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
         android:layout_marginTop="84dp"
         android:text="TextView"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/glass"
+        app:layout_constraintEnd_toEndOf="@+id/tv_glass"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/glass"
-        app:layout_constraintTop_toBottomOf="@+id/glass" />
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/tv_glass" />
 
     <TextView
         android:id="@+id/textView28"
@@ -205,11 +155,11 @@
         android:layout_height="wrap_content"
         android:text="kg"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/plastic"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_plastic"
         app:layout_constraintEnd_toEndOf="@+id/textView27"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView27"
-        app:layout_constraintTop_toTopOf="@+id/plastic"
+        app:layout_constraintTop_toTopOf="@+id/tv_plastic"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -218,7 +168,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="총합계 :"
+        android:text="합계 :"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -248,16 +198,16 @@
 
 
     <TextView
-        android:id="@+id/paper"
+        android:id="@+id/tv_paper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="TextView"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/plastic"
+        app:layout_constraintEnd_toEndOf="@+id/tv_plastic"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/plastic"
-        app:layout_constraintTop_toBottomOf="@+id/plastic" />
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/tv_plastic" />
 
     <TextView
         android:id="@+id/textView29"
@@ -265,11 +215,11 @@
         android:layout_height="wrap_content"
         android:text="kg"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/paper"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_paper"
         app:layout_constraintEnd_toEndOf="@+id/textView28"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView28"
-        app:layout_constraintTop_toTopOf="@+id/paper"
+        app:layout_constraintTop_toTopOf="@+id/tv_paper"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -278,10 +228,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="총합계 :"
+        android:text="합계 :"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
 
     <TextView
         android:id="@+id/tv_totalPaperPrice"
@@ -292,12 +243,11 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView18"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.607"
+        app:layout_constraintHorizontal_bias="0.253"
         app:layout_constraintStart_toEndOf="@+id/textView18"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
         app:layout_constraintTop_toTopOf="@+id/textView18"
         app:layout_constraintVertical_bias="1.0" />
-
 
     <TextView
         android:id="@+id/textView8"
@@ -312,17 +262,18 @@
 
 
     <TextView
-        android:id="@+id/metal"
+        android:id="@+id/tv_metal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="@+id/paper"
+        app:layout_constraintEnd_toEndOf="@+id/tv_tv_paper"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/paper"
-        app:layout_constraintTop_toBottomOf="@+id/paper"
-        app:layout_constraintVertical_bias="0.964" />
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/tv_paper"
+        app:layout_constraintVertical_bias="0.988" />
 
     <TextView
         android:id="@+id/textView30"
@@ -330,11 +281,11 @@
         android:layout_height="wrap_content"
         android:text="kg"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/metal"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_metal"
         app:layout_constraintEnd_toEndOf="@+id/textView29"
         app:layout_constraintHorizontal_bias="0.957"
         app:layout_constraintStart_toStartOf="@+id/textView29"
-        app:layout_constraintTop_toTopOf="@+id/metal"
+        app:layout_constraintTop_toTopOf="@+id/tv_metal"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -343,7 +294,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="18dp"
-        android:text="총합계 :"
+        android:text="합계 :"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -356,7 +307,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView21"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.109"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toEndOf="@+id/textView21"
         app:layout_constraintTop_toTopOf="@+id/textView21"
         app:layout_constraintVertical_bias="0.0" />
@@ -378,7 +329,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="104dp"
-        android:hint="총합계"
+        android:hint="합계"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView26"
         app:layout_constraintEnd_toEndOf="parent"
