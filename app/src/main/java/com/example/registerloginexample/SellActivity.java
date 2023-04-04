@@ -84,6 +84,7 @@ public class SellActivity extends AppCompatActivity {
                 intent.putExtra("metal",metal);
 
                 startActivity(intent);
+                finish();
 
 
             }
