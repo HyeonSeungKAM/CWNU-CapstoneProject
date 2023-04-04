@@ -22,37 +22,49 @@ public class SellActivity extends AppCompatActivity {
         TextView tv_totalPlasticPrice = findViewById(R.id.tv_totalPlasticPrice);
         TextView tv_totalPaperPrice = findViewById(R.id.tv_totalPaperPrice);
         TextView tv_totalMetalPrice = findViewById(R.id.tv_totalMetalPrice);
+        TextView tv_Total = findViewById(R.id.tv_Total);
 
         TextView tv_glass = findViewById(R.id.tv_glass);
         TextView tv_plastic = findViewById(R.id.tv_plastic);
         TextView tv_paper = findViewById(R.id.tv_paper);
         TextView tv_metal = findViewById(R.id.tv_metal);
 
-        Intent sellActivityintent = getIntent();
-        String glass = sellActivityintent.getStringExtra("glass");
-        String plastic = sellActivityintent.getStringExtra("plastic");
-        String paper = sellActivityintent.getStringExtra("paper");
-        String metal = sellActivityintent.getStringExtra("metal");
+        Intent intent = getIntent();
+        String userID = intent.getStringExtra("userID");
+        String userName = intent.getStringExtra("userName");
+        String binName = intent.getStringExtra("binName");
+        String glass = intent.getStringExtra("glass");
+        String plastic = intent.getStringExtra("plastic");
+        String paper = intent.getStringExtra("paper");
+        String metal = intent.getStringExtra("metal");
 
-        float glassF = Float.parseFloat(glass);
-        float plasticF = Float.parseFloat(plastic);
-        float paperF = Float.parseFloat(paper);
-        float metalF = Float.parseFloat(metal);
+        float glassW = Float.parseFloat(glass);
+        float plasticW = Float.parseFloat(plastic);
+        float paperW = Float.parseFloat(paper);
+        float metalW = Float.parseFloat(metal);
 
-        String glassT = Float.toString(glassF * 50);
-        String plasticT = Float.toString(plasticF * 50);
-        String paperT = Float.toString(paperF * 10);
-        String metalT = Float.toString(metalF * 500);
+        float glassTP = glassW * 50;
+        float plasticTP = plasticW * 50;
+        float paperTP = paperW * 10;
+        float metalTP = metalW * 500;
+        float TotalPrice = glassTP + glassTP + paperTP + metalTP;
 
-        tv_glass.setText(glass);
-        tv_plastic.setText(plastic);
-        tv_paper.setText(paper);
-        tv_metal.setText(metal);
+        String str_glassTP = Float.toString(glassTP);
+        String str_plasticTP = Float.toString(plasticTP);
+        String str_paperTP = Float.toString(paperTP);
+        String str_metalTP = Float.toString(metalTP);
+        String str_TotalPrice = Float.toString(TotalPrice);
 
-        tv_totalGlassPrice.setText(glassT);
-        tv_totalPlasticPrice.setText(plasticT);
-        tv_totalPaperPrice.setText(paperT);
-        tv_totalMetalPrice.setText(metalT);
+        tv_glass.setText(glass +"kg");
+        tv_plastic.setText(plastic + "kg");
+        tv_paper.setText(paper + "kg");
+        tv_metal.setText(metal + "kg");
+
+        tv_totalGlassPrice.setText(str_glassTP + "원");
+        tv_totalPlasticPrice.setText(str_plasticTP + "원");
+        tv_totalPaperPrice.setText(str_paperTP + "원");
+        tv_totalMetalPrice.setText(str_metalTP + "원");
+        tv_Total.setText(str_TotalPrice + "원");
 
 
         btn_sellContinue = findViewById(R.id.btn_sellContinue); // 판매하기
@@ -62,8 +74,17 @@ public class SellActivity extends AppCompatActivity {
         btn_sellContinue.setOnClickListener(new View.OnClickListener() {    // 판매하기
             @Override
             public void onClick(View view) {
-                Intent sellContinue_intent = new Intent(SellActivity.this, ListActivity.class);
-                startActivity(sellContinue_intent);
+                Intent intent = new Intent(SellActivity.this, ListActivity.class);
+                intent.putExtra("binName",binName);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("glass",glass);
+                intent.putExtra("plastic",plastic);
+                intent.putExtra("paper",paper);
+                intent.putExtra("metal",metal);
+
+                startActivity(intent);
+
 
             }
         });

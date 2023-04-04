@@ -16,6 +16,15 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        Intent intent = getIntent();
+        String userID = intent.getStringExtra("userID");
+        String userName = intent.getStringExtra("userName");
+        String binName = intent.getStringExtra("binName");
+        String glass = intent.getStringExtra("glass");
+        String plastic = intent.getStringExtra("plastic");
+        String paper = intent.getStringExtra("paper");
+        String metal = intent.getStringExtra("metal");
+
         btn_sell2 = findViewById(R.id.btn_sell2); // 판매하기 
         btn_main = findViewById(R.id.btn_main); // 메인
 
@@ -23,8 +32,15 @@ public class ListActivity extends AppCompatActivity {
         btn_sell2.setOnClickListener(new View.OnClickListener() {    // 판매하기
             @Override
             public void onClick(View view) {
-                Intent sellContinue_intent = new Intent(ListActivity.this, SellActivity.class);
-                startActivity(sellContinue_intent);
+                Intent intent = new Intent(ListActivity.this, SellActivity.class);
+                intent.putExtra("binName",binName);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("glass",glass);
+                intent.putExtra("plastic",plastic);
+                intent.putExtra("paper",paper);
+                intent.putExtra("metal",metal);
+                startActivity(intent);
 
             }
         });
@@ -32,7 +48,16 @@ public class ListActivity extends AppCompatActivity {
         btn_main.setOnClickListener(new View.OnClickListener() {    // 메인
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(ListActivity.this, MainActivity.class);
+                intent.putExtra("binName",binName);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("glass",glass);
+                intent.putExtra("plastic",plastic);
+                intent.putExtra("paper",paper);
+                intent.putExtra("metal",metal);
+
+                startActivity(intent);
             }
         });
     }

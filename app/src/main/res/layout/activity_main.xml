@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tv_paperW"
+        android:id="@+id/tv_metalW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -15,7 +15,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.573"
-        app:layout_constraintStart_toEndOf="@+id/tv_pbagW"
+        app:layout_constraintStart_toEndOf="@+id/tv_paperW"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_binName" />
 
     <TextView
-        android:id="@+id/tv_pbagW"
+        android:id="@+id/tv_paperW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="332dp"
-        android:text="비닐"
+        android:text="종이"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.163"
@@ -97,10 +97,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="332dp"
-        android:text="유리병"
+        android:text="고철"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintHorizontal_bias="0.57"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="parent" />
 

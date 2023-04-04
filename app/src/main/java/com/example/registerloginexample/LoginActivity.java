@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String glass = jsonObject.getString("glass");
                                 String plastic = jsonObject.getString("plastic");
                                 String paper = jsonObject.getString("paper");
-                                String plastic_bag = jsonObject.getString("plastic_bag");
+                                String metal = jsonObject.getString("metal");
 
                                 Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                                 intent.putExtra("glass",glass);
                                 intent.putExtra("plastic",plastic);
                                 intent.putExtra("paper",paper);
-                                intent.putExtra("plastic_bag",plastic_bag);
+                                intent.putExtra("metal",metal);
 
 
                                 startActivity(intent);

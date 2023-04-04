@@ -3,7 +3,9 @@ package com.example.registerloginexample;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn_sell, btn_list; // 판매하기, 목록 버튼
 
-
     // 서버에서 가져온 내용 보여주기
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +33,28 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tv_id = findViewById(R.id.tv_id);
         TextView tv_name = findViewById(R.id.tv_name);
-        TextView tv_glassW = findViewById(R.id.tv_glassW);
         TextView tv_binName = findViewById(R.id.tv_binName);
+        TextView tv_glassW = findViewById(R.id.tv_glassW);
+        TextView tv_plasticW = findViewById(R.id.tv_plasticW);
+        TextView tv_paperW = findViewById(R.id.tv_paperW);
+        TextView tv_metalW = findViewById(R.id.tv_metalW);
 
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
-        String glass = intent.getStringExtra("glass");
         String binName = intent.getStringExtra("binName");
+        String glass = intent.getStringExtra("glass");
+        String plastic = intent.getStringExtra("plastic");
+        String paper = intent.getStringExtra("paper");
+        String metal = intent.getStringExtra("metal");
 
         tv_id.setText(userID);
         tv_name.setText(userName);
-        tv_glassW.setText(glass);
         tv_binName.setText(binName);
-
-
+        tv_glassW.setText(glass +"kg");
+        tv_plasticW.setText(plastic+"kg");
+        tv_paperW.setText(paper+"kg");
+        tv_metalW.setText(metal+"kg");
 
         btn_sell = findViewById(R.id.btn_sell); // 판매하기
         btn_list = findViewById(R.id.btn_list); // 목록
@@ -69,13 +77,16 @@ public class MainActivity extends AppCompatActivity {
                                 String metal = jsonObject.getString("metal");
 
                                 Toast.makeText(getApplicationContext(),"정보를 불러오는데 성공하였습니다.",Toast.LENGTH_SHORT).show();
-                                Intent SELLintent = new Intent(MainActivity.this, SellActivity.class);
-                                SELLintent.putExtra("glass",glass);
-                                SELLintent.putExtra("plastic",plastic);
-                                SELLintent.putExtra("paper",paper);
-                                SELLintent.putExtra("metal",metal);
+                                Intent intent = new Intent(MainActivity.this, SellActivity.class);
+                                intent.putExtra("binName",binName);
+                                intent.putExtra("userID",userID);
+                                intent.putExtra("userName",userName);
+                                intent.putExtra("glass",glass);
+                                intent.putExtra("plastic",plastic);
+                                intent.putExtra("paper",paper);
+                                intent.putExtra("metal",metal);
 
-                                startActivity(SELLintent);
+                                startActivity(intent);
 
                             } else {
                                 Toast.makeText(getApplicationContext(),"정보를 불러오는데 실패하였습니다.",Toast.LENGTH_SHORT).show();
@@ -95,11 +106,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         btn_list.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
-                Intent LISTintent = new Intent(MainActivity.this, ListActivity.class);
-                startActivity(LISTintent);
+                Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                intent.putExtra("binName",binName);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("glass",glass);
+                intent.putExtra("plastic",plastic);
+                intent.putExtra("paper",paper);
+                intent.putExtra("metal",metal);
+                startActivity(intent);
 
             }
         });
@@ -107,6 +128,4 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
 }
