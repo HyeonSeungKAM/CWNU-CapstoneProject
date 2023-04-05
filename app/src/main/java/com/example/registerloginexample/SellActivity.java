@@ -3,11 +3,14 @@ package com.example.registerloginexample;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 
 
 public class SellActivity extends AppCompatActivity {
@@ -84,7 +87,6 @@ public class SellActivity extends AppCompatActivity {
                 intent.putExtra("metal",metal);
 
                 startActivity(intent);
-                finish();
 
 
             }
