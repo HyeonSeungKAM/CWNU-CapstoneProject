@@ -10,6 +10,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
@@ -77,17 +84,34 @@ public class SellActivity extends AppCompatActivity {
         btn_sellContinue.setOnClickListener(new View.OnClickListener() {    // 판매하기
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SellActivity.this, ListActivity.class);
-                intent.putExtra("binName",binName);
-                intent.putExtra("userID",userID);
-                intent.putExtra("userName",userName);
-                intent.putExtra("glass",glass);
-                intent.putExtra("plastic",plastic);
-                intent.putExtra("paper",paper);
-                intent.putExtra("metal",metal);
 
-                startActivity(intent);
+                Response.Listener<String> responseListner = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean success = jsonObject.getBoolean("success");
+                            if (success) {
+
+
+                                startActivity(intent);
+
+
+
+                            } else {
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                };
+                postSellBoardRequest postsellboardRequest = new postSellBoardRequest(userID, binName,  responseListner);
+                RequestQueue queue = Volley.newRequestQueue(SellActivity.this);
+                queue.add(postsellboardRequest);
 
             }
         });
