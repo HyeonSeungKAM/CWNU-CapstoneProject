@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 };
-
                 SellInfoRequest sellinfoRequest = new SellInfoRequest(binName, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
                 queue.add(sellinfoRequest);
