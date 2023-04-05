@@ -1,13 +1,14 @@
 package com.example.registerloginexample;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
@@ -17,13 +18,29 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 
 public class SellActivity extends AppCompatActivity {
 
     private Button btn_sellContinue, btn_cancel; // 판매하기, 취소
 
+
+// 날짜 -----------------------------------------------------------
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    long dnow;
+    Date ddate;
+    private String getTime(){
+        dnow = System.currentTimeMillis();
+        ddate = new Date(dnow);
+        return mFormat.format("yyyy-MM-dd hh:mm:ss");
+    }
+// -----------------------------------------------------------
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell);
@@ -38,6 +55,7 @@ public class SellActivity extends AppCompatActivity {
         TextView tv_plastic = findViewById(R.id.tv_plastic);
         TextView tv_paper = findViewById(R.id.tv_paper);
         TextView tv_metal = findViewById(R.id.tv_metal);
+
 
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userID");
@@ -65,6 +83,14 @@ public class SellActivity extends AppCompatActivity {
         String str_metalTP = Float.toString(metalTP);
         String str_TotalPrice = Float.toString(TotalPrice);
 
+        String contents = glass + "," + str_glassTP + "," + plastic + "," + str_plasticTP + "," +
+                paper + "," + str_paperTP + "," + metal + ',' + str_metalTP + "," + str_TotalPrice; // sellBoard에 전송할 contents 내용
+
+
+        String Date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/dd/MM")); // 현재 날짜
+
+
+
         tv_glass.setText(glass +"kg");
         tv_plastic.setText(plastic + "kg");
         tv_paper.setText(paper + "kg");
@@ -85,6 +111,7 @@ public class SellActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
                 Response.Listener<String> responseListner = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -94,12 +121,21 @@ public class SellActivity extends AppCompatActivity {
                             boolean success = jsonObject.getBoolean("success");
                             if (success) {
 
+                                Toast.makeText(getApplicationContext(),"등록에 성공하였습니다.",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SellActivity.this, ListActivity.class);
+                                intent.putExtra("binName",binName);
+                                intent.putExtra("userID",userID);
+                                intent.putExtra("userName",userName);
+                                intent.putExtra("glass",glass);
+                                intent.putExtra("plastic",plastic);
+                                intent.putExtra("paper",paper);
+                                intent.putExtra("metal",metal);
 
                                 startActivity(intent);
 
-
-
                             } else {
+                                Toast.makeText(getApplicationContext(),"등록에 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                                return;
 
                             }
 
@@ -109,7 +145,7 @@ public class SellActivity extends AppCompatActivity {
 
                     }
                 };
-                postSellBoardRequest postsellboardRequest = new postSellBoardRequest(userID, binName,  responseListner);
+                postSellBoardRequest postsellboardRequest = new postSellBoardRequest(userID, binName, contents, Date, responseListner);
                 RequestQueue queue = Volley.newRequestQueue(SellActivity.this);
                 queue.add(postsellboardRequest);
 

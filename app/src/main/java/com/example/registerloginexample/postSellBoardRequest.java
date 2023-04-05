@@ -13,16 +13,18 @@ import java.util.Map;
 
 public class postSellBoardRequest extends StringRequest {
 
-    final static private String URL = "http://gamhs44.ivyro.net/test.php";
+    final static private String URL = "http://gamhs44.ivyro.net/postsellBoardinfo.php";
 
     private Map<String, String> map;
 
-    public postSellBoardRequest(String userID, String binName, Response.Listener<String> listener) {
+    public postSellBoardRequest(String userID, String binName,String contents, String Date,Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         map.put("userID", userID);
         map.put("binName", binName);
+        map.put("contents", contents);
+        map.put("Date", Date);
 
     }
 
