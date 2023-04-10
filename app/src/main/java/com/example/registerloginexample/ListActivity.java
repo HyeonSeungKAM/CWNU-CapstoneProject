@@ -1,10 +1,13 @@
 package com.example.registerloginexample;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -74,6 +77,15 @@ public class ListActivity extends AppCompatActivity {
 
         GetData task = new GetData();
         task.execute("http://gamhs44.ivyro.net/test.php");
+        mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(ListActivity.this, SPageActivity.class);
+                intent.putExtra("userID",userID);
+                startActivity(intent);
+            }
+        });
 
 
 // ------------------ 버튼들 -----------------------------------------------
@@ -218,12 +230,10 @@ public class ListActivity extends AppCompatActivity {
             ListAdapter adapter = new SimpleAdapter(
                     ListActivity.this, mArrayList, R.layout.item_list,
                     new String[]{TAG_ID, TAG_USERID, TAG_BINNAME},
-                    new int[]{R.id.textView_list_id, R.id.textView_list_name, R.id.textView_list_address}
+                    new int[]{R.id.textView_list_id, R.id.textView_list_userid, R.id.textView_list_binname}
             );
+
             mlistView.setAdapter(adapter);
-
-
-
 
         } catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);
