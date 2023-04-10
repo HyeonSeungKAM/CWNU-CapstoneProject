@@ -85,15 +85,59 @@ public class ListActivity extends AppCompatActivity {
         TextView textView_list_binname = itemlist_view.findViewById(R.id.textView_list_binname);
 
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                             @Override
+                                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                                 Response.Listener<String> responseListener = new Response.Listener<String>() {
+                                                     @Override
+                                                     public void onResponse(String response) {
+                                                         try {
+                                                             JSONArray jsonArray = new JSONArray();
+                                                             JSONObject jsonObject = new JSONObject(response);
+                                                             boolean success = jsonObject.getBoolean("sucess");
+                                                             if (success) {
+                                                                 String userID = jsonObject.getString("userID");
+                                                                 String binName = jsonObject.getString("binName");
+                                                                 String Date = jsonObject.getString("Date");
+                                                                 String glassW = jsonObject.getString("glassW");
+                                                                 String plasticW = jsonObject.getString("plasticW");
+                                                                 String paperW = jsonObject.getString("paperW");
+                                                                 String metalW = jsonObject.getString("metalW");
+                                                                 String totalGlassPrice = jsonObject.getString("totalGlassPrice");
+                                                                 String totalPlasticPrice = jsonObject.getString("totalPlasticPrice");
+                                                                 String totalPaperPrice = jsonObject.getString("totalPaperPrice");
+                                                                 String totalMetalPrice = jsonObject.getString("totalMetalPrice");
+                                                                 String Total = jsonObject.getString("Total");
 
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ListActivity.this, SPageActivity.class);
-                intent.putExtra("userID",textView_list_userid.getText().toString());
-                intent
-                startActivity(intent);
-            }
-        });
+                                                                 Intent intent = new Intent(ListActivity.this, SPageActivity.class);
+                                                                 intent.putExtra("userID", userID);
+                                                                 intent.putExtra("binName", binName);
+                                                                 intent.putExtra("Date", Date);
+                                                                 intent.putExtra("glassW", glassW);
+                                                                 intent.putExtra("plasticW", plasticW);
+                                                                 intent.putExtra("paperW", paperW);
+                                                                 intent.putExtra("metalW", metalW);
+                                                                 intent.putExtra("totalGlassPrice", totalGlassPrice);
+                                                                 intent.putExtra("totalPlasticPrice", totalPlasticPrice);
+                                                                 intent.putExtra("totalPaperPrice", totalPaperPrice);
+                                                                 intent.putExtra("totalMetalPrice", totalMetalPrice);
+                                                                 intent.putExtra("Total", Total);
+
+                                                                 startActivity(intent);
+                                                             } else {
+                                                                 Toast.makeText(getApplicationContext(), "불러오기 실패", Toast.LENGTH_SHORT).show();
+                                                                 return;
+                                                             }
+                                                         } catch (JSONException ex) {
+                                                             ex.printStackTrace();
+                                                         }
+
+                                                     }
+                                                 };
+                                                 SPageRequest sPageRequest = new SPageRequest();
+                                                 RequestQueue queue = Volley.newRequestQueue(ListActivity.this);
+                                                 queue.add(sPageRequest);
+                                             }
+                                         });
 
 
 // ------------------ 버튼들 -----------------------------------------------
@@ -249,5 +293,7 @@ public class ListActivity extends AppCompatActivity {
 
     }
 }
+
+
 
 
