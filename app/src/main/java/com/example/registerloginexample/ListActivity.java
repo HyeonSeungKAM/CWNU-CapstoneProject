@@ -77,12 +77,20 @@ public class ListActivity extends AppCompatActivity {
 
         GetData task = new GetData();
         task.execute("http://gamhs44.ivyro.net/test.php");
+
+        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View itemlist_view = inflater.inflate(R.layout.item_list, null);
+
+        TextView textView_list_userid = itemlist_view.findViewById(R.id.textView_list_userid);
+        TextView textView_list_binname = itemlist_view.findViewById(R.id.textView_list_binname);
+
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ListActivity.this, SPageActivity.class);
-                intent.putExtra("userID",userID);
+                intent.putExtra("userID",textView_list_userid.getText().toString());
+                intent
                 startActivity(intent);
             }
         });
