@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                                 String paper = jsonObject.getString("paper");
                                 String metal = jsonObject.getString("metal");
 
-                                Toast.makeText(getApplicationContext(),"정보를 불러오는데 성공하였습니다.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(MainActivity.this, SellActivity.class);
                                 intent.putExtra("binName",binName);
                                 intent.putExtra("userID",userID);

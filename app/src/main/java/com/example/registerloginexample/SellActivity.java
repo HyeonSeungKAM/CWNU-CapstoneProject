@@ -130,7 +130,6 @@ public class SellActivity extends AppCompatActivity {
                                 intent.putExtra("plastic",plastic);
                                 intent.putExtra("paper",paper);
                                 intent.putExtra("metal",metal);
-
                                 startActivity(intent);
 
                             } else {
