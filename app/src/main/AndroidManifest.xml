@@ -42,6 +42,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".SellActivity" />
         <activity android:name=".ListActivity"/>
+        <activity android:name=".SPageActivity"/>
     </application>
 
 </manifest>

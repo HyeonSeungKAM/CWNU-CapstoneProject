@@ -3,7 +3,6 @@ package com.example.registerloginexample;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -19,10 +18,16 @@ public class ListActivity extends AppCompatActivity {
 
 
     private Button btn_sell2, btn_main; // 판매하기, 취소
+    private ListView list;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        List<String> data = new ArrayList<>();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,data);
+        list.setAdapter(adapter); // 어댑터를 리스트와 연결
 
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userID");
@@ -33,11 +38,8 @@ public class ListActivity extends AppCompatActivity {
         String paper = intent.getStringExtra("paper");
         String metal = intent.getStringExtra("metal");
 
-
-
         btn_sell2 = findViewById(R.id.btn_sell2); // 판매하기 
         btn_main = findViewById(R.id.btn_main); // 메인
-
 
 
         btn_sell2.setOnClickListener(new View.OnClickListener() {
