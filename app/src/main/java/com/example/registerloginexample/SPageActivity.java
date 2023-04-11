@@ -12,13 +12,25 @@ public class SPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_spage);
+        setContentView(R.layout.activity_spagetest);
 
-        TextView userid = (TextView) findViewById(R.id.userid);
+        TextView textView1 = (TextView) findViewById(R.id.textView1);
+        TextView textView2 = (TextView) findViewById(R.id.textView2);
+        TextView textView3 = (TextView) findViewById(R.id.textView3);
+        TextView textView4 = (TextView) findViewById(R.id.textView4);
+
 
         Intent intent = getIntent();
-        String userID = intent.getExtras().getString("userID");
-        userid.setText(userID);
+        String board_userID = intent.getExtras().getString("userID");
+        String board_binname = intent.getExtras().getString("binName");
+        String board_contents = intent.getExtras().getString("contents");
+        String board_Date = intent.getExtras().getString("Date");
+
+        textView1.setText(board_userID);
+        textView2.setText(board_binname);
+        textView3.setText(board_contents);
+        textView4.setText(board_Date);
+
 
 
 

@@ -51,7 +51,6 @@ public class ListActivity extends AppCompatActivity {
     ArrayList<HashMap<String, String>> mArrayList;
     ListView mlistView;
 
-
     String mJsonString;
 // ------------- ----------------------------------
 
@@ -76,51 +75,55 @@ public class ListActivity extends AppCompatActivity {
         mArrayList = new ArrayList<>();
 
         GetData task = new GetData();
-        task.execute("http://gamhs44.ivyro.net/test.php");
+        task.execute("http://gamhs44.ivyro.net/sellboardlist.php");
 
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemlist_view = inflater.inflate(R.layout.item_list, null);
+        View vi = inflater.inflate(R.layout.item_list, null);
 
-        TextView textView_list_userid = itemlist_view.findViewById(R.id.textView_list_userid);
-        TextView textView_list_binname = itemlist_view.findViewById(R.id.textView_list_binname);
+        TextView textView_list_userid = (TextView) vi.findViewById(R.id.textView_list_userid);
+        TextView textView_list_binname = (TextView) vi.findViewById(R.id.textView_list_binname);
 
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                              @Override
-                                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                             public void onItemClick(AdapterView<?> parent, View view, int postion, long id) {
+
+                                                 String board_userID = textView_list_userid.getText().toString();
+                                                 String board_binname = textView_list_binname.getText().toString();
                                                  Response.Listener<String> responseListener = new Response.Listener<String>() {
                                                      @Override
                                                      public void onResponse(String response) {
                                                          try {
-                                                             JSONArray jsonArray = new JSONArray();
                                                              JSONObject jsonObject = new JSONObject(response);
                                                              boolean success = jsonObject.getBoolean("sucess");
                                                              if (success) {
                                                                  String userID = jsonObject.getString("userID");
                                                                  String binName = jsonObject.getString("binName");
+                                                                 String contents = jsonObject.getString("contents");
                                                                  String Date = jsonObject.getString("Date");
-                                                                 String glassW = jsonObject.getString("glassW");
-                                                                 String plasticW = jsonObject.getString("plasticW");
-                                                                 String paperW = jsonObject.getString("paperW");
-                                                                 String metalW = jsonObject.getString("metalW");
-                                                                 String totalGlassPrice = jsonObject.getString("totalGlassPrice");
-                                                                 String totalPlasticPrice = jsonObject.getString("totalPlasticPrice");
-                                                                 String totalPaperPrice = jsonObject.getString("totalPaperPrice");
-                                                                 String totalMetalPrice = jsonObject.getString("totalMetalPrice");
-                                                                 String Total = jsonObject.getString("Total");
+                                                                // String glassW = jsonObject.getString("glassW");
+                                                                // String plasticW = jsonObject.getString("plasticW");
+                                                                // String paperW = jsonObject.getString("paperW");
+                                                                // String metalW = jsonObject.getString("metalW");
+                                                                // String totalGlassPrice = jsonObject.getString("totalGlassPrice");
+                                                                // String totalPlasticPrice = jsonObject.getString("totalPlasticPrice");
+                                                                // String totalPaperPrice = jsonObject.getString("totalPaperPrice");
+                                                                // String totalMetalPrice = jsonObject.getString("totalMetalPrice");
+                                                                // String Total = jsonObject.getString("Total");
 
                                                                  Intent intent = new Intent(ListActivity.this, SPageActivity.class);
                                                                  intent.putExtra("userID", userID);
                                                                  intent.putExtra("binName", binName);
+                                                                 intent.putExtra("contents",contents);
                                                                  intent.putExtra("Date", Date);
-                                                                 intent.putExtra("glassW", glassW);
-                                                                 intent.putExtra("plasticW", plasticW);
-                                                                 intent.putExtra("paperW", paperW);
-                                                                 intent.putExtra("metalW", metalW);
-                                                                 intent.putExtra("totalGlassPrice", totalGlassPrice);
-                                                                 intent.putExtra("totalPlasticPrice", totalPlasticPrice);
-                                                                 intent.putExtra("totalPaperPrice", totalPaperPrice);
-                                                                 intent.putExtra("totalMetalPrice", totalMetalPrice);
-                                                                 intent.putExtra("Total", Total);
+                                                                 // intent.putExtra("glassW", glassW);
+                                                                 // intent.putExtra("plasticW", plasticW);
+                                                                 // intent.putExtra("paperW", paperW);
+                                                                 // intent.putExtra("metalW", metalW);
+                                                                 // intent.putExtra("totalGlassPrice", totalGlassPrice);
+                                                                 // intent.putExtra("totalPlasticPrice", totalPlasticPrice);
+                                                                 // intent.putExtra("totalPaperPrice", totalPaperPrice);
+                                                                 // intent.putExtra("totalMetalPrice", totalMetalPrice);
+                                                                 // intent.putExtra("Total", Total);
 
                                                                  startActivity(intent);
                                                              } else {
@@ -133,7 +136,7 @@ public class ListActivity extends AppCompatActivity {
 
                                                      }
                                                  };
-                                                 SPageRequest sPageRequest = new SPageRequest();
+                                                 SPageRequest sPageRequest = new SPageRequest(board_userID,board_binname,responseListener);
                                                  RequestQueue queue = Volley.newRequestQueue(ListActivity.this);
                                                  queue.add(sPageRequest);
                                              }
