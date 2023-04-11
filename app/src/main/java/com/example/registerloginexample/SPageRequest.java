@@ -13,12 +13,13 @@ public class SPageRequest extends StringRequest {
     final static private String URL = "http://gamhs44.ivyro.net/call_sellboardinfo.php";
     private Map<String, String> map;
 
-    public SPageRequest(String board_userID, String board_binname, Response.Listener<String> listener) {
+    public SPageRequest(String board_id, String board_userid, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
-        map.put( "board_userID", board_userID);
-        map.put( "board_binname", board_binname);
+        map.put( "board_id", board_id);
+        map.put( "board_userid", board_userid);
+
 
     }
 
