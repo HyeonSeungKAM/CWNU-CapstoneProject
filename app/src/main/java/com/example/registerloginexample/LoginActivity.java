@@ -55,30 +55,45 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
-                            if (success) { // 로그인에 성공한 경우
-                                String binName = jsonObject.getString("binName");
-                                String userID = jsonObject.getString("userID");
-                                String userName = jsonObject.getString("userName");
-                                String glass = jsonObject.getString("glass");
-                                String plastic = jsonObject.getString("plastic");
-                                String paper = jsonObject.getString("paper");
-                                String metal = jsonObject.getString("metal");
+                            if (success) {
+                                String kind = jsonObject.getString("kind");
+                                if(kind.equals("buyer")) {
+                                    String userID = jsonObject.getString("userID");
+                                    String userName = jsonObject.getString("userName");
 
-                                Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다",Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("binName",binName);
-                                intent.putExtra("userID",userID);
-                                intent.putExtra("userName",userName);
-                                intent.putExtra("glass",glass);
-                                intent.putExtra("plastic",plastic);
-                                intent.putExtra("paper",paper);
-                                intent.putExtra("metal",metal);
+                                    Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다",Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this, BuyerMainActivity.class);
+                                    intent.putExtra("kind",kind);
+                                    intent.putExtra("userID",userID);
+                                    intent.putExtra("userName",userName);
 
+                                    startActivity(intent);
 
-                                startActivity(intent);
+                                } else if (kind.equals("user")) {
+                                    String binName = jsonObject.getString("binName");
+                                    String userID = jsonObject.getString("userID");
+                                    String userName = jsonObject.getString("userName");
+                                    String glass = jsonObject.getString("glass");
+                                    String plastic = jsonObject.getString("plastic");
+                                    String paper = jsonObject.getString("paper");
+                                    String metal = jsonObject.getString("metal");
+
+                                    Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다",Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("binName",binName);
+                                    intent.putExtra("kind",kind);
+                                    intent.putExtra("userID",userID);
+                                    intent.putExtra("userName",userName);
+                                    intent.putExtra("glass",glass);
+                                    intent.putExtra("plastic",plastic);
+                                    intent.putExtra("paper",paper);
+                                    intent.putExtra("metal",metal);
+
+                                    startActivity(intent);
+                                }
 
                             } else { // 로그인에 실패한 경우
-                                Toast.makeText(getApplicationContext(),"회원 등록에 실패하였습니다",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"로그인에 실패하였습니다",Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         } catch (JSONException e) {

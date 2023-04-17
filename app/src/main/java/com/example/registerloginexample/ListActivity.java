@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,13 +57,14 @@ public class ListActivity extends AppCompatActivity {
 // ------------- ----------------------------------
 
 
-    private Button btn_sell2, btn_main; // 판매하기, 취소
+    private Button btn_bought, btn_sell2, btn_main; // 판매하기, 취소
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
         Intent intent = getIntent();
+        String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
         String binName = intent.getStringExtra("binName");
@@ -76,7 +78,7 @@ public class ListActivity extends AppCompatActivity {
         mArrayList = new ArrayList<>();
 
         GetData task = new GetData();
-        task.execute("http://gamhs44.ivyro.net/test.php");
+        task.execute("http://gamhs44.ivyro.net/sellboardlist.php");
 
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                              @Override
@@ -95,16 +97,26 @@ public class ListActivity extends AppCompatActivity {
                                                              JSONObject jsonObject = new JSONObject(response);
                                                              boolean success = jsonObject.getBoolean("success");
                                                              if (success) {
-                                                                 String userID = jsonObject.getString("userID");
-                                                                 String binName = jsonObject.getString("binName");
-                                                                 String contents = jsonObject.getString("contents");
-                                                                 String Date = jsonObject.getString("Date");
+                                                                 String board_userID = jsonObject.getString("userID");
+                                                                 String board_binName = jsonObject.getString("binName");
+                                                                 String board_contents = jsonObject.getString("contents");
+                                                                 String board_Date = jsonObject.getString("Date");
 
                                                                  Intent intent = new Intent(ListActivity.this, SPageActivity.class);
-                                                                 intent.putExtra("userID", userID);
-                                                                 intent.putExtra("binName", binName);
-                                                                 intent.putExtra("contents",contents);
-                                                                 intent.putExtra("Date", Date);
+                                                                 intent.putExtra("board_userID", board_userID);
+                                                                 intent.putExtra("board_contents",board_contents);
+                                                                 intent.putExtra("board_Date", board_Date);
+
+                                                                 // 로그인한 유저 정보들
+                                                                 intent.putExtra("kind",kind);
+                                                                 intent.putExtra("binName",binName);
+                                                                 intent.putExtra("kind",kind);
+                                                                 intent.putExtra("userID",userID);
+                                                                 intent.putExtra("userName",userName);
+                                                                 intent.putExtra("glass",glass);
+                                                                 intent.putExtra("plastic",plastic);
+                                                                 intent.putExtra("paper",paper);
+                                                                 intent.putExtra("metal",metal);
 
                                                                  startActivity(intent);
                                                                  finish();
@@ -127,9 +139,20 @@ public class ListActivity extends AppCompatActivity {
 
 
 // ------------------ 버튼들 -----------------------------------------------
+        btn_bought = findViewById(R.id.btn_bought);
         btn_sell2 = findViewById(R.id.btn_sell2); // 판매하기
         btn_main = findViewById(R.id.btn_main); // 메인
 
+        if (kind.equals("user")) {
+            btn_bought.setVisibility(View.INVISIBLE);
+            btn_sell2.setVisibility(View.VISIBLE);
+            btn_main.setVisibility(View.VISIBLE);
+
+        } else if (kind.equals("buyer")) {
+            btn_bought.setVisibility(View.VISIBLE);
+            btn_sell2.setVisibility(View.INVISIBLE);
+            btn_main.setVisibility(View.VISIBLE);
+        }
 
         btn_sell2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +161,7 @@ public class ListActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(ListActivity.this, SellActivity.class);
                 intent.putExtra("binName", binName);
+                intent.putExtra("kind",kind);
                 intent.putExtra("userID", userID);
                 intent.putExtra("userName", userName);
                 intent.putExtra("glass", glass);
@@ -152,16 +176,29 @@ public class ListActivity extends AppCompatActivity {
         btn_main.setOnClickListener(new View.OnClickListener() {    // 메인
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ListActivity.this, MainActivity.class);
-                intent.putExtra("binName", binName);
-                intent.putExtra("userID", userID);
-                intent.putExtra("userName", userName);
-                intent.putExtra("glass", glass);
-                intent.putExtra("plastic", plastic);
-                intent.putExtra("paper", paper);
-                intent.putExtra("metal", metal);
 
-                startActivity(intent);
+                if(kind.equals("buyer")){
+                    Intent intent = new Intent(ListActivity.this, BuyerMainActivity.class);
+                    intent.putExtra("kind",kind);
+                    intent.putExtra("userID", userID);
+                    intent.putExtra("userName", userName);
+
+                    startActivity(intent);
+
+                } else if(kind.equals("user")){
+                    Intent intent = new Intent(ListActivity.this, MainActivity.class);
+                    intent.putExtra("binName", binName);
+                    intent.putExtra("kind",kind);
+                    intent.putExtra("userID", userID);
+                    intent.putExtra("userName", userName);
+                    intent.putExtra("glass", glass);
+                    intent.putExtra("plastic", plastic);
+                    intent.putExtra("paper", paper);
+                    intent.putExtra("metal", metal);
+
+                    startActivity(intent);
+                }
+
             }
         });
     }

@@ -40,14 +40,31 @@
 
             android:text="메인" />
 
-        <Button
-            android:id="@+id/btn_sell2"
-            android:layout_width="wrap_content"
+        <FrameLayout
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content">
 
-            android:text="판매하기" />
+            <Button
+                android:id="@+id/btn_sell2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+
+                android:text="판매하기" />
+
+            <Button
+                android:id="@+id/btn_bought"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+
+                android:text="구매내역" />
+
+        </FrameLayout>
+
+
 
 
     </LinearLayout>

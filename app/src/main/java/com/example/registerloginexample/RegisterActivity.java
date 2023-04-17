@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -18,14 +19,34 @@ import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    public String type = "";
     private EditText et_id, et_pass, et_name, et_binName;
     private Button btn_register;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // 액티비티 시작시 처음으로 실행되는 생명주기!
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+
+        RadioGroup radioGroup = findViewById(R.id.radio_group);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                switch(checkedId){
+                    case R.id.radio_button_user:
+                        type = "user";
+                        et_binName.setVisibility(View.VISIBLE);
+                        break;
+                    case R.id.radio_button_buyer:
+                        type = "buyer";
+                        et_binName.setVisibility(View.INVISIBLE);
+                        break;
+                }
+
+            }
+        });
 
         // 아이디 값 찾아주기
         et_id = findViewById(R.id.et_id);
@@ -44,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String userPass = et_pass.getText().toString();
                 String userName = et_name.getText().toString();
                 String binName = et_binName.getText().toString();
-
+                String kind = type;
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -65,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
                 // 서버로 Volley를 이용해 요청을 함.
-                RegisterRequest registerRequest = new RegisterRequest(userID, userPass, userName, binName, responseListener);
+                RegisterRequest registerRequest = new RegisterRequest(kind, userID, userPass, userName, binName, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
 

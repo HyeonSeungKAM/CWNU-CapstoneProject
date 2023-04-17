@@ -257,23 +257,20 @@
             android:layout_gravity="center"
             android:layout_span="4">
             <TableRow>
+
                 <Button
                     android:id="@+id/btn_buy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="76dp"
+                    android:layout_margin="40dp"
                     android:text="구매하기" />
 
                 <Button
                     android:id="@+id/btn_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginBottom="76dp"
+                    android:layout_margin="40dp"
                     android:text="목록" />
-
-
-
 
             </TableRow>
 

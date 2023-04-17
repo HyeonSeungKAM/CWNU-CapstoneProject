@@ -10,13 +10,14 @@ import java.util.Map;
 public class RegisterRequest extends StringRequest {
 
     // 서버 URL 설정 (PHP 파일 연동)
-    final static private String URL = "http://gamhs44.ivyro.net/Register2.php";
+    final static private String URL = "http://gamhs44.ivyro.net/Register2test.php";
     private Map<String, String> map;
 
-    public RegisterRequest(String userID, String userPassword, String userName, String binName, Response.Listener<String> listener) {
+    public RegisterRequest(String kind, String userID, String userPassword, String userName, String binName, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
+        map.put("kind", kind);
         map.put( "userID", userID);
         map.put( "userPassword", userPassword);
         map.put( "userName", userName);
