@@ -56,7 +56,6 @@ public class BuyActivity extends AppCompatActivity {
         // 로그인한 유저 정보
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
-        String purchase_date = intent.getStringExtra("purchase_date");
 
         String seller_userID = intent.getExtras().getString("seller_userID");
         String seller_userName = intent.getExtras().getString("seller_userName");
@@ -94,11 +93,13 @@ public class BuyActivity extends AppCompatActivity {
 
 
 
-        btn_buy.setOnClickListener(new View.OnClickListener() {    // 구매하기
+        String purchase_date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")); // 현재 날짜
+
+
+
+        btn_buy.setOnClickListener(new View.OnClickListener() { // 구매하기
             @Override
             public void onClick(View view) {
-
-
                 Response.Listener<String> responseListner = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -114,10 +115,10 @@ public class BuyActivity extends AppCompatActivity {
                                 String seller_account = jsonObject.getString("seller_account");
                                 String seller_phoneNum = jsonObject.getString("seller_phoneNum");
 
-                                String purchase_date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/dd/MM")); // 현재 날짜
+                                String purchase_date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")); // 현재 날짜
 
 
-                                Toast.makeText(getApplicationContext(),"등록에 성공하였습니다.",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"구매 완료.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(BuyActivity.this, ListActivity.class);
 
                                 intent.putExtra("kind",kind);
@@ -145,9 +146,9 @@ public class BuyActivity extends AppCompatActivity {
 
                     }
                 };
-                BuyInfoRequest buyInfoRequest = new BuyInfoRequest(board_userID, responseListner);
-                RequestQueue queue = Volley.newRequestQueue(SPageActivity.this);
-                queue.add(buyInfoRequest);
+                PurchaseUpdateRequest purchaseUpdateRequest = new PurchaseUpdateRequest(seller_userID, userID, purchase_date, responseListner);
+                RequestQueue queue = Volley.newRequestQueue(BuyActivity.this);
+                queue.add(purchaseUpdateRequest);
 
             }
         });

@@ -121,7 +121,6 @@ public class SPageActivity extends AppCompatActivity {
 
                                 intent.putExtra("kind",kind);
                                 intent.putExtra("userID",userID);
-
                                 intent.putExtra("seller_userID",seller_userID);
                                 intent.putExtra("seller_userName",seller_userName);
                                 intent.putExtra("seller_address",seller_address);
