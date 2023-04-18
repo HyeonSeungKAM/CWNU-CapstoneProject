@@ -20,7 +20,7 @@ import org.json.JSONObject;
 public class RegisterActivity extends AppCompatActivity {
 
     public String type = "";
-    private EditText et_id, et_pass, et_name, et_binName;
+    private EditText et_id, et_pass, et_name, et_binName, et_accountBank, et_accountNumber, et_address;
     private Button btn_register;
 
     @Override

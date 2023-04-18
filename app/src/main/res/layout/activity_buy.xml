@@ -270,7 +270,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/tv_idname"
+                    android:id="@+id/tv_seller_userIDName"
                     android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -291,11 +291,11 @@
                     />
 
                 <TextView
-                    android:id="@+id/tv_userPhone_num"
+                    android:id="@+id/tv_seller_phoneNum"
                     android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="userPhone_num"
+                    android:hint="tv_seller_phoneNum"
                     android:textSize="18sp"
                     />
 
@@ -312,7 +312,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/tv_account"
+                    android:id="@+id/tv_seller_account"
                     android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -334,11 +334,11 @@
                     />
 
                 <TextView
-                    android:id="@+id/tv_userAddress"
+                    android:id="@+id/tv_seller_address"
                     android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="user_Address"
+                    android:hint="tv_seller_address"
                     android:textSize="18sp"
                     />
 
@@ -349,30 +349,21 @@
                 android:layout_marginStart="25dp"
                 android:layout_span="2">
 
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_gravity="center"
-                    >
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
 
                         <Button
                             android:id="@+id/btn_buy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="40dp"
-                            android:text="구매하기" />
+                            android:text="결제하기" />
 
                         <Button
                             android:id="@+id/btn_cancel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="40dp"
-                            android:text="목록" />
-                    </TableRow>
-                </TableLayout>
+                            android:text="결제취소" />
+
             </TableRow>
         </TableLayout>
 
