@@ -6,21 +6,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="랭킹"
+        android:textSize="24sp" />
+
+    <ListView
+        android:id="@+id/listview_rank_innerframe"
+        android:layout_width="match_parent"
+        android:layout_height="326dp"
+        android:layout_margin="5dp"
+        android:layout_weight="5"
+        android:padding="10dp" />
+
 
     <TextView
         android:id="@+id/textView2"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="list페이지"
+        android:text="판매목록"
         android:textSize="24sp" />
 
     <ListView
         android:id="@+id/listview_innerframe"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="326dp"
         android:layout_margin="5dp"
         android:layout_weight="5"
         android:padding="10dp" />
@@ -35,8 +51,8 @@
             android:id="@+id/btn_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="80dp"
+            android:layout_marginLeft="95dp"
+            android:layout_marginRight="20dp"
 
             android:text="메인" />
 

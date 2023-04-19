@@ -48,9 +48,17 @@ public class ListActivity extends AppCompatActivity {
     private static final String TAG_USERID = "userID";
     private static final String TAG_BINNAME = "binName";
 
+
+    private static final String TAG_RANK = "rank";
+    private static final String TAG_USERNAME = "userName";
+
+
+
+
     private TextView mTextViewResult;
     ArrayList<HashMap<String, String>> mArrayList;
-    ListView mlistView;
+    ArrayList<HashMap<String, String>> RArrayList;
+    ListView mlistView, RlistView;
 
 
     String mJsonString;
@@ -79,6 +87,13 @@ public class ListActivity extends AppCompatActivity {
 
         GetData task = new GetData();
         task.execute("http://gamhs44.ivyro.net/sellboardlist.php");
+
+// 랭킹 리스트====================================================================//
+        RlistView = (ListView) findViewById(R.id.listview_rank_innerframe);
+        RArrayList = new ArrayList<>();
+
+        GetRankData task2 = new GetRankData();
+        task2.execute("http://gamhs44.ivyro.net/rank.php");
 
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                              @Override
@@ -315,8 +330,120 @@ public class ListActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+    private class GetRankData extends AsyncTask<String, Void, String> {
+    ProgressDialog progressDialog;
+    String errorString = null;
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+        progressDialog = ProgressDialog.show(ListActivity.this,
+                "Please Wait", null, true, true);
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+
+        progressDialog.dismiss();
+        Log.d(TAG, "response  - " + result);
+
+        if (result == null) {
+            //
+        } else {
+
+            mJsonString = result;
+            showRankResult();
+        }
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+
+        String serverURL = params[0];
+
+        try {
+            URL url = new URL(serverURL);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+            httpURLConnection.setReadTimeout(5000);
+            httpURLConnection.setConnectTimeout(5000);
+            httpURLConnection.connect();
+
+            int responseStatusCode = httpURLConnection.getResponseCode();
+            Log.d(TAG, "response code - " + responseStatusCode);
+
+            InputStream inputStream;
+            if (responseStatusCode == HttpURLConnection.HTTP_OK) {
+                inputStream = httpURLConnection.getInputStream();
+            } else {
+                inputStream = httpURLConnection.getErrorStream();
+            }
+
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            StringBuilder sb = new StringBuilder();
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line);
+            }
+
+
+            bufferedReader.close();
+            return sb.toString().trim();
+
+        } catch (Exception e) {
+
+            Log.d(TAG, "InsertData: Error ", e);
+            errorString = e.toString();
+
+            return null;
+        }
+
+    }
+    }
+
+    private void showRankResult() {
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject item = jsonArray.getJSONObject(i);
+                String rank = String.valueOf(i+1);
+                String userID = item.getString(TAG_USERID);
+                String userName = item.getString(TAG_USERNAME);
+
+                HashMap<String, String> hashMap = new HashMap<>();
+
+                hashMap.put(TAG_RANK, rank);
+                hashMap.put(TAG_USERID, userID);
+                hashMap.put(TAG_USERNAME, userName);
+
+                RArrayList.add(hashMap);
+            }
+
+            ListAdapter adapter = new SimpleAdapter(
+                    ListActivity.this, RArrayList, R.layout.item_ranklist,
+                    new String[]{TAG_RANK, TAG_USERID, TAG_USERNAME},
+                    new int[]{R.id.textView_list_rank,R.id.textView_list_userid, R.id.textView_list_useridname}
+            );
+
+            RlistView.setAdapter(adapter);
+
+        } catch (JSONException e) {
+            Log.d(TAG, "showRankResult : ", e);
+        }
+
+    }
+
 }
-
-
 
 

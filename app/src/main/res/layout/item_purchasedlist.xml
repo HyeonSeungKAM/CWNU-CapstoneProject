@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="15dp"
+    android:padding="10dp">
+
+    <TableLayout
+        android:layout_width="353dp"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_marginTop="3dp"
+            android:layout_height="3dip"
+            android:background="#FF909090" />
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="구매날짜"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_pdate"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="구매날짜"
+                android:textSize="16sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="판매자"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_seller"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginLeft="10dp"
+                android:hint="id(name)"
+                android:textSize="16sp" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="물품목록"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="물품목록"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="결제금액"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_tpayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="결제금액"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="판매자 연락처"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_sphoneNum"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="전화번호"
+                android:textSize="16sp" />
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="판매자 거주지"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_saddress"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="거주지 주소"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <View
+            android:layout_marginTop="3dp"
+            android:layout_height="3dip"
+            android:background="#FF909090" />
+
+
+    </TableLayout>
+
+</LinearLayout >

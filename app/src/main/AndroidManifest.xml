@@ -46,6 +46,8 @@
         <activity android:name=".SPageActivity"/>
         <activity android:name=".BuyerMainActivity"/>
         <activity android:name=".BuyActivity"/>
+        <activity android:name=".PurchasedListActivity"/>
+
     </application>
 
 </manifest>
