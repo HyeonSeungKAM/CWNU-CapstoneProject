@@ -116,11 +116,12 @@ public class SPageActivity extends AppCompatActivity {
                                 String seller_account = jsonObject.getString("seller_account");
                                 String seller_phoneNum = jsonObject.getString("seller_phoneNum");
 
-                                Toast.makeText(getApplicationContext(),"등록에 성공하였습니다.",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"결제 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
 
                                 intent.putExtra("kind",kind);
                                 intent.putExtra("userID",userID);
+
                                 intent.putExtra("seller_userID",seller_userID);
                                 intent.putExtra("seller_userName",seller_userName);
                                 intent.putExtra("seller_address",seller_address);

@@ -73,7 +73,7 @@ public class ListActivity extends AppCompatActivity {
         String paper = intent.getStringExtra("paper");
         String metal = intent.getStringExtra("metal");
 
-
+//==== 판매 리스트 ==========================================================//
         mlistView = (ListView) findViewById(R.id.listview_innerframe);
         mArrayList = new ArrayList<>();
 

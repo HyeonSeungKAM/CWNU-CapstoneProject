@@ -86,6 +86,8 @@ public class BuyActivity extends AppCompatActivity {
 
         // 판매자 정보표 구간 =========================================================
 
+        String seller_userIDName = seller_userID + "(" + seller_userName + ")";
+
         tv_seller_userIDName.setText(seller_userID + "(" + seller_userName + ")");
         tv_seller_phoneNum.setText(seller_phoneNum);
         tv_seller_account.setText(seller_account);
@@ -95,9 +97,14 @@ public class BuyActivity extends AppCompatActivity {
 
         String purchase_date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")); // 현재 날짜
 
+        String contents = board_contents;
+        String total_payment = board_contents.split(",")[8];
 
+        btn_buy = findViewById(R.id.btn_buy);
+        btn_cancel = findViewById(R.id.btn_cancel);
 
-        btn_buy.setOnClickListener(new View.OnClickListener() { // 구매하기
+        
+        btn_buy.setOnClickListener(new View.OnClickListener() { // 결제하기
             @Override
             public void onClick(View view) {
                 Response.Listener<String> responseListner = new Response.Listener<String>() {
@@ -107,30 +114,12 @@ public class BuyActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
+                            System.out.println(success);
                             if (success) {
-
-                                String seller_userID = jsonObject.getString("seller_userID");
-                                String seller_userName = jsonObject.getString("seller_userName");
-                                String seller_address = jsonObject.getString("seller_address");
-                                String seller_account = jsonObject.getString("seller_account");
-                                String seller_phoneNum = jsonObject.getString("seller_phoneNum");
-
-                                String purchase_date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")); // 현재 날짜
-
-
                                 Toast.makeText(getApplicationContext(),"구매 완료.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(BuyActivity.this, ListActivity.class);
-
                                 intent.putExtra("kind",kind);
                                 intent.putExtra("userID",userID);
-                                intent.putExtra("purchase_date", purchase_date);
-
-                                intent.putExtra("seller_userID",seller_userID);
-                                intent.putExtra("seller_userName",seller_userName);
-                                intent.putExtra("seller_address",seller_address);
-                                intent.putExtra("seller_account",seller_account);
-                                intent.putExtra("seller_phoneNum",seller_phoneNum);
-                                intent.putExtra("board_contents",board_contents);
 
                                 startActivity(intent);
 
@@ -146,7 +135,8 @@ public class BuyActivity extends AppCompatActivity {
 
                     }
                 };
-                PurchaseUpdateRequest purchaseUpdateRequest = new PurchaseUpdateRequest(seller_userID, userID, purchase_date, responseListner);
+                PurchaseUpdateRequest purchaseUpdateRequest = new PurchaseUpdateRequest(seller_userID,  userID, purchase_date,board_contents,
+                        total_payment, seller_userIDName, seller_address, seller_phoneNum, responseListner);
                 RequestQueue queue = Volley.newRequestQueue(BuyActivity.this);
                 queue.add(purchaseUpdateRequest);
 
