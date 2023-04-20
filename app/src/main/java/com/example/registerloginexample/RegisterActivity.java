@@ -1,5 +1,7 @@
 package com.example.registerloginexample;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,7 +22,7 @@ import org.json.JSONObject;
 public class RegisterActivity extends AppCompatActivity {
 
     public String type = "";
-    private EditText et_id, et_pass, et_name, et_binName, et_accountBank, et_accountNumber, et_address;
+    private EditText et_id, et_pass, et_name, et_phoneNum, et_binName, et_accountBank, et_accountNumber, et_address;
     private Button btn_register;
 
     @Override
@@ -38,21 +40,34 @@ public class RegisterActivity extends AppCompatActivity {
                     case R.id.radio_button_user:
                         type = "user";
                         et_binName.setVisibility(View.VISIBLE);
+                        et_binName.setVisibility(View.VISIBLE);
+                        et_accountBank.setVisibility(View.VISIBLE);
+                        et_accountNumber.setVisibility(View.VISIBLE);
+                        et_address.setVisibility(View.VISIBLE);
                         break;
+
                     case R.id.radio_button_buyer:
                         type = "buyer";
-                        et_binName.setVisibility(View.INVISIBLE);
+                        et_binName.setVisibility(View.GONE);
+                        et_accountBank.setVisibility(View.GONE);
+                        et_accountNumber.setVisibility(View.GONE);
+                        et_address.setVisibility(View.GONE);
                         break;
                 }
 
             }
         });
 
-        // 아이디 값 찾아주기
+        // 회원가입 정보 기입 관련 =============================================
+
         et_id = findViewById(R.id.et_id);
         et_pass = findViewById(R.id.et_pass);
         et_name = findViewById(R.id.et_name);
+        et_phoneNum = findViewById(R.id.et_phoneNum);
         et_binName = findViewById(R.id.et_binName);
+
+        et_accountBank = findViewById(R.id.et_accountBank);
+        et_accountNumber = findViewById(R.id.et_accountNumber);
 
         // 회원가입 버튼 클릭 시 수정
         btn_register = findViewById(R.id.btn_register);
@@ -64,7 +79,14 @@ public class RegisterActivity extends AppCompatActivity {
                 String userID = et_id.getText().toString();
                 String userPass = et_pass.getText().toString();
                 String userName = et_name.getText().toString();
+                String phoneNum = et_phoneNum.getText().toString();
                 String binName = et_binName.getText().toString();
+                String accountBank = et_accountBank.getText().toString();
+                String accountNumber = et_accountNumber.getText().toString();
+
+                String account = accountBank + " " +accountNumber;
+                String address = et_address.getText().toString();
+
                 String kind = type;
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -86,13 +108,41 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
                 // 서버로 Volley를 이용해 요청을 함.
-                RegisterRequest registerRequest = new RegisterRequest(kind, userID, userPass, userName, binName, responseListener);
+                RegisterRequest registerRequest = new RegisterRequest(kind, userID, userPass, userName,phoneNum ,binName, account, address, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
 
             }
         });
 
+        // 주소검색 api 사용 ============================================================
+
+        et_address = findViewById(R.id.et_address);
+        // 클릭 시
+        et_address.setFocusable(false);
+        et_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 주소 검색 웹뷰 화면으로 이동
+                Intent intent = new Intent(RegisterActivity.this, SearchActivity.class );
+                getSearchResult.launch(intent);
+            }
+        });
+
 
     }
+
+    private final ActivityResultLauncher<Intent> getSearchResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                // Search Activity 로부터의 결과 값이 이곳으로 전달 된다.. (setResult에 의해)
+                if (result.getResultCode() == RESULT_OK) {
+                    if (result.getData() != null) {
+                        String data = result.getData().getStringExtra("data");
+                        et_address.setText(data);
+                    }
+                }
+            }
+    );
+
 }

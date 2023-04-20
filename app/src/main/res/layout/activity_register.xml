@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="76dp"
                 android:orientation="horizontal"
+                android:checkedButton="@id/radio_button_user"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,6 +92,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/et_pass" />
 
             <EditText
+                android:id="@+id/et_phoneNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="전화번호"
+                android:inputType="textPersonName"
+                android:minHeight="48dp" />
+
+
+
+            <EditText
                 android:id="@+id/et_binName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,7 +122,7 @@
                 android:id="@+id/et_accountBank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="20dp"
                 android:ems="10"
                 android:hint="은행이름"
                 android:inputType="textPersonName"
@@ -134,14 +147,12 @@
                 app:layout_constraintStart_toStartOf="@+id/et_accountBank"
                 app:layout_constraintTop_toBottomOf="@+id/et_accountBank" />
 
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/et_address"
+                android:layout_width="208dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:ems="15"
-                android:hint="주소를 입력해주세요."
-                android:inputType="textPersonName" />
+                android:hint="주소를 입력해주세요." />
 
 
         </LinearLayout>

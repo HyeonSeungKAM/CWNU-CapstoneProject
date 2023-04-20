@@ -421,19 +421,20 @@ public class ListActivity extends AppCompatActivity {
                 String userID = item.getString(TAG_USERID);
                 String userName = item.getString(TAG_USERNAME);
 
+                String userIDName = userID + " (" + userName + ")";
+
                 HashMap<String, String> hashMap = new HashMap<>();
 
                 hashMap.put(TAG_RANK, rank);
-                hashMap.put(TAG_USERID, userID);
-                hashMap.put(TAG_USERNAME, userName);
+                hashMap.put(TAG_USERID, userIDName);
 
                 RArrayList.add(hashMap);
             }
 
             ListAdapter adapter = new SimpleAdapter(
                     ListActivity.this, RArrayList, R.layout.item_ranklist,
-                    new String[]{TAG_RANK, TAG_USERID, TAG_USERNAME},
-                    new int[]{R.id.textView_list_rank,R.id.textView_list_userid, R.id.textView_list_useridname}
+                    new String[]{TAG_RANK, TAG_USERID},
+                    new int[]{R.id.textView_list_rank,R.id.textView_list_useridname}
             );
 
             RlistView.setAdapter(adapter);
