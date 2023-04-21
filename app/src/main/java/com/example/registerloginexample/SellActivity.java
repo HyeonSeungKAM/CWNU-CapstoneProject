@@ -29,7 +29,7 @@ public class SellActivity extends AppCompatActivity {
     private Button btn_sellContinue, btn_cancel; // 판매하기, 취소
 
 
-// 날짜 -----------------------------------------------------------
+    // 날짜 -----------------------------------------------------------
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     long dnow;
     Date ddate;

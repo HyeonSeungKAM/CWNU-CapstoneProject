@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -21,14 +24,26 @@ import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    public String type = "";
+    public String type = "user";
     private EditText et_id, et_pass, et_name, et_phoneNum, et_binName, et_accountBank, et_accountNumber, et_address;
     private Button btn_register;
+
+    private ScrollView scrollView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // 액티비티 시작시 처음으로 실행되는 생명주기!
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        
+        scrollView2 = (ScrollView) findViewById(R.id.scrollView2);
+        scrollView2.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollView2.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
 
 
         RadioGroup radioGroup = findViewById(R.id.radio_group);
@@ -58,12 +73,19 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        scrollView2 = findViewById(R.id.scrollView2);
+
         // 회원가입 정보 기입 관련 =============================================
 
         et_id = findViewById(R.id.et_id);
+        
+
         et_pass = findViewById(R.id.et_pass);
         et_name = findViewById(R.id.et_name);
         et_phoneNum = findViewById(R.id.et_phoneNum);
+        et_phoneNum.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
+
         et_binName = findViewById(R.id.et_binName);
 
         et_accountBank = findViewById(R.id.et_accountBank);
@@ -83,7 +105,6 @@ public class RegisterActivity extends AppCompatActivity {
                 String binName = et_binName.getText().toString();
                 String accountBank = et_accountBank.getText().toString();
                 String accountNumber = et_accountNumber.getText().toString();
-
                 String account = accountBank + " " +accountNumber;
                 String address = et_address.getText().toString();
 

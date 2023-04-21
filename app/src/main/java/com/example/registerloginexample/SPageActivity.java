@@ -7,9 +7,16 @@ import android.widget.Button;
 
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 
@@ -83,6 +90,59 @@ public class SPageActivity extends AppCompatActivity {
             btn_buy.setVisibility(View.VISIBLE);
             btn_list.setVisibility(View.VISIBLE);
         }
+
+        btn_buy.setOnClickListener(new View.OnClickListener() {    // 판매하기
+            @Override
+            public void onClick(View view) {
+
+
+                Response.Listener<String> responseListner = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean success = jsonObject.getBoolean("success");
+                            if (success) {
+
+                                String seller_userID = jsonObject.getString("seller_userID");
+                                String seller_userName = jsonObject.getString("seller_userName");
+                                String seller_address = jsonObject.getString("seller_address");
+                                String seller_account = jsonObject.getString("seller_account");
+                                String seller_phoneNum = jsonObject.getString("seller_phoneNum");
+
+                                Toast.makeText(getApplicationContext(),"결제 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
+
+                                intent.putExtra("kind",kind);
+                                intent.putExtra("userID",userID);
+
+                                intent.putExtra("seller_userID",seller_userID);
+                                intent.putExtra("seller_userName",seller_userName);
+                                intent.putExtra("seller_address",seller_address);
+                                intent.putExtra("seller_account",seller_account);
+                                intent.putExtra("seller_phoneNum",seller_phoneNum);
+                                intent.putExtra("board_contents",board_contents);
+
+                                startActivity(intent);
+
+                            } else {
+                                Toast.makeText(getApplicationContext(),"구매에 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                                return;
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                BuyInfoRequest buyInfoRequest = new BuyInfoRequest(board_userID, responseListner);
+                RequestQueue queue = Volley.newRequestQueue(SPageActivity.this);
+                queue.add(buyInfoRequest);
+
+            }
+        });
 
         btn_list.setOnClickListener(new View.OnClickListener() {    // 취소
             @Override
