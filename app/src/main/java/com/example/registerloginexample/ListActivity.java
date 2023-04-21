@@ -59,7 +59,7 @@ public class ListActivity extends AppCompatActivity {
 // ------------- ----------------------------------
 
 
-    private Button btn_bought, btn_sell2, btn_main; // 판매하기, 취소
+    private Button btn_purchasedlist, btn_sell2, btn_main; // 판매하기, 취소
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,20 +148,34 @@ public class ListActivity extends AppCompatActivity {
 
 
 // ------------------ 버튼들 -----------------------------------------------
-        btn_bought = findViewById(R.id.btn_bought);
+        btn_purchasedlist = findViewById(R.id.btn_purchasedlist);
         btn_sell2 = findViewById(R.id.btn_sell2); // 판매하기
         btn_main = findViewById(R.id.btn_main); // 메인
 
         if (kind.equals("user")) {
-            btn_bought.setVisibility(View.INVISIBLE);
+            btn_purchasedlist.setVisibility(View.INVISIBLE);
             btn_sell2.setVisibility(View.VISIBLE);
             btn_main.setVisibility(View.VISIBLE);
 
         } else if (kind.equals("buyer")) {
-            btn_bought.setVisibility(View.VISIBLE);
+            btn_purchasedlist.setVisibility(View.VISIBLE);
             btn_sell2.setVisibility(View.INVISIBLE);
             btn_main.setVisibility(View.VISIBLE);
         }
+
+        btn_purchasedlist.setOnClickListener(new View.OnClickListener() {    // 목록
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListActivity.this, PurchasedListActivity.class);
+                intent.putExtra("kind",kind);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+
+                startActivity(intent);
+
+            }
+        });
+
 
         btn_sell2.setOnClickListener(new View.OnClickListener() {
             @Override

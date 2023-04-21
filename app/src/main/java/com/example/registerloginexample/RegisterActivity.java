@@ -28,7 +28,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText et_id, et_pass, et_name, et_phoneNum, et_binName, et_accountBank, et_accountNumber, et_address;
     private Button btn_register;
 
-    private ScrollView scrollView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // 액티비티 시작시 처음으로 실행되는 생명주기!
@@ -37,14 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         
-        scrollView2 = (ScrollView) findViewById(R.id.scrollView2);
-        scrollView2.post(new Runnable() {
-            @Override
-            public void run() {
-                scrollView2.fullScroll(ScrollView.FOCUS_DOWN);
-            }
-        });
-
 
         RadioGroup radioGroup = findViewById(R.id.radio_group);
 
@@ -73,7 +64,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        scrollView2 = findViewById(R.id.scrollView2);
 
         // 회원가입 정보 기입 관련 =============================================
 

@@ -22,7 +22,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn_sell, btn_list; // 판매하기, 목록 버튼
+    private Button btn_logout, btn_sell, btn_list; // 판매하기, 목록 버튼
 
     // 서버에서 가져온 내용 보여주기
     @Override
