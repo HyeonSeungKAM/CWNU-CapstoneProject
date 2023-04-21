@@ -87,7 +87,7 @@ public class SellActivity extends AppCompatActivity {
                 paper + "," + str_paperTP + "," + metal + ',' + str_metalTP + "," + str_TotalPrice; // sellBoard에 전송할 contents 내용
 
 
-        String Date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/dd/MM")); // 현재 날짜
+        String Date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")); // 현재 날짜
 
 
 

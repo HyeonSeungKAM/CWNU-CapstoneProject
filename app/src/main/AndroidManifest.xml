@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!--인터넷 권한 선언 -->
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- 블루투스 통신에 필요원 권한 선언 -->
-
+    <!-- 인터넷 권한 선언 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 인터넷 연결 확인 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 블루투스 통신에 필요원 권한 선언 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
@@ -14,12 +10,13 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
-    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false"/>
 
-
-
-    <!-- android:usesCleartextTraffic="true" 서버 php로 넘어가기 위해 필수로 필요 -->
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -27,8 +24,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:theme="@style/Theme.RegisterLoginExample"
         android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.RegisterLoginExample">
+        >
+        <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -41,10 +42,11 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SellActivity" />
-        <activity android:name=".ListActivity"/>
-        <activity android:name=".SPageActivity"/>
-        <activity android:name=".BuyerMainActivity"/>
+        <activity android:name=".ListActivity" />
+        <activity android:name=".SPageActivity" />
+        <activity android:name=".BuyerMainActivity" />
+        <activity android:name=".BuyActivity" />
+        <activity android:name=".PurchasedListActivity" />
     </application>
 
 </manifest>
-

@@ -17,13 +17,12 @@ import org.w3c.dom.Text;
 public class SPageActivity extends AppCompatActivity {
 
 
-    private Button btn_list, btn_buy; //목록, 구매하기
+    private Button btn_list, btn_buy; // 판매하기, 취소
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spagetest);
-        
-        // 상세 페이지 textview 정의
+
         TextView tv_b_userID = (TextView) findViewById(R.id.tv_b_userID);
         TextView tv_b_Date = (TextView) findViewById(R.id.tv_b_Date);
 
@@ -38,9 +37,7 @@ public class SPageActivity extends AppCompatActivity {
         TextView tv_totalMetalPrice = (TextView) findViewById(R.id.tv_totalMetalPrice);
         TextView tv_Total = (TextView) findViewById(R.id.tv_Total);
 
-        
         Intent intent = getIntent();
-        // 목록 리스트 정보 불러오기
         String board_userID = intent.getExtras().getString("board_userID");
         String board_contents = intent.getExtras().getString("board_contents");
         String board_Date = intent.getExtras().getString("board_Date");
@@ -54,9 +51,8 @@ public class SPageActivity extends AppCompatActivity {
         String plastic = intent.getStringExtra("plastic");
         String paper = intent.getStringExtra("paper");
         String metal = intent.getStringExtra("metal");
-        
-        
-        // 불러온 데이터 정의한 Textview에 붙이기
+
+
         tv_b_userID.setText(board_userID);
         tv_b_Date.setText(board_Date);
 
@@ -76,7 +72,6 @@ public class SPageActivity extends AppCompatActivity {
 
 
 
-
         btn_buy = findViewById(R.id.btn_buy);
         btn_list = findViewById(R.id.btn_list);
 
@@ -89,28 +84,7 @@ public class SPageActivity extends AppCompatActivity {
             btn_list.setVisibility(View.VISIBLE);
         }
 
-
-        btn_buy.setOnClickListener(new View.OnClickListener() {    
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
-                intent.putExtra("kind",kind);
-                intent.putExtra("binName",binName);
-                intent.putExtra("userID",userID);
-                intent.putExtra("userName",userName);
-                intent.putExtra("glass",glass);
-                intent.putExtra("plastic",plastic);
-                intent.putExtra("paper",paper);
-                intent.putExtra("metal",metal);
-
-                startActivity(intent);
-                finish();
-            }
-        });
-
-
-
-        btn_list.setOnClickListener(new View.OnClickListener() {    // 목록
+        btn_list.setOnClickListener(new View.OnClickListener() {    // 취소
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SPageActivity.this, ListActivity.class);

@@ -261,13 +261,13 @@
 
             <TableRow
                 android:layout_marginTop="5dp">
-
                 <TextView
                     android:id="@+id/textView17"
-                    android:layout_width="160dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ID(이름)"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    />
 
                 <TextView
                     android:id="@+id/tv_idname"
@@ -345,12 +345,12 @@
             </TableRow>
 
             <TableRow
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="25dp"
                 android:layout_span="2">
 
                 <TableLayout
-                    android:layout_marginStart="30dp"
-                    android:layout_span="2"
+                    android:layout_width="match_parent"
                     android:layout_gravity="center"
                     >
 
@@ -362,14 +362,14 @@
                             android:id="@+id/btn_buy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="20dp"
+                            android:layout_margin="40dp"
                             android:text="구매하기" />
 
                         <Button
                             android:id="@+id/btn_cancel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
+                            android:layout_margin="40dp"
                             android:text="목록" />
                     </TableRow>
                 </TableLayout>
