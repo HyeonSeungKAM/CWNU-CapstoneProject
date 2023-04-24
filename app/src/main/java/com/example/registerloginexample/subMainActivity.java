@@ -1,35 +1,18 @@
 package com.example.registerloginexample;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class subMainActivity extends AppCompatActivity {
 
     private Button btn_logout, btn_sell, btn_list; // 판매하기, 목록 버튼
     private Spinner spinner_binName;
@@ -44,37 +27,18 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Intent intent = getIntent();
-        String kind = intent.getStringExtra("kind");
-        String userID = intent.getStringExtra("userID");
-        String userName = intent.getStringExtra("userName");
-
-
-        JSONObject postObject = new JSONObject();
+/*
         requestQueue = Volley.newRequestQueue(this);
-        spinner_binName = (Spinner) findViewById(R.id.spinner_binName);
 
+        spinner_binName = (Spinner) findViewById(R.id.spinner_binName);
         String url = "http://gamhs44.ivyro.net/binList.php";
-        try {
-            postObject.put("userID",userID);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
                 url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray jsonArray = response.getJSONArray("binNames");
-                    for(int i=0; i<jsonArray.length()){
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String binName = jsonObject.optString("binNames");
-                        binList.add(binName);
-                        binNamesAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_item, binList);
-                        binNamesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinner_binName.setAdapter(binNamesAdapter);
-                    };
+                    for(int i=0; i<jsonArray.length())
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -85,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        requestQueue.add(jsonObjectRequest);
 
 
 
@@ -97,7 +60,16 @@ public class MainActivity extends AppCompatActivity {
        // TextView tv_paperW = findViewById(R.id.tv_paperW);
        // TextView tv_metalW = findViewById(R.id.tv_metalW);
 
-
+        Intent intent = getIntent();
+        String kind = intent.getStringExtra("kind");
+        String userID = intent.getStringExtra("userID");
+        String userName = intent.getStringExtra("userName");
+        String binName = intent.getStringExtra("binName");
+        String mDate = intent.getStringExtra("mDate");
+        String glass = intent.getStringExtra("glass");
+        String plastic = intent.getStringExtra("plastic");
+        String paper = intent.getStringExtra("paper");
+        String metal = intent.getStringExtra("metal");
 
        // tv_id.setText(userID);
         tv_name.setText(userName);
