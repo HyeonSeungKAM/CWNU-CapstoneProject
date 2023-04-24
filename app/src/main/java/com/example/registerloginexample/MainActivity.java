@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tv_id = findViewById(R.id.tv_id);
         TextView tv_name = findViewById(R.id.tv_name);
-        TextView tv_binName = findViewById(R.id.tv_binName);
+        TextView tv_mDate = findViewById(R.id.tv_mDate);
         TextView tv_glassW = findViewById(R.id.tv_glassW);
         TextView tv_plasticW = findViewById(R.id.tv_plasticW);
         TextView tv_paperW = findViewById(R.id.tv_paperW);
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
         String binName = intent.getStringExtra("binName");
+        String mDate = intent.getStringExtra("mDate");
         String glass = intent.getStringExtra("glass");
         String plastic = intent.getStringExtra("plastic");
         String paper = intent.getStringExtra("paper");
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         tv_id.setText(userID);
         tv_name.setText(userName);
-        tv_binName.setText(binName);
+        tv_mDate.setText(mDate);
         tv_glassW.setText(glass +"kg");
         tv_plasticW.setText(plastic+"kg");
         tv_paperW.setText(paper+"kg");

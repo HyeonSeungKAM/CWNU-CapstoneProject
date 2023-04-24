@@ -102,36 +102,14 @@
                 android:minHeight="48dp" />
 
 
-
-            <EditText
-                android:id="@+id/et_binName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+            <Spinner
+                android:id="@+id/spinner_bankMenu"
                 android:ems="10"
-                android:hint="쓰레기통이름"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="@+id/et_name"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/et_name"
-                app:layout_constraintTop_toBottomOf="@+id/et_name" />
-
-
-            <EditText
-                android:id="@+id/et_accountBank"
-                android:layout_width="wrap_content"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:ems="10"
-                android:hint="은행이름"
-                android:inputType="textPersonName"
                 android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="@+id/et_binName"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/et_binName"
-                app:layout_constraintTop_toBottomOf="@+id/et_binName" />
-
+                android:spinnerMode="dialog" />
 
             <EditText
                 android:id="@+id/et_accountNumber"

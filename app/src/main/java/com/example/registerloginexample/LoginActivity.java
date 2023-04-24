@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 } else if (kind.equals("user")) {
                                     String binName = jsonObject.getString("binName");
+                                    String mDate = jsonObject.getString("mDate");
                                     String userID = jsonObject.getString("userID");
                                     String userName = jsonObject.getString("userName");
                                     String glass = jsonObject.getString("glass");
@@ -85,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     intent.putExtra("binName",binName);
+                                    intent.putExtra("mDate",mDate);
                                     intent.putExtra("kind",kind);
                                     intent.putExtra("userID",userID);
                                     intent.putExtra("userName",userName);

@@ -13,7 +13,7 @@ public class RegisterRequest extends StringRequest {
     final static private String URL = "http://gamhs44.ivyro.net/Register.php";
     private Map<String, String> map;
 
-    public RegisterRequest(String kind, String userID, String userPassword, String userName, String phoneNum, String binName,
+    public RegisterRequest(String kind, String userID, String userPassword, String userName, String phoneNum,
                            String account, String address ,Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
@@ -23,7 +23,6 @@ public class RegisterRequest extends StringRequest {
         map.put( "userPassword", userPassword);
         map.put( "userName", userName);
         map.put( "phoneNum", phoneNum);
-        map.put( "binName", binName);
         map.put( "account", account);
         map.put( "address", address);
 

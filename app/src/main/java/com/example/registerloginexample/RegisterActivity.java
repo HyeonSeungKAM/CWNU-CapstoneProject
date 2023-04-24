@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -25,7 +28,9 @@ import org.json.JSONObject;
 public class RegisterActivity extends AppCompatActivity {
 
     public String type = "user";
-    private EditText et_id, et_pass, et_name, et_phoneNum, et_binName, et_accountBank, et_accountNumber, et_address;
+    private EditText et_id, et_pass, et_name, et_phoneNum, et_accountNumber, et_address;
+
+    private Spinner spinner_bankMenu;
     private Button btn_register;
 
 
@@ -45,17 +50,14 @@ public class RegisterActivity extends AppCompatActivity {
                 switch(checkedId){
                     case R.id.radio_button_user:
                         type = "user";
-                        et_binName.setVisibility(View.VISIBLE);
-                        et_binName.setVisibility(View.VISIBLE);
-                        et_accountBank.setVisibility(View.VISIBLE);
+                        spinner_bankMenu.setVisibility(View.VISIBLE);
                         et_accountNumber.setVisibility(View.VISIBLE);
                         et_address.setVisibility(View.VISIBLE);
                         break;
 
                     case R.id.radio_button_buyer:
                         type = "buyer";
-                        et_binName.setVisibility(View.GONE);
-                        et_accountBank.setVisibility(View.GONE);
+                        spinner_bankMenu.setVisibility(View.GONE);
                         et_accountNumber.setVisibility(View.GONE);
                         et_address.setVisibility(View.GONE);
                         break;
@@ -75,10 +77,16 @@ public class RegisterActivity extends AppCompatActivity {
         et_phoneNum = findViewById(R.id.et_phoneNum);
         et_phoneNum.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
+        spinner_bankMenu = findViewById(R.id.spinner_bankMenu);
+        final String[] banks = getResources().getStringArray(R.array.banks_array);
 
-        et_binName = findViewById(R.id.et_binName);
+        ArrayAdapter menuAdapter = ArrayAdapter.createFromResource(this, R.array.banks_array, android.R.layout.simple_spinner_item);
 
-        et_accountBank = findViewById(R.id.et_accountBank);
+        // 스피너 클릭 시 DropDown 모양을 설정
+        menuAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // 스피너 어댑터에 연결
+        spinner_bankMenu.setAdapter(menuAdapter);
+
         et_accountNumber = findViewById(R.id.et_accountNumber);
 
         // 회원가입 버튼 클릭 시 수정
@@ -92,10 +100,11 @@ public class RegisterActivity extends AppCompatActivity {
                 String userPass = et_pass.getText().toString();
                 String userName = et_name.getText().toString();
                 String phoneNum = et_phoneNum.getText().toString();
-                String binName = et_binName.getText().toString();
-                String accountBank = et_accountBank.getText().toString();
+                String accountBank = spinner_bankMenu.getSelectedItem().toString();
                 String accountNumber = et_accountNumber.getText().toString();
+
                 String account = accountBank + " " +accountNumber;
+
                 String address = et_address.getText().toString();
 
                 String kind = type;
@@ -119,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
                 // 서버로 Volley를 이용해 요청을 함.
-                RegisterRequest registerRequest = new RegisterRequest(kind, userID, userPass, userName,phoneNum ,binName, account, address, responseListener);
+                RegisterRequest registerRequest = new RegisterRequest(kind, userID, userPass, userName,phoneNum, account, address, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
 
