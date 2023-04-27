@@ -13,23 +13,30 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 
-public class MainActivityBackup extends AppCompatActivity {
 
-    private Button btn_logout, btn_sell, btn_list; // 판매하기, 목록 버튼
+public class BinMainActivity extends AppCompatActivity {
+
+    private Button btn_logout, btn_sell, btn_list, btn_binList; // 판매하기, 목록 버튼
+
+    ArrayList<String> binList = new ArrayList<>();
+
 
     // 서버에서 가져온 내용 보여주기
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mainbackup);
+        setContentView(R.layout.activity_binmain);
 
         TextView tv_id = findViewById(R.id.tv_id);
         TextView tv_name = findViewById(R.id.tv_name);
+        TextView tv_binName = findViewById(R.id.tv_binName);
         TextView tv_mDate = findViewById(R.id.tv_mDate);
         TextView tv_glassW = findViewById(R.id.tv_glassW);
         TextView tv_plasticW = findViewById(R.id.tv_plasticW);
@@ -37,6 +44,8 @@ public class MainActivityBackup extends AppCompatActivity {
         TextView tv_metalW = findViewById(R.id.tv_metalW);
 
         Intent intent = getIntent();
+        binList = intent.getStringArrayListExtra("binList");
+
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
@@ -48,6 +57,7 @@ public class MainActivityBackup extends AppCompatActivity {
         String metal = intent.getStringExtra("metal");
 
         tv_id.setText(userID);
+        tv_binName.setText(binName);
         tv_name.setText(userName);
         tv_mDate.setText(mDate);
         tv_glassW.setText(glass +"kg");
@@ -57,6 +67,25 @@ public class MainActivityBackup extends AppCompatActivity {
 
         btn_sell = findViewById(R.id.btn_sell); // 판매하기
         btn_list = findViewById(R.id.btn_list); // 목록
+
+        btn_list.setOnClickListener(new View.OnClickListener() {    // 목록
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BinMainActivity.this, ListActivity.class);
+
+                intent.putExtra("kind",kind);
+                intent.putExtra("binName",binName);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("glass",glass);
+                intent.putExtra("plastic",plastic);
+                intent.putExtra("paper",paper);
+                intent.putExtra("metal",metal);
+                startActivity(intent);
+
+            }
+        });
+
 
 
         btn_sell.setOnClickListener(new View.OnClickListener() {    // 판매하기
@@ -75,7 +104,7 @@ public class MainActivityBackup extends AppCompatActivity {
                                 String paper = jsonObject.getString("paper");
                                 String metal = jsonObject.getString("metal");
 
-                                Intent intent = new Intent(MainActivityBackup.this, SellActivity.class);
+                                Intent intent = new Intent(BinMainActivity.this, SellActivity.class);
                                 intent.putExtra("kind",kind);
                                 intent.putExtra("binName",binName);
                                 intent.putExtra("userID",userID);
@@ -98,33 +127,40 @@ public class MainActivityBackup extends AppCompatActivity {
                     }
                 };
                 SellInfoRequest sellinfoRequest = new SellInfoRequest(binName, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(MainActivityBackup.this);
+                RequestQueue queue = Volley.newRequestQueue(BinMainActivity.this);
                 queue.add(sellinfoRequest);
 
             }
         });
 
-
-
-
-        btn_list.setOnClickListener(new View.OnClickListener() {    // 목록
+        btn_binList = findViewById(R.id.btn_binList);
+        btn_binList.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivityBackup.this, ListActivity.class);
-                intent.putExtra("kind",kind);
-                intent.putExtra("binName",binName);
-                intent.putExtra("userID",userID);
-                intent.putExtra("userName",userName);
-                intent.putExtra("glass",glass);
-                intent.putExtra("plastic",plastic);
-                intent.putExtra("paper",paper);
-                intent.putExtra("metal",metal);
+
+                Intent intent = new Intent(BinMainActivity.this, BinListActivity.class);
+                            intent.putExtra("kind",kind);
+                            intent.putExtra("userID",userID);
+                            intent.putExtra("userName",userName);
+                            intent.putExtra("binList", binList);
+                            startActivity(intent);
+                };
+        });
+
+
+
+
+
+        btn_logout = findViewById(R.id.btn_logout);// 목록
+        btn_logout.setOnClickListener(new View.OnClickListener() {    // 목록
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BinMainActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
 
             }
         });
-
-
 
     }
 }

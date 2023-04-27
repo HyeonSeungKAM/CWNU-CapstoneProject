@@ -45,6 +45,11 @@
         <activity android:name=".SellActivity" />
         <activity android:name=".ListActivity" />
         <activity android:name=".SPageActivity" />
+
+        <activity android:name=".BinListActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".BinMainActivity" />
+
         <activity android:name=".BuyerMainActivity" />
         <activity android:name=".BuyActivity" />
         <activity android:name=".PurchasedListActivity" />

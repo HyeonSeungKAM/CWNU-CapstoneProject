@@ -7,15 +7,17 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BinListRequest extends StringRequest {
-    final static private String URL = "http://gamhs44.ivyro.net/binList.php";
+
+public class BinMainRequest extends StringRequest {
+    final static private String URL = "http://gamhs44.ivyro.net/call_BinInfo.php";
     private Map<String, String> map;
 
-    public BinListRequest(String userID, Response.Listener<String> listener) {
+    public BinMainRequest(String userID, String binName, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         map.put( "userID", userID);
+        map.put( "binName", binName);
 
     }
 
