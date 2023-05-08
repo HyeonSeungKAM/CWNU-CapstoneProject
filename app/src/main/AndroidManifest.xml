@@ -48,6 +48,10 @@
 
         <activity android:name=".BinListActivity"
             android:theme="@android:style/Theme.Dialog" />
+
+        <activity android:name=".BinEditActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
+
         <activity android:name=".BinMainActivity" />
 
         <activity android:name=".BuyerMainActivity" />

@@ -55,7 +55,6 @@
             android:id="@+id/tv_binName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
             android:hint="쓰레기통 이름"
             android:textSize="20sp" />
 
@@ -67,6 +66,13 @@
             android:textSize="20sp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_binLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="쓰레기통 위치"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -177,6 +183,13 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_editBin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="쓰레기통 정보수정" />
 
 
         <Button

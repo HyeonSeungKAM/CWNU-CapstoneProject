@@ -22,9 +22,8 @@ import java.util.ArrayList;
 
 public class BinMainActivity extends AppCompatActivity {
 
-    private Button btn_logout, btn_sell, btn_list, btn_binList; // 판매하기, 목록 버튼
+    private Button btn_logout, btn_editBin, btn_sell, btn_list, btn_binList;
 
-    ArrayList<String> binList = new ArrayList<>();
 
 
     // 서버에서 가져온 내용 보여주기
@@ -37,6 +36,7 @@ public class BinMainActivity extends AppCompatActivity {
         TextView tv_id = findViewById(R.id.tv_id);
         TextView tv_name = findViewById(R.id.tv_name);
         TextView tv_binName = findViewById(R.id.tv_binName);
+        TextView tv_binLoc = findViewById(R.id.tv_binLoc);
         TextView tv_mDate = findViewById(R.id.tv_mDate);
         TextView tv_glassW = findViewById(R.id.tv_glassW);
         TextView tv_plasticW = findViewById(R.id.tv_plasticW);
@@ -44,12 +44,12 @@ public class BinMainActivity extends AppCompatActivity {
         TextView tv_metalW = findViewById(R.id.tv_metalW);
 
         Intent intent = getIntent();
-        binList = intent.getStringArrayListExtra("binList");
-
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
+        String address = intent.getStringExtra("address");
         String binName = intent.getStringExtra("binName");
+        String binLoc = intent.getStringExtra("binLoc");
         String mDate = intent.getStringExtra("mDate");
         String glass = intent.getStringExtra("glass");
         String plastic = intent.getStringExtra("plastic");
@@ -59,15 +59,30 @@ public class BinMainActivity extends AppCompatActivity {
         tv_id.setText(userID);
         tv_binName.setText(binName);
         tv_name.setText(userName);
+        tv_binLoc.setText(binLoc);
         tv_mDate.setText(mDate);
         tv_glassW.setText(glass +"kg");
         tv_plasticW.setText(plastic+"kg");
         tv_paperW.setText(paper+"kg");
         tv_metalW.setText(metal+"kg");
 
-        btn_sell = findViewById(R.id.btn_sell); // 판매하기
-        btn_list = findViewById(R.id.btn_list); // 목록
 
+        btn_editBin = findViewById(R.id.btn_editBin);
+        btn_editBin.setOnClickListener(new View.OnClickListener() {    // 목록
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BinMainActivity.this, BinEditActivity.class);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
+                intent.putExtra("binName",binName);
+                intent.putExtra("binLoc",binLoc);
+                startActivity(intent);
+            }
+        });
+
+
+        btn_list = findViewById(R.id.btn_list); // 목록
         btn_list.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
@@ -87,7 +102,7 @@ public class BinMainActivity extends AppCompatActivity {
         });
 
 
-
+        btn_sell = findViewById(R.id.btn_sell); // 판매하기
         btn_sell.setOnClickListener(new View.OnClickListener() {    // 판매하기
             @Override
             public void onClick(View view) {
@@ -133,22 +148,47 @@ public class BinMainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+
         btn_binList = findViewById(R.id.btn_binList);
         btn_binList.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            System.out.println(response);
 
-                Intent intent = new Intent(BinMainActivity.this, BinListActivity.class);
+                            ArrayList<String> binList = new ArrayList<>();
+                            String binList_edit = "쓰레기통 추가/삭제";
+                            binList.add(binList_edit);
+                            for(int i=0; i < jsonArray.length(); i++){
+                                JSONObject jsonObject= jsonArray.getJSONObject(i);
+                                String binName = jsonObject.getString("binName");
+                                binList.add(binName);
+                            }
+                            Intent intent = new Intent(BinMainActivity.this, BinListActivity.class);
                             intent.putExtra("kind",kind);
                             intent.putExtra("userID",userID);
                             intent.putExtra("userName",userName);
                             intent.putExtra("binList", binList);
                             startActivity(intent);
+
+                        } catch(JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 };
+                BinListRequest binListRequest = new BinListRequest(userID, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(BinMainActivity.this);
+                queue.add(binListRequest);
+
+            }
         });
-
-
-
 
 
         btn_logout = findViewById(R.id.btn_logout);// 목록

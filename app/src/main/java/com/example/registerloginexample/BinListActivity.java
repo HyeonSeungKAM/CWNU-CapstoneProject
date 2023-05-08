@@ -43,9 +43,9 @@ public class BinListActivity extends Activity {
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
+        String address = intent.getStringExtra("address");
 
-        String binList_edit = "쓰레기통 추가/삭제";
-        binList.add(binList_edit);
+
 
         ListView bin_listview = findViewById(R.id.bin_listview);
         ArrayAdapter<String> adpater = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,binList);
@@ -66,6 +66,7 @@ public class BinListActivity extends Activity {
                             boolean success = jsonObject.getBoolean("success");
                             if (success) {
 
+                                String binLoc = jsonObject.getString("binLoc");
                                 String mDate = jsonObject.getString("mDate");
                                 String glass = jsonObject.getString("glass");
                                 String plastic = jsonObject.getString("plastic");
@@ -74,11 +75,12 @@ public class BinListActivity extends Activity {
 
                                 Intent intent = new Intent(BinListActivity.this, BinMainActivity.class);
                                 intent.putExtra("kind",kind);
-                                intent.putExtra("binList", binList);
                                 intent.putExtra("binName",binName);
+                                intent.putExtra("binLoc",binLoc);
                                 intent.putExtra("mDate",mDate);
                                 intent.putExtra("userID",userID);
                                 intent.putExtra("userName",userName);
+                                intent.putExtra("address",address);
                                 intent.putExtra("glass",glass);
                                 intent.putExtra("plastic",plastic);
                                 intent.putExtra("paper",paper);

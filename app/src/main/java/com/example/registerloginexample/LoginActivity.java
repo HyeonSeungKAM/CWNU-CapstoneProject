@@ -76,12 +76,14 @@ public class LoginActivity extends AppCompatActivity {
                                 } else if (kind.equals("user")) {
                                     String userID = jsonObject.getString("userID");
                                     String userName = jsonObject.getString("userName");
+                                    String address = jsonObject.getString("address");
 
                                     Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     intent.putExtra("kind",kind);
                                     intent.putExtra("userID",userID);
                                     intent.putExtra("userName",userName);
+                                    intent.putExtra("address",address);
 
                                     startActivity(intent);
                                 }

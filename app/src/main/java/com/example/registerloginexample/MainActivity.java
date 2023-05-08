@@ -26,10 +26,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> binList = new ArrayList<>();
     private Button btn_salesList,btn_logout, btn_binList, btn_list; // 판매하기, 목록 버튼
 
-    private String userID, userName, kind;
+    private String userID, userName, kind, address;
 
     // 서버에서 가져온 내용 보여주기
     @Override
@@ -45,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         kind = intent.getStringExtra("kind");
         userID = intent.getStringExtra("userID");
         userName = intent.getStringExtra("userName");
+        address = intent.getStringExtra("address");
+
 
         tv_id.setText(userID);
         tv_name.setText(userName);
@@ -63,17 +64,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
         btn_binList = findViewById(R.id.btn_binList);
+
         btn_binList.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
-
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                                 JSONArray jsonArray = new JSONArray(response);
                                 System.out.println(response);
+                                ArrayList<String> binList = new ArrayList<>();
+
+                                String binList_edit = "쓰레기통 추가/삭제";
+                                binList.add(binList_edit);
                                 for(int i=0; i < jsonArray.length(); i++){
                                     JSONObject jsonObject= jsonArray.getJSONObject(i);
                                     String binName = jsonObject.getString("binName");
@@ -83,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("kind",kind);
                                 intent.putExtra("userID",userID);
                                 intent.putExtra("userName",userName);
+                                intent.putExtra("address",address);
                                 intent.putExtra("binList", binList);
                                 startActivity(intent);
 
