@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         btn_register = findViewById(R.id.btn_register);
 
+
         //회원가입 버튼을 클릭 시 수행
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -56,11 +56,15 @@ public class SellActivity extends AppCompatActivity {
         TextView tv_paper = findViewById(R.id.tv_paper);
         TextView tv_metal = findViewById(R.id.tv_metal);
 
+        TextView tv_binName = findViewById(R.id.tv_binName);
+        TextView tv_binLoc = findViewById(R.id.tv_binLoc);
+
 
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
         String binName = intent.getStringExtra("binName");
+        String binLoc = intent.getStringExtra("binLoc");
         String glass = intent.getStringExtra("glass");
         String plastic = intent.getStringExtra("plastic");
         String paper = intent.getStringExtra("paper");
@@ -90,6 +94,9 @@ public class SellActivity extends AppCompatActivity {
         String Date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")); // 현재 날짜
 
 
+
+        tv_binName.setText(binName);
+        tv_binLoc.setText(binLoc);
 
         tv_glass.setText(glass +"kg");
         tv_plastic.setText(plastic + "kg");
@@ -124,6 +131,7 @@ public class SellActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"등록에 성공하였습니다.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SellActivity.this, ListActivity.class);
                                 intent.putExtra("binName",binName);
+                                intent.putExtra("binLoc", binLoc);
                                 intent.putExtra("userID",userID);
                                 intent.putExtra("userName",userName);
                                 intent.putExtra("glass",glass);

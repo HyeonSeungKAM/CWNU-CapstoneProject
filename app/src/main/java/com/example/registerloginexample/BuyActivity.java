@@ -56,6 +56,7 @@ public class BuyActivity extends AppCompatActivity {
         // 로그인한 유저 정보
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
+        String userName = intent.getStringExtra("userName");
 
         String seller_userID = intent.getExtras().getString("seller_userID");
         String seller_userName = intent.getExtras().getString("seller_userName");
@@ -120,6 +121,7 @@ public class BuyActivity extends AppCompatActivity {
                                 Intent intent = new Intent(BuyActivity.this, ListActivity.class);
                                 intent.putExtra("kind",kind);
                                 intent.putExtra("userID",userID);
+                                intent.putExtra("userName",userName);
 
                                 startActivity(intent);
 

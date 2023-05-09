@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 public class BuyerMainActivity extends AppCompatActivity {
 
-    private Button btn_purchasedlist, btn_list; // 판매하기, 목록 버튼
+    private Button btn_logout, btn_purchasedlist, btn_list; // 판매하기, 목록 버튼
 
     // 서버에서 가져온 내용 보여주기
     @Override
@@ -39,10 +39,18 @@ public class BuyerMainActivity extends AppCompatActivity {
         tv_id.setText(userID);
         tv_name.setText(userName);
 
+
+        btn_logout = findViewById(R.id.btn_logout);// 목록
+        btn_logout.setOnClickListener(new View.OnClickListener() {    // 목록
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BuyerMainActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
+
         btn_purchasedlist = findViewById(R.id.btn_purchasedlist); // 판매하기
-        btn_list = findViewById(R.id.btn_list); // 목록
-
-
         btn_purchasedlist.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
@@ -57,8 +65,7 @@ public class BuyerMainActivity extends AppCompatActivity {
         });
 
 
-
-
+        btn_list = findViewById(R.id.btn_list); // 목록
         btn_list.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {

@@ -108,23 +108,22 @@ public class ListActivity extends AppCompatActivity {
                                                              if (success) {
                                                                  String board_userID = jsonObject.getString("userID");
                                                                  String board_binName = jsonObject.getString("binName");
+                                                                 String board_binLoc = jsonObject.getString("binLoc");
                                                                  String board_contents = jsonObject.getString("contents");
                                                                  String board_Date = jsonObject.getString("Date");
 
                                                                  Intent intent = new Intent(ListActivity.this, SPageActivity.class);
                                                                  intent.putExtra("board_userID", board_userID);
+                                                                 intent.putExtra("board_binName", board_binName);
+                                                                 intent.putExtra("board_binLoc", board_binLoc);
                                                                  intent.putExtra("board_contents",board_contents);
                                                                  intent.putExtra("board_Date", board_Date);
 
                                                                  // 로그인한 유저 정보들
                                                                  intent.putExtra("kind",kind);
-                                                               //  intent.putExtra("binName",binName);
                                                                  intent.putExtra("userID",userID);
                                                                  intent.putExtra("userName",userName);
-                                                              //   intent.putExtra("glass",glass);
-                                                              //   intent.putExtra("plastic",plastic);
-                                                              //   intent.putExtra("paper",paper);
-                                                               //  intent.putExtra("metal",metal);
+
 
                                                                  startActivity(intent);
                                                                  finish();

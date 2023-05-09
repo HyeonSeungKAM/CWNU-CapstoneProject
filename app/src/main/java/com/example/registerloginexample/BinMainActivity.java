@@ -105,6 +105,7 @@ public class BinMainActivity extends AppCompatActivity {
 
                 intent.putExtra("kind",kind);
                 intent.putExtra("binName",binName);
+                intent.putExtra("binLoc",binLoc);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
                 intent.putExtra("glass",glass);
@@ -137,6 +138,7 @@ public class BinMainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(BinMainActivity.this, SellActivity.class);
                                 intent.putExtra("kind",kind);
                                 intent.putExtra("binName",binName);
+                                intent.putExtra("binLoc",binLoc);
                                 intent.putExtra("userID",userID);
                                 intent.putExtra("userName",userName);
                                 intent.putExtra("glass",glass);
@@ -211,7 +213,6 @@ public class BinMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BinMainActivity.this, SalesListActivity.class);
-                intent.putExtra("binLoc",binLoc);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
                 intent.putExtra("address",address);

@@ -31,7 +31,10 @@ public class SPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spagetest);
 
         TextView tv_b_userID = (TextView) findViewById(R.id.tv_b_userID);
+        TextView tv_b_binName = (TextView) findViewById(R.id.tv_b_binName);
+        TextView tv_b_binLoc = (TextView) findViewById(R.id.tv_b_binLoc);
         TextView tv_b_Date = (TextView) findViewById(R.id.tv_b_Date);
+
 
         TextView tv_glassW = (TextView) findViewById(R.id.tv_glassW);
         TextView tv_plasticW = (TextView) findViewById(R.id.tv_plasticW);
@@ -46,22 +49,21 @@ public class SPageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String board_userID = intent.getExtras().getString("board_userID");
+        String board_binName = intent.getExtras().getString("board_binName");
+        String board_binLoc = intent.getExtras().getString("board_binLoc");
         String board_contents = intent.getExtras().getString("board_contents");
         String board_Date = intent.getExtras().getString("board_Date");
 
+
         // 로그인한 유저 정보
         String kind = intent.getStringExtra("kind");
-        String binName = intent.getStringExtra("binName");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
-        String glass = intent.getStringExtra("glass");
-        String plastic = intent.getStringExtra("plastic");
-        String paper = intent.getStringExtra("paper");
-        String metal = intent.getStringExtra("metal");
-
 
         tv_b_userID.setText(board_userID);
         tv_b_Date.setText(board_Date);
+        tv_b_binName.setText(board_binName);
+        tv_b_binLoc.setText(board_binLoc);
 
         tv_glassW.setText(board_contents.split(",")[0]);
         tv_totalGlassPrice.setText(board_contents.split(",")[1]);
@@ -149,13 +151,8 @@ public class SPageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SPageActivity.this, ListActivity.class);
                 intent.putExtra("kind",kind);
-                intent.putExtra("binName",binName);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
-                intent.putExtra("glass",glass);
-                intent.putExtra("plastic",plastic);
-                intent.putExtra("paper",paper);
-                intent.putExtra("metal",metal);
 
                 startActivity(intent);
                 finish();
