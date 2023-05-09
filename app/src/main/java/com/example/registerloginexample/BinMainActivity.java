@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class BinMainActivity extends AppCompatActivity {
 
-    private Button btn_logout, btn_editBin, btn_sell, btn_list, btn_binList;
+    private Button btn_salesList, btn_map, btn_logout, btn_editBin, btn_sell, btn_list, btn_binList;
 
 
 
@@ -65,6 +65,21 @@ public class BinMainActivity extends AppCompatActivity {
         tv_plasticW.setText(plastic+"kg");
         tv_paperW.setText(paper+"kg");
         tv_metalW.setText(metal+"kg");
+
+        btn_map = findViewById(R.id.btn_map);
+        btn_map.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BinMainActivity.this, MapActivity.class);
+                intent.putExtra("binLoc",binLoc);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
+                intent.putExtra("binName",binName);
+                intent.putExtra("binLoc",binLoc);
+            }
+        });
 
 
         btn_editBin = findViewById(R.id.btn_editBin);
@@ -189,6 +204,19 @@ public class BinMainActivity extends AppCompatActivity {
 
             }
         });
+
+        btn_salesList = findViewById(R.id.btn_salesList);
+        btn_salesList.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BinMainActivity.this, SalesListActivity.class);
+                intent.putExtra("userID",userID);
+                startActivity(intent);
+            }
+        });
+
+
 
 
         btn_logout = findViewById(R.id.btn_logout);// 목록
