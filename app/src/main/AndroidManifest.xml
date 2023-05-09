@@ -53,7 +53,7 @@
             android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
 
         <activity android:name=".BinMainActivity" />
-
+        <activity android:name=".SalesListActivity" />
         <activity android:name=".BuyerMainActivity" />
         <activity android:name=".BuyActivity" />
         <activity android:name=".PurchasedListActivity" />

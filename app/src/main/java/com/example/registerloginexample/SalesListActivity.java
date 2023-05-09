@@ -27,26 +27,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SalesListActivity extends AppCompatActivity {
-    private static String TAG = "php_PurchasedListAcitivity";
+    private static String TAG = "php_SalesListAcitivity";
 
     private static final String TAG_JSON = "webnautes";
-    private static final String TAG_PDATE = "Date";
-    private static final String TAG_SELLER = "seller_IDName";
+    private static final String TAG_SDATE = "sdate";
+    private static final String TAG_BUYER = "buyer_ID";
     private static final String TAG_CONTENTS = "contents";
 
     private static final String TAG_TPAYMENT = "total_payment";
-    private static final String TAG_SPHONENUM = "seller_phoneNum";
-    private static final String TAG_SADDRESS = "seller_address";
+
 
 
 
     private Button btn_main, btn_list; // 판매하기, 취소
     // private TextView mTextViewResult;
 
-    String pJsonString;
+    String sJsonString;
 
-    ListView plistView;
-    ArrayList<HashMap<String, String>> pArrayList;
+    ListView slistView;
+    ArrayList<HashMap<String, String>> sArrayList;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +55,13 @@ public class SalesListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
+        String userName = intent.getStringExtra("userName");
+        String address = intent.getStringExtra("address");
+        String binName = intent.getStringExtra("binName");
+        String binLoc = intent.getStringExtra("binLoc");
 
-        String buyer_ID = userID;
+
+        String seller_ID = userID;
 
         //  mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
 
@@ -67,8 +71,8 @@ public class SalesListActivity extends AppCompatActivity {
         slistView = (ListView) findViewById(R.id.listview_sales_innerframe);
         sArrayList = new ArrayList<>();
 
-        PurchasedListActivity.GetData task = new PurchasedListActivity.GetData();
-        task.execute(buyer_ID);
+        SalesListActivity.GetData task = new SalesListActivity.GetData();
+        task.execute(seller_ID);
 
 
 
@@ -79,9 +83,13 @@ public class SalesListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(PurchasedListActivity.this, BuyerMainActivity.class);
-                intent.putExtra("kind",kind);
-                intent.putExtra("userID", userID);
+                Intent intent = new Intent(SalesListActivity.this, MainActivity.class);
+                intent.putExtra("binLoc",binLoc);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
+                intent.putExtra("binName",binName);
+                intent.putExtra("binLoc",binLoc);
 
                 startActivity(intent);
 
@@ -94,9 +102,13 @@ public class SalesListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(PurchasedListActivity.this, ListActivity.class);
-                intent.putExtra("kind",kind);
-                intent.putExtra("userID", userID);
+                Intent intent = new Intent(SalesListActivity.this, ListActivity.class);
+                intent.putExtra("binLoc",binLoc);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
+                intent.putExtra("binName",binName);
+                intent.putExtra("binLoc",binLoc);
 
                 startActivity(intent);
             }
@@ -113,7 +125,7 @@ public class SalesListActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(PurchasedListActivity.this,
+            progressDialog = ProgressDialog.show(SalesListActivity.this,
                     "Please Wait", null, true, true);
         }
 
@@ -129,7 +141,7 @@ public class SalesListActivity extends AppCompatActivity {
                 //     mTextViewResult.setText(errorString);
             } else {
 
-                pJsonString = result;
+                sJsonString = result;
                 showResult();
             }
         }
@@ -137,10 +149,10 @@ public class SalesListActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            String buyer_ID = params[0];
+            String seller_ID = params[0];
 
-            String serverURL = "http://gamhs44.ivyro.net/purchasedlist.php";
-            String postParameters = "buyer_ID=" + buyer_ID;
+            String serverURL = "http://gamhs44.ivyro.net/saleslist.php";
+            String postParameters = "seller_ID=" + seller_ID;
 
             try {
                 URL url = new URL(serverURL);
@@ -193,43 +205,39 @@ public class SalesListActivity extends AppCompatActivity {
 
     private void showResult() {
         try {
-            JSONObject jsonObject = new JSONObject(pJsonString);
+            JSONObject jsonObject = new JSONObject(sJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                String pdate = item.getString(TAG_PDATE);
+                String sdate = item.getString(TAG_SDATE);
                 String content = item.getString(TAG_CONTENTS);
 
                 String edit_con = "유리병"+content.split(",")[0]+"kg" + "플라스틱"+content.split(",")[2]+"kg"
                         + "\n" +"종이"+content.split(",")[4]+"kg" + "고철"+content.split(",")[6]+"kg";
 
                 String tpayment = item.getString(TAG_TPAYMENT);
-                String seller = item.getString(TAG_SELLER);
-                String saddress = item.getString(TAG_SADDRESS);
-                String sphonenum = item.getString(TAG_SPHONENUM);
+                String buyer = item.getString(TAG_BUYER);
 
                 HashMap<String, String> hashMap = new HashMap<>();
 
-                hashMap.put(TAG_PDATE, pdate);
+                hashMap.put(TAG_SDATE, sdate);
                 hashMap.put(TAG_CONTENTS, edit_con);
                 hashMap.put(TAG_TPAYMENT, tpayment);
-                hashMap.put(TAG_SELLER, seller);
-                hashMap.put(TAG_SADDRESS, saddress);
-                hashMap.put(TAG_SPHONENUM, sphonenum);
+                hashMap.put(TAG_BUYER, buyer);
 
-                pArrayList.add(hashMap);
+                sArrayList.add(hashMap);
             }
 
             ListAdapter adapter = new SimpleAdapter(
-                    PurchasedListActivity.this, pArrayList, R.layout.item_purchasedlist,
-                    new String[]{TAG_PDATE, TAG_SELLER, TAG_CONTENTS,TAG_TPAYMENT,TAG_SPHONENUM,TAG_SADDRESS},
-                    new int[]{R.id.tv_pdate, R.id.tv_seller, R.id.tv_content,R.id.tv_tpayment ,R.id.tv_sphoneNum ,R.id.tv_saddress}
+                    SalesListActivity.this, sArrayList, R.layout.item_saleslist,
+                    new String[]{TAG_SDATE, TAG_BUYER, TAG_CONTENTS,TAG_TPAYMENT},
+                    new int[]{R.id.tv_sdate, R.id.tv_buyer, R.id.tv_content,R.id.tv_tpayment}
             );
 
-            plistView.setAdapter(adapter);
+            slistView.setAdapter(adapter);
 
         } catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);

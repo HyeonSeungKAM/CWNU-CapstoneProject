@@ -63,6 +63,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_salesList = findViewById(R.id.btn_salesList);
+        btn_salesList.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SalesListActivity.class);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
+                startActivity(intent);
+            }
+        });
+
 
 
         btn_binList = findViewById(R.id.btn_binList);
