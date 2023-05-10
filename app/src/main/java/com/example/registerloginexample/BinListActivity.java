@@ -56,50 +56,63 @@ public class BinListActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 String binName = binList.get(i);
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                if (binName.equals("쓰레기통 추가/삭제")) {
 
+                    binList.remove("쓰레기통 추가/삭제");
+                    Intent intent = new Intent(BinListActivity.this,AddDropBinActivity.class);
+                    intent.putExtra("kind",kind);
+                    intent.putExtra("userID",userID);
+                    intent.putExtra("binList", binList);
+                    startActivity(intent);
 
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean success = jsonObject.getBoolean("success");
-                            if (success) {
+                    Toast.makeText(getApplicationContext(),"쓰레기통 추가/삭제가 클릭되었습니다.",Toast.LENGTH_SHORT).show();
 
-                                String binLoc = jsonObject.getString("binLoc");
-                                String mDate = jsonObject.getString("mDate");
-                                String glass = jsonObject.getString("glass");
-                                String plastic = jsonObject.getString("plastic");
-                                String paper = jsonObject.getString("paper");
-                                String metal = jsonObject.getString("metal");
+                } else {
 
-                                Intent intent = new Intent(BinListActivity.this, BinMainActivity.class);
-                                intent.putExtra("kind",kind);
-                                intent.putExtra("binName",binName);
-                                intent.putExtra("binLoc",binLoc);
-                                intent.putExtra("mDate",mDate);
-                                intent.putExtra("userID",userID);
-                                intent.putExtra("userName",userName);
-                                intent.putExtra("address",address);
-                                intent.putExtra("glass",glass);
-                                intent.putExtra("plastic",plastic);
-                                intent.putExtra("paper",paper);
-                                intent.putExtra("metal",metal);
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                boolean success = jsonObject.getBoolean("success");
+                                if (success) {
 
-                                startActivity(intent);
+                                    String binLoc = jsonObject.getString("binLoc");
+                                    String mDate = jsonObject.getString("mDate");
+                                    String glass = jsonObject.getString("glass");
+                                    String plastic = jsonObject.getString("plastic");
+                                    String paper = jsonObject.getString("paper");
+                                    String metal = jsonObject.getString("metal");
 
-                            } else {
-                                Toast.makeText(getApplicationContext(),"정보를 불러오는데 실패하였습니다.",Toast.LENGTH_SHORT).show();
-                                return;
+                                    Intent intent = new Intent(BinListActivity.this, BinMainActivity.class);
+                                    intent.putExtra("kind",kind);
+                                    intent.putExtra("binName",binName);
+                                    intent.putExtra("binLoc",binLoc);
+                                    intent.putExtra("mDate",mDate);
+                                    intent.putExtra("userID",userID);
+                                    intent.putExtra("userName",userName);
+                                    intent.putExtra("address",address);
+                                    intent.putExtra("glass",glass);
+                                    intent.putExtra("plastic",plastic);
+                                    intent.putExtra("paper",paper);
+                                    intent.putExtra("metal",metal);
+
+                                    startActivity(intent);
+
+                                } else {
+                                    Toast.makeText(getApplicationContext(),"정보를 불러오는데 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
-                };
-                BinMainRequest binMainRequest = new BinMainRequest(userID, binName, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(BinListActivity.this);
-                queue.add(binMainRequest);
+                    };
+                    BinMainRequest binMainRequest = new BinMainRequest(userID, binName, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(BinListActivity.this);
+                    queue.add(binMainRequest);
+
+                }
             }
         });
         

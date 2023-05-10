@@ -208,7 +208,6 @@ public class BinMainActivity extends AppCompatActivity {
 
         btn_salesList = findViewById(R.id.btn_salesList);
         btn_salesList.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BinMainActivity.this, SalesListActivity.class);

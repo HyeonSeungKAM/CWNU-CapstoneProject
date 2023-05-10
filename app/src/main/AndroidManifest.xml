@@ -57,6 +57,8 @@
         <activity android:name=".BuyerMainActivity" />
         <activity android:name=".BuyActivity" />
         <activity android:name=".PurchasedListActivity" />
+        <activity android:name=".AddDropBinActivity" />
+
     </application>
 
 </manifest>

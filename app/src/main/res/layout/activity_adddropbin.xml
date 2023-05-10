@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="쓰레기통 목록"
+        android:textSize="24sp" />
+
+    <ListView
+        android:id="@+id/bin_listview_innerframe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="5"
+        android:padding="10dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginHorizontal="60dp">
+
+        <Button
+            android:id="@+id/btn_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="메인" />
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추가" />
+
+            <Button
+                android:id="@+id/btn_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="삭제" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
