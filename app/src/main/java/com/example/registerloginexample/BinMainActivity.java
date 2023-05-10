@@ -72,7 +72,6 @@ public class BinMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BinMainActivity.this, MapActivity.class);
-                intent.putExtra("binLoc",binLoc);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
                 intent.putExtra("address",address);

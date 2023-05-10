@@ -61,6 +61,7 @@ public class SellActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
+        String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
         String binName = intent.getStringExtra("binName");
@@ -130,10 +131,11 @@ public class SellActivity extends AppCompatActivity {
 
                                 Toast.makeText(getApplicationContext(),"등록에 성공하였습니다.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SellActivity.this, ListActivity.class);
-                                intent.putExtra("binName",binName);
-                                intent.putExtra("binLoc", binLoc);
+                                intent.putExtra("kind",kind);
                                 intent.putExtra("userID",userID);
                                 intent.putExtra("userName",userName);
+                                intent.putExtra("binName",binName);
+                                intent.putExtra("binLoc", binLoc);
                                 intent.putExtra("glass",glass);
                                 intent.putExtra("plastic",plastic);
                                 intent.putExtra("paper",paper);
@@ -152,7 +154,7 @@ public class SellActivity extends AppCompatActivity {
 
                     }
                 };
-                postSellBoardRequest postsellboardRequest = new postSellBoardRequest(userID, binName, contents, Date, responseListner);
+                postSellBoardRequest postsellboardRequest = new postSellBoardRequest(userID, binName, binLoc, contents, Date, responseListner);
                 RequestQueue queue = Volley.newRequestQueue(SellActivity.this);
                 queue.add(postsellboardRequest);
 

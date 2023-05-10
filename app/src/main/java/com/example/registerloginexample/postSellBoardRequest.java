@@ -17,12 +17,13 @@ public class postSellBoardRequest extends StringRequest {
 
     private Map<String, String> map;
 
-    public postSellBoardRequest(String userID, String binName,String contents, String Date,Response.Listener<String> listener) {
+    public postSellBoardRequest(String userID, String binName, String binLoc, String contents, String Date,Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         map.put("userID", userID);
         map.put("binName", binName);
+        map.put("binLoc",binLoc);
         map.put("contents", contents);
         map.put("Date", Date);
 
