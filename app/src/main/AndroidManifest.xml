@@ -58,6 +58,8 @@
         <activity android:name=".BuyActivity" />
         <activity android:name=".PurchasedListActivity" />
         <activity android:name=".AddDropBinActivity" />
+        <activity android:name=".BinAddActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
 
     </application>
 

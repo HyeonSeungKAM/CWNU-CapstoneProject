@@ -3,17 +3,16 @@ package com.example.registerloginexample;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -44,15 +43,11 @@ public class AddDropBinActivity extends AppCompatActivity {
     private static final String TAG_BINNAME = "binName";
     private static final String TAG_BINLOC = "binLoc";
 
-    private Button btn_main, btn_add, btn_drop;
-
-    private String binName;
+    private Button btn_main, btn_add;
 
     private ListView binlistView;
     ArrayList<HashMap<String, String>> binArrayList;
 
-
-    private  ArrayList<String> binList;
 
     String binJsonString;
 
@@ -64,10 +59,36 @@ public class AddDropBinActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
+        String userName = intent.getStringExtra("userName");
+        String address = intent.getStringExtra("address");
 
         btn_add = findViewById(R.id.btn_add);
+        btn_add.setOnClickListener(new View.OnClickListener()  {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddDropBinActivity.this, BinAddActivity.class);
+                intent.putExtra("kind",kind);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
+                startActivity(intent);
+            }
+        });
+
+
+
         btn_main = findViewById(R.id.btn_main);
-        btn_drop = findViewById(R.id.btn_drop);
+        btn_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddDropBinActivity.this, MainActivity.class);
+                intent.putExtra("kind",kind);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
+                startActivity(intent);
+            }
+        });
 
         binlistView = (ListView) findViewById(R.id.bin_listview_innerframe);
         binArrayList = new ArrayList<>();
@@ -75,19 +96,15 @@ public class AddDropBinActivity extends AppCompatActivity {
         AddDropBinActivity.GetData task = new AddDropBinActivity.GetData();
         task.execute(userID);
 
-        final int[] selectedPos = {-1};
-
         binlistView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedPos[0] = i;
+                String binName = ((TextView) view.findViewById(R.id.tv_list_binName)).getText().toString();
                 AlertDialog.Builder alertDig = new AlertDialog.Builder(view.getContext());
                 alertDig.setTitle("삭제확인");
-
                 alertDig.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                         Response.Listener<String> responseListener = new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -99,13 +116,15 @@ public class AddDropBinActivity extends AppCompatActivity {
                                         Intent intent = new Intent(AddDropBinActivity.this, AddDropBinActivity.class);
                                         intent.putExtra("kind",kind);
                                         intent.putExtra("userID",userID);
+                                        intent.putExtra("userName",userName);
+                                        intent.putExtra("address",address);
+
                                         startActivity(intent);
 
                                     } else {
                                         Toast.makeText(getApplicationContext(),"삭제 실패",Toast.LENGTH_SHORT).show();
                                         return;
                                     }
-
                                 } catch (
                                         JSONException e) {
                                     e.printStackTrace();
@@ -116,8 +135,6 @@ public class AddDropBinActivity extends AppCompatActivity {
                         RequestQueue queue = Volley.newRequestQueue(AddDropBinActivity.this);
                         queue.add(dropBinRequest);
                     }
-
-
                 });
                 alertDig.setNegativeButton("아니오", new DialogInterface.OnClickListener()
                 {
@@ -126,14 +143,13 @@ public class AddDropBinActivity extends AppCompatActivity {
                         dialog.dismiss();  // AlertDialog를 닫는다.
                     }
                 });
-
-                alertDig.setMessage("삭제하시겠습니까?");
+                alertDig.setMessage(binName+"삭제하시겠습니까?");
                 alertDig.show();
-
                 return false;
-
             }
         });
+
+
 
 
 

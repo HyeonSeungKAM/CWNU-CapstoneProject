@@ -62,10 +62,10 @@ public class BinListActivity extends Activity {
                     Intent intent = new Intent(BinListActivity.this,AddDropBinActivity.class);
                     intent.putExtra("kind",kind);
                     intent.putExtra("userID",userID);
+                    intent.putExtra("userName",userName);
+                    intent.putExtra("address",address);
                     intent.putExtra("binList", binList);
                     startActivity(intent);
-
-                    Toast.makeText(getApplicationContext(),"쓰레기통 추가/삭제가 클릭되었습니다.",Toast.LENGTH_SHORT).show();
 
                 } else {
 

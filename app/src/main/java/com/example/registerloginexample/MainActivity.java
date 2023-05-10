@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
                 startActivity(intent);
 
             }
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SalesListActivity.class);
+                intent.putExtra("kind",kind);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
                 intent.putExtra("address",address);
