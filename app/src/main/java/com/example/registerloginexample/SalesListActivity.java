@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SalesListActivity extends AppCompatActivity {
+
     private static String TAG = "php_SalesListAcitivity";
 
     private static final String TAG_JSON = "webnautes";
@@ -35,10 +36,7 @@ public class SalesListActivity extends AppCompatActivity {
     private static final String TAG_CONTENTS = "contents";
 
     private static final String TAG_TPAYMENT = "total_payment";
-
-
-
-
+    
     private Button btn_main, btn_list; // 판매하기, 취소
     // private TextView mTextViewResult;
 
@@ -55,11 +53,6 @@ public class SalesListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
-        String userName = intent.getStringExtra("userName");
-        String address = intent.getStringExtra("address");
-        String binName = intent.getStringExtra("binName");
-        String binLoc = intent.getStringExtra("binLoc");
-
 
         String seller_ID = userID;
 
@@ -84,12 +77,8 @@ public class SalesListActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(SalesListActivity.this, MainActivity.class);
-                intent.putExtra("binLoc",binLoc);
-                intent.putExtra("userID",userID);
-                intent.putExtra("userName",userName);
-                intent.putExtra("address",address);
-                intent.putExtra("binName",binName);
-                intent.putExtra("binLoc",binLoc);
+                intent.putExtra("kind",kind);
+                intent.putExtra("userID", userID);
 
                 startActivity(intent);
 
@@ -103,12 +92,8 @@ public class SalesListActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(SalesListActivity.this, ListActivity.class);
-                intent.putExtra("binLoc",binLoc);
-                intent.putExtra("userID",userID);
-                intent.putExtra("userName",userName);
-                intent.putExtra("address",address);
-                intent.putExtra("binName",binName);
-                intent.putExtra("binLoc",binLoc);
+                intent.putExtra("kind",kind);
+                intent.putExtra("userID", userID);
 
                 startActivity(intent);
             }
@@ -212,21 +197,22 @@ public class SalesListActivity extends AppCompatActivity {
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                String sdate = item.getString(TAG_SDATE);
+                String pdate = item.getString(TAG_SDATE);
                 String content = item.getString(TAG_CONTENTS);
 
                 String edit_con = "유리병"+content.split(",")[0]+"kg" + "플라스틱"+content.split(",")[2]+"kg"
                         + "\n" +"종이"+content.split(",")[4]+"kg" + "고철"+content.split(",")[6]+"kg";
 
                 String tpayment = item.getString(TAG_TPAYMENT);
-                String buyer = item.getString(TAG_BUYER);
+                String buyer_ID = item.getString(TAG_BUYER);
+
 
                 HashMap<String, String> hashMap = new HashMap<>();
 
-                hashMap.put(TAG_SDATE, sdate);
+                hashMap.put(TAG_SDATE, pdate);
                 hashMap.put(TAG_CONTENTS, edit_con);
                 hashMap.put(TAG_TPAYMENT, tpayment);
-                hashMap.put(TAG_BUYER, buyer);
+                hashMap.put(TAG_BUYER, buyer_ID);
 
                 sArrayList.add(hashMap);
             }
@@ -244,5 +230,4 @@ public class SalesListActivity extends AppCompatActivity {
         }
 
     }
-
 }
