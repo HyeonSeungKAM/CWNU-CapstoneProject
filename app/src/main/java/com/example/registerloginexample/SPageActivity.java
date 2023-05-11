@@ -54,7 +54,6 @@ public class SPageActivity extends AppCompatActivity {
         String board_contents = intent.getExtras().getString("board_contents");
         String board_Date = intent.getExtras().getString("board_Date");
 
-
         // 로그인한 유저 정보
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");

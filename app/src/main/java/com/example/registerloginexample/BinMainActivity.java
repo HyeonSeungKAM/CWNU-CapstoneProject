@@ -68,7 +68,6 @@ public class BinMainActivity extends AppCompatActivity {
 
         btn_map = findViewById(R.id.btn_map);
         btn_map.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BinMainActivity.this, MapActivity.class);
@@ -77,6 +76,7 @@ public class BinMainActivity extends AppCompatActivity {
                 intent.putExtra("address",address);
                 intent.putExtra("binName",binName);
                 intent.putExtra("binLoc",binLoc);
+                startActivity(intent);
             }
         });
 
