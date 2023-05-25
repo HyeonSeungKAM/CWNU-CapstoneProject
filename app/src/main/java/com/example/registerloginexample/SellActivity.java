@@ -99,15 +99,15 @@ public class SellActivity extends AppCompatActivity {
         tv_binName.setText(binName);
         tv_binLoc.setText(binLoc);
 
-        tv_glass.setText(glass +"kg");
-        tv_plastic.setText(plastic + "kg");
-        tv_paper.setText(paper + "kg");
-        tv_metal.setText(metal + "kg");
+        tv_glass.setText(glass);
+        tv_plastic.setText(plastic);
+        tv_paper.setText(paper);
+        tv_metal.setText(metal);
 
-        tv_totalGlassPrice.setText(str_glassTP + "원");
-        tv_totalPlasticPrice.setText(str_plasticTP + "원");
-        tv_totalPaperPrice.setText(str_paperTP + "원");
-        tv_totalMetalPrice.setText(str_metalTP + "원");
+        tv_totalGlassPrice.setText(str_glassTP);
+        tv_totalPlasticPrice.setText(str_plasticTP);
+        tv_totalPaperPrice.setText(str_paperTP);
+        tv_totalMetalPrice.setText(str_metalTP);
         tv_Total.setText(str_TotalPrice + "원");
 
 

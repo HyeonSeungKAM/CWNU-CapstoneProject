@@ -1,24 +1,15 @@
 package com.example.registerloginexample;
 
-import static net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord;
 
-import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
+
 import android.os.Bundle;
-import android.view.ViewGroup;
+
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapView;
-
-import java.io.IOException;
-import java.util.List;
 
 public class MapActivity extends AppCompatActivity {
 

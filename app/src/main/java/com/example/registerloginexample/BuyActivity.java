@@ -78,10 +78,9 @@ public class BuyActivity extends AppCompatActivity {
         tv_metalW.setText(board_contents.split(",")[6]);
         tv_totalMetalPrice.setText(board_contents.split(",")[7]);
 
-        tv_Total.setText(board_contents.split(",")[8]);
+        tv_Total.setText(board_contents.split(",")[8] + " 원");
 
-        tv_Total.setText(board_contents.split(",")[8]);
-        tv_Total2.setText(board_contents.split(",")[8]);
+        tv_Total2.setText(board_contents.split(",")[8] + " 원");
 
 
 

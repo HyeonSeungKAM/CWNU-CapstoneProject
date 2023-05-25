@@ -58,11 +58,12 @@ public class SPageActivity extends AppCompatActivity {
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
+        String address = intent.getStringExtra("address");
 
         tv_b_userID.setText(board_userID);
         tv_b_Date.setText(board_Date);
-        tv_b_binName.setText(board_binName);
-        tv_b_binLoc.setText(board_binLoc);
+        tv_b_binName.setText(board_binName + " 쓰레기통");
+        tv_b_binLoc.setText("("+board_binLoc+")");
 
         tv_glassW.setText(board_contents.split(",")[0]);
         tv_totalGlassPrice.setText(board_contents.split(",")[1]);
@@ -117,6 +118,7 @@ public class SPageActivity extends AppCompatActivity {
 
                                 intent.putExtra("kind",kind);
                                 intent.putExtra("userID",userID);
+                                intent.putExtra("userName",userName);
 
                                 intent.putExtra("seller_userID",seller_userID);
                                 intent.putExtra("seller_userName",seller_userName);
@@ -152,6 +154,7 @@ public class SPageActivity extends AppCompatActivity {
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
 
                 startActivity(intent);
                 finish();

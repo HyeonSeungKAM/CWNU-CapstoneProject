@@ -58,6 +58,7 @@ public class PurchasedListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
+        String userName = intent.getStringExtra("userName");
 
         String buyer_ID = userID;
 
@@ -84,6 +85,7 @@ public class PurchasedListActivity extends AppCompatActivity {
                     Intent intent = new Intent(PurchasedListActivity.this, BuyerMainActivity.class);
                     intent.putExtra("kind",kind);
                     intent.putExtra("userID", userID);
+                    intent.putExtra("userName", userName);
 
                     startActivity(intent);
 
@@ -99,6 +101,7 @@ public class PurchasedListActivity extends AppCompatActivity {
                 Intent intent = new Intent(PurchasedListActivity.this, ListActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID", userID);
+                intent.putExtra("userName",userName);
 
                 startActivity(intent);
             }

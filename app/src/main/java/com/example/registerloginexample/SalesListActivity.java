@@ -53,7 +53,10 @@ public class SalesListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
-
+        String userName = intent.getStringExtra("userName");
+        String binName = intent.getStringExtra("binName");
+        String binLoc = intent.getStringExtra("binLoc");
+        String address = intent.getStringExtra("address");
         String seller_ID = userID;
 
         //  mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
@@ -79,6 +82,8 @@ public class SalesListActivity extends AppCompatActivity {
                 Intent intent = new Intent(SalesListActivity.this, MainActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID", userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
 
                 startActivity(intent);
 
@@ -94,6 +99,8 @@ public class SalesListActivity extends AppCompatActivity {
                 Intent intent = new Intent(SalesListActivity.this, ListActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID", userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
 
                 startActivity(intent);
             }

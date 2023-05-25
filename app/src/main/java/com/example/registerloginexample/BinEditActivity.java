@@ -93,6 +93,7 @@ public class BinEditActivity extends AppCompatActivity {
                                 intent.putExtra("mDate",mDate);
                                 intent.putExtra("userID",userID);
                                 intent.putExtra("userName",userName);
+                                intent.putExtra("address",address);
                                 intent.putExtra("glass",glass);
                                 intent.putExtra("plastic",plastic);
                                 intent.putExtra("paper",paper);

@@ -69,11 +69,13 @@ public class ListActivity extends AppCompatActivity {
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
-     //   String binName = intent.getStringExtra("binName");
-     //   String glass = intent.getStringExtra("glass");
-     //   String plastic = intent.getStringExtra("plastic");
-      //  String paper = intent.getStringExtra("paper");
-      //  String metal = intent.getStringExtra("metal");
+        String address = intent.getStringExtra("address");
+        String binName = intent.getStringExtra("binName");
+        String binLoc = intent.getStringExtra("binLoc");
+        String glass = intent.getStringExtra("glass");
+        String plastic = intent.getStringExtra("plastic");
+        String paper = intent.getStringExtra("paper");
+        String metal = intent.getStringExtra("metal");
 
 //==== 판매 리스트 ==========================================================//
         mlistView = (ListView) findViewById(R.id.listview_innerframe);
@@ -123,6 +125,7 @@ public class ListActivity extends AppCompatActivity {
                                                                  intent.putExtra("kind",kind);
                                                                  intent.putExtra("userID",userID);
                                                                  intent.putExtra("userName",userName);
+                                                                 intent.putExtra("address",address);
 
 
                                                                  startActivity(intent);
@@ -168,6 +171,7 @@ public class ListActivity extends AppCompatActivity {
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
 
                 startActivity(intent);
 
@@ -181,15 +185,17 @@ public class ListActivity extends AppCompatActivity {
                 // 판매하기(올리기)
 
                 Intent intent = new Intent(ListActivity.this, SellActivity.class);
-            //    intent.putExtra("binName", binName);
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID", userID);
                 intent.putExtra("userName", userName);
-            //    intent.putExtra("glass", glass);
-             //   intent.putExtra("plastic", plastic);
-              //  intent.putExtra("paper", paper);
-              //  intent.putExtra("metal", metal);
-              //  startActivity(intent);
+                intent.putExtra("address",address);
+                intent.putExtra("binName", binName);
+                intent.putExtra("binLoc",binLoc);
+                intent.putExtra("glass", glass);
+                intent.putExtra("plastic", plastic);
+                intent.putExtra("paper", paper);
+                intent.putExtra("metal", metal);
+                startActivity(intent);
 
             }
         });
@@ -212,6 +218,7 @@ public class ListActivity extends AppCompatActivity {
                     intent.putExtra("kind",kind);
                     intent.putExtra("userID", userID);
                     intent.putExtra("userName", userName);
+                    intent.putExtra("address",address);
                //     intent.putExtra("glass", glass);
                 //    intent.putExtra("plastic", plastic);
                 //    intent.putExtra("paper", paper);

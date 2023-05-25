@@ -57,7 +57,7 @@ public class BinMainActivity extends AppCompatActivity {
         String metal = intent.getStringExtra("metal");
 
         tv_id.setText(userID);
-        tv_binName.setText(binName);
+        tv_binName.setText(binName + " 쓰레기통");
         tv_name.setText(userName);
         tv_binLoc.setText(binLoc);
         tv_mDate.setText(mDate);
@@ -66,7 +66,7 @@ public class BinMainActivity extends AppCompatActivity {
         tv_paperW.setText(paper+"kg");
         tv_metalW.setText(metal+"kg");
 
-        btn_map = findViewById(R.id.btn_map);
+        /* btn_map = findViewById(R.id.btn_map);
         btn_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +78,7 @@ public class BinMainActivity extends AppCompatActivity {
                 intent.putExtra("binLoc",binLoc);
                 startActivity(intent);
             }
-        });
+        }); */
 
 
         btn_editBin = findViewById(R.id.btn_editBin);
@@ -91,6 +91,11 @@ public class BinMainActivity extends AppCompatActivity {
                 intent.putExtra("address",address);
                 intent.putExtra("binName",binName);
                 intent.putExtra("binLoc",binLoc);
+                intent.putExtra("mDate",mDate);
+                intent.putExtra("glass",glass);
+                intent.putExtra("plastic",plastic);
+                intent.putExtra("paper",paper);
+                intent.putExtra("metal",metal);
                 startActivity(intent);
             }
         });
@@ -107,6 +112,7 @@ public class BinMainActivity extends AppCompatActivity {
                 intent.putExtra("binLoc",binLoc);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
                 intent.putExtra("glass",glass);
                 intent.putExtra("plastic",plastic);
                 intent.putExtra("paper",paper);
@@ -140,6 +146,7 @@ public class BinMainActivity extends AppCompatActivity {
                                 intent.putExtra("binLoc",binLoc);
                                 intent.putExtra("userID",userID);
                                 intent.putExtra("userName",userName);
+                                intent.putExtra("address",address);
                                 intent.putExtra("glass",glass);
                                 intent.putExtra("plastic",plastic);
                                 intent.putExtra("paper",paper);
@@ -211,11 +218,16 @@ public class BinMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BinMainActivity.this, SalesListActivity.class);
+                intent.putExtra("kind",kind);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
                 intent.putExtra("address",address);
                 intent.putExtra("binName",binName);
                 intent.putExtra("binLoc",binLoc);
+                intent.putExtra("glass",glass);
+                intent.putExtra("plastic",plastic);
+                intent.putExtra("paper",paper);
+                intent.putExtra("metal",metal);
                 startActivity(intent);
             }
         });
