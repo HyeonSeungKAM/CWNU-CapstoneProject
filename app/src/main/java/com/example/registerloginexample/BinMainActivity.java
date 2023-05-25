@@ -1,12 +1,20 @@
 package com.example.registerloginexample;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
@@ -18,13 +26,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class BinMainActivity extends AppCompatActivity {
 
+    private static final String TAG_BinName = "binName";
+    private static final String TAG_STATUS = "glass_full";
     private Button btn_salesList, btn_map, btn_logout, btn_editBin, btn_sell, btn_list, btn_binList;
+    private String userID, userName, kind, address, binName, binLoc,
+            mDate, glass, plastic, paper, metal, glass_full, plastic_full,paper_full, metal_full;
 
-
+    List<Map<String, String>> dialogItemList;
 
     // 서버에서 가져온 내용 보여주기
     @Override
@@ -44,17 +59,22 @@ public class BinMainActivity extends AppCompatActivity {
         TextView tv_metalW = findViewById(R.id.tv_metalW);
 
         Intent intent = getIntent();
-        String kind = intent.getStringExtra("kind");
-        String userID = intent.getStringExtra("userID");
-        String userName = intent.getStringExtra("userName");
-        String address = intent.getStringExtra("address");
-        String binName = intent.getStringExtra("binName");
-        String binLoc = intent.getStringExtra("binLoc");
-        String mDate = intent.getStringExtra("mDate");
-        String glass = intent.getStringExtra("glass");
-        String plastic = intent.getStringExtra("plastic");
-        String paper = intent.getStringExtra("paper");
-        String metal = intent.getStringExtra("metal");
+        kind = intent.getStringExtra("kind");
+        userID = intent.getStringExtra("userID");
+        userName = intent.getStringExtra("userName");
+        address = intent.getStringExtra("address");
+        binName = intent.getStringExtra("binName");
+        binLoc = intent.getStringExtra("binLoc");
+        mDate = intent.getStringExtra("mDate");
+        glass = intent.getStringExtra("glass");
+        plastic = intent.getStringExtra("plastic");
+        paper = intent.getStringExtra("paper");
+        metal = intent.getStringExtra("metal");
+        glass_full = intent.getStringExtra("glass_full");
+        plastic_full = intent.getStringExtra("plastic_full");
+        paper_full = intent.getStringExtra("paper_full");
+        metal_full = intent.getStringExtra("metal_full");
+
 
         tv_id.setText(userID);
         tv_binName.setText(binName + " 쓰레기통");
@@ -65,21 +85,6 @@ public class BinMainActivity extends AppCompatActivity {
         tv_plasticW.setText(plastic+"kg");
         tv_paperW.setText(paper+"kg");
         tv_metalW.setText(metal+"kg");
-
-        /* btn_map = findViewById(R.id.btn_map);
-        btn_map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(BinMainActivity.this, MapActivity.class);
-                intent.putExtra("userID",userID);
-                intent.putExtra("userName",userName);
-                intent.putExtra("address",address);
-                intent.putExtra("binName",binName);
-                intent.putExtra("binLoc",binLoc);
-                startActivity(intent);
-            }
-        }); */
-
 
         btn_editBin = findViewById(R.id.btn_editBin);
         btn_editBin.setOnClickListener(new View.OnClickListener() {    // 목록
@@ -151,6 +156,10 @@ public class BinMainActivity extends AppCompatActivity {
                                 intent.putExtra("plastic",plastic);
                                 intent.putExtra("paper",paper);
                                 intent.putExtra("metal",metal);
+                                intent.putExtra("glass_full",glass_full);
+                                intent.putExtra("plastic_full",plastic_full);
+                                intent.putExtra("paper_full",paper_full);
+                                intent.putExtra("metal_full",metal_full);
 
                                 startActivity(intent);
 
@@ -167,48 +176,6 @@ public class BinMainActivity extends AppCompatActivity {
                 SellInfoRequest sellinfoRequest = new SellInfoRequest(binName, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(BinMainActivity.this);
                 queue.add(sellinfoRequest);
-
-            }
-        });
-
-
-
-
-
-        btn_binList = findViewById(R.id.btn_binList);
-        btn_binList.setOnClickListener(new View.OnClickListener() {    // 목록
-            @Override
-            public void onClick(View view) {
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            System.out.println(response);
-
-                            ArrayList<String> binList = new ArrayList<>();
-                            String binList_edit = "쓰레기통 추가/삭제";
-                            binList.add(binList_edit);
-                            for(int i=0; i < jsonArray.length(); i++){
-                                JSONObject jsonObject= jsonArray.getJSONObject(i);
-                                String binName = jsonObject.getString("binName");
-                                binList.add(binName);
-                            }
-                            Intent intent = new Intent(BinMainActivity.this, BinListActivity.class);
-                            intent.putExtra("kind",kind);
-                            intent.putExtra("userID",userID);
-                            intent.putExtra("userName",userName);
-                            intent.putExtra("binList", binList);
-                            startActivity(intent);
-
-                        } catch(JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                BinListRequest binListRequest = new BinListRequest(userID, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(BinMainActivity.this);
-                queue.add(binListRequest);
 
             }
         });
@@ -246,5 +213,140 @@ public class BinMainActivity extends AppCompatActivity {
             }
         });
 
+        dialogItemList = new ArrayList<>();
+
+        btn_binList = findViewById(R.id.btn_binList);
+        btn_binList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            System.out.println(response);
+                            for(int i=0; i < jsonArray.length(); i++){
+                                JSONObject jsonObject= jsonArray.getJSONObject(i);
+                                String binName = jsonObject.getString(TAG_BinName);
+                                String full = jsonObject.getString(TAG_STATUS);
+
+                                Map<String, String> itemMap = new HashMap<>();
+                                itemMap.put(TAG_BinName, binName);
+                                itemMap.put(TAG_STATUS, full);
+                                dialogItemList.add(itemMap);
+                            }
+                            showAlertDialog();
+                        } catch(JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                BinListRequest binListRequest = new BinListRequest(userID, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(BinMainActivity.this);
+                queue.add(binListRequest);
+            }
+        });
+
     }
+
+    private void showAlertDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(BinMainActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.alert_dialog,null);
+        builder.setView(view);
+
+        TextView tv_bin_add_delete = view.findViewById(R.id.tv_bin_add_delete);
+        tv_bin_add_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BinMainActivity.this,AddDropBinActivity.class);
+                intent.putExtra("kind",kind);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
+                startActivity(intent);
+            }
+        });
+
+
+
+        final ListView listview = (ListView)view.findViewById(R.id.listview_alterdialog_list);
+        final AlertDialog dialog = builder.create();
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter(BinMainActivity.this, dialogItemList,
+                R.layout.alert_dialog_row,
+                new String[]{TAG_BinName, TAG_STATUS},
+                new int[]{R.id.alertDialogItemBins, R.id.alertDialogItemStatus});
+
+        listview.setAdapter(simpleAdapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String binName = ((TextView) view.findViewById(R.id.alertDialogItemBins)).getText().toString();
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean success = jsonObject.getBoolean("success");
+                            if (success) {
+                                String binLoc = jsonObject.getString("binLoc");
+                                String mDate = jsonObject.getString("mDate");
+                                String glass = jsonObject.getString("glass");
+                                String plastic = jsonObject.getString("plastic");
+                                String paper = jsonObject.getString("paper");
+                                String metal = jsonObject.getString("metal");
+                                String glass_full = jsonObject.getString("glass_full");
+                                String plastic_full = jsonObject.getString("plastic_full");
+                                String paper_full = jsonObject.getString("paper_full");
+                                String metal_full = jsonObject.getString("metal_full");
+
+                                Intent intent = new Intent(BinMainActivity.this, BinMainActivity.class);
+                                intent.putExtra("kind",kind);
+                                intent.putExtra("binName",binName);
+                                intent.putExtra("binLoc",binLoc);
+                                intent.putExtra("mDate",mDate);
+                                intent.putExtra("userID",userID);
+                                intent.putExtra("userName",userName);
+                                intent.putExtra("address",address);
+                                intent.putExtra("glass",glass);
+                                intent.putExtra("plastic",plastic);
+                                intent.putExtra("paper",paper);
+                                intent.putExtra("metal",metal);
+                                intent.putExtra("glass_full",glass_full);
+                                intent.putExtra("plastic_full",plastic_full);
+                                intent.putExtra("paper_full",paper_full);
+                                intent.putExtra("metal_full",metal_full);
+
+                                startActivity(intent);
+
+                            } else {
+                                Toast.makeText(getApplicationContext(),"정보를 불러오는데 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                BinMainRequest binMainRequest = new BinMainRequest(userID, binName, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(BinMainActivity.this);
+                queue.add(binMainRequest);
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog)
+            {
+                dialogItemList.clear();
+            }
+        });
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
 }

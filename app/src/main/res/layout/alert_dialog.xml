@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="20dp"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+        
+        <TextView
+            android:id="@+id/tv_bin_add_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="쓰레기통 추가/삭제"
+            android:textSize="20dp"
+            android:layout_marginStart="10dp"
+            android:padding="6dp"/>
+
+        <View
+            android:layout_marginTop="3dp"
+            android:layout_height="1dip"
+            android:background="#DCDCDC"
+            android:layout_width="wrap_content"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/listview_alterdialog_list"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
