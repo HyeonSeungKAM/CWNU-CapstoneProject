@@ -147,7 +147,7 @@ public class BuyerMainActivity extends AppCompatActivity {
 
                     };
 
-                    DataItem dataItem = new DataItem(userID, binName, binLoc, status, glass_full,plastic_full,paper_full,metal_full);
+                    DataItem dataItem = new DataItem(userID, binName, binLoc, status);
                     dataList.add(dataItem);
                 }
                 return dataList;
@@ -188,10 +188,10 @@ public class BuyerMainActivity extends AppCompatActivity {
                 tv_itm_binName = itemView.findViewById(R.id.tv_itm_binName);
                 tv_itm_binLoc = itemView.findViewById(R.id.tv_itm_binLoc);
                 tv_itm_status = itemView.findViewById(R.id.tv_itm_status);
-                tv_itm_glass_f = itemView.findViewById(R.id.tv_itm_glass_f);
+            /*    tv_itm_glass_f = itemView.findViewById(R.id.tv_itm_glass_f);
                 tv_itm_plastic_f = itemView.findViewById(R.id.tv_itm_plastic_f);
                 tv_itm_paper_f = itemView.findViewById(R.id.tv_itm_paper_f);
-                tv_itm_metal_f = itemView.findViewById(R.id.tv_itm_metal_f);
+                tv_itm_metal_f = itemView.findViewById(R.id.tv_itm_metal_f); */
             }
         }
 
@@ -209,10 +209,10 @@ public class BuyerMainActivity extends AppCompatActivity {
             holder.tv_itm_binLoc.setText(item.getBinLoc());
             holder.tv_itm_binName.setText(item.getBinName());
             holder.tv_itm_status.setText(item.getStatus());
-            holder.tv_itm_glass_f.setText(item.getGF());
+          /*  holder.tv_itm_glass_f.setText(item.getGF());
             holder.tv_itm_plastic_f.setText(item.getPLF());
             holder.tv_itm_paper_f.setText(item.getPPF());
-            holder.tv_itm_metal_f.setText(item.getMF());
+            holder.tv_itm_metal_f.setText(item.getMF()); */
 
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
             layoutParams.setMargins(80, 0, 80, 0); // 왼쪽과 오른쪽 마진을 16dp로 설정
@@ -236,15 +236,15 @@ public class BuyerMainActivity extends AppCompatActivity {
         private String paper_full;
         private String metal_full;
 
-        public DataItem(String userID, String binName, String binLoc, String status, String glass_full, String plastic_full, String paper_full, String metal_full) {
+        public DataItem(String userID, String binName, String binLoc, String status) {
             this.userID = userID;
             this.binName = binName;
             this.binLoc = binLoc;
             this.status = status;
-            this.glass_full = glass_full;
+          /*  this.glass_full = glass_full;
             this.plastic_full = plastic_full;
             this.paper_full = paper_full;
-            this.metal_full = metal_full;
+            this.metal_full = metal_full; */
         }
 
         public String getUserID() {
@@ -260,11 +260,11 @@ public class BuyerMainActivity extends AppCompatActivity {
         }
         public String getStatus() {return status;}
 
-        public String getGF() {
+       /* public String getGF() {
             return glass_full;
         }
 
-        public String getPLF() {
+         public String getPLF() {
             return plastic_full;
         }
 
@@ -273,7 +273,7 @@ public class BuyerMainActivity extends AppCompatActivity {
         }
         public String getMF() {
             return metal_full;
-        }
+        } */
 
     }
 

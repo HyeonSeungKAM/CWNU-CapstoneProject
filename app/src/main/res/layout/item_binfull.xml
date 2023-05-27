@@ -37,7 +37,7 @@
         android:textSize="18dp"
         android:text="상태"/>
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/tv_itm_glass_f"
         android:textAlignment="center"
         android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18dp"
-        android:text="고철"/>
+        android:text="고철"/>                                 -->
 
 
 </LinearLayout>
