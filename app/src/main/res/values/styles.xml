@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ <style name="InitTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- 기타 속성 -->
+     <item name="android:windowBackground">@drawable/initial_background</item> <!-- 로딩 화면 배경에 사용할 이미지 파일명으로 수정 -->
+ </style>
+</resources>
