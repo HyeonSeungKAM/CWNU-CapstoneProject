@@ -44,7 +44,7 @@
     <LinearLayout
         android:id="@+id/ll_buttons"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
@@ -54,11 +54,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="20dp"
+            android:background="@drawable/custom_button"
             android:text="메인" />
 
         <FrameLayout
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/btn_sell2"
@@ -66,7 +67,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="판매하기" />
+                android:background="@drawable/custom_button"
+                android:text="판매하기"
+
+                />
 
             <Button
                 android:id="@+id/btn_purchasedlist"
@@ -74,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:background="@drawable/custom_button"
                 android:text="구매내역" />
 
         </FrameLayout>

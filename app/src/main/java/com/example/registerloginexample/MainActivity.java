@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_STATUS = "full";
     private static final String TAG_TYPE = "type";
 
-    private Button btn_salesList,btn_logout, btn_binList;// 판매하기, 목록 버튼
+    private Button btn_list, btn_salesList,btn_logout, btn_binList;// 판매하기, 목록 버튼
     private String userID, userName, kind, address;
 
 
@@ -86,6 +86,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
         dialogItemList = new ArrayList<>();
+
+        btn_list = findViewById(R.id.btn_list); // 목록
+        btn_list.setOnClickListener(new View.OnClickListener() {    // 목록
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ListActivity.class);
+
+                intent.putExtra("kind",kind);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
+
+                startActivity(intent);
+
+            }
+        });
+
 
         btn_binList = findViewById(R.id.btn_binList);
         btn_binList.setOnClickListener(new View.OnClickListener() {

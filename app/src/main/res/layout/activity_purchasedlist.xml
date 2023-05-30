@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="75dp"
             android:layout_marginRight="20dp"
+            android:background="@drawable/custom_button"
             android:text="메인" />
 
         <Button
@@ -53,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:background="@drawable/custom_button"
 
             android:text="목록" />
 

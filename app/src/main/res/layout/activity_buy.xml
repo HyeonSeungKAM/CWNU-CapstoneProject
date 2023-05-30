@@ -359,6 +359,7 @@
                 android:layout_margin="40dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="76dp"
+                android:background="@drawable/custom_button"
                 android:text="구매하기" />
 
             <Button
@@ -368,6 +369,7 @@
                 android:layout_margin="40dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="76dp"
+                android:background="@drawable/custom_button"
                 android:text="목록" />
 
         </LinearLayout>

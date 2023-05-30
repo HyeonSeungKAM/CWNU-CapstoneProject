@@ -76,6 +76,11 @@ public class ListActivity extends AppCompatActivity {
         String plastic = intent.getStringExtra("plastic");
         String paper = intent.getStringExtra("paper");
         String metal = intent.getStringExtra("metal");
+        String glass_full = intent.getStringExtra("glass_full");
+        String plastic_full = intent.getStringExtra("plastic_full");
+        String metal_full = intent.getStringExtra("metal_full");
+        String paper_full = intent.getStringExtra("paper_full");
+
 
 //==== 판매 리스트 ==========================================================//
         mlistView = (ListView) findViewById(R.id.listview_innerframe);

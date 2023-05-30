@@ -89,6 +89,7 @@
             android:id="@+id/btn_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
             android:text="목록" />
 
         <Button
@@ -96,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:background="@drawable/custom_button"
             android:text="구매내역" />
 
     </LinearLayout>

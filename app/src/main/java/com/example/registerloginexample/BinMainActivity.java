@@ -35,7 +35,9 @@ public class BinMainActivity extends AppCompatActivity {
 
     private static final String TAG_BinName = "binName";
     private static final String TAG_STATUS = "glass_full";
-    private Button btn_salesList, btn_map, btn_logout, btn_editBin, btn_sell, btn_list, btn_binList;
+    private static final String TAG_TYPE = "type";
+
+    private Button btn_salesList, btn_map, btn_main, btn_editBin, btn_sell, btn_list, btn_binList;
     private String userID, userName, kind, address, binName, binLoc,
             mDate, glass, plastic, paper, metal, glass_full, plastic_full,paper_full, metal_full;
 
@@ -48,8 +50,8 @@ public class BinMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_binmain);
 
-        TextView tv_id = findViewById(R.id.tv_id);
-        TextView tv_name = findViewById(R.id.tv_name);
+      /**  TextView tv_id = findViewById(R.id.tv_id);
+        TextView tv_name = findViewById(R.id.tv_name); **/
         TextView tv_binName = findViewById(R.id.tv_binName);
         TextView tv_binLoc = findViewById(R.id.tv_binLoc);
         TextView tv_mDate = findViewById(R.id.tv_mDate);
@@ -76,15 +78,29 @@ public class BinMainActivity extends AppCompatActivity {
         metal_full = intent.getStringExtra("metal_full");
 
 
-        tv_id.setText(userID);
-        tv_binName.setText(binName + " 쓰레기통");
-        tv_name.setText(userName);
+     //   tv_id.setText(userID);
+        tv_binName.setText(binName);
+     //   tv_name.setText(userName);
         tv_binLoc.setText(binLoc);
         tv_mDate.setText(mDate);
         tv_glassW.setText(glass +"kg");
         tv_plasticW.setText(plastic+"kg");
         tv_paperW.setText(paper+"kg");
         tv_metalW.setText(metal+"kg");
+
+        btn_main = findViewById(R.id.btn_main);
+        btn_main.setOnClickListener(new View.OnClickListener() {    // 목록
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BinMainActivity.this, MainActivity.class);
+                intent.putExtra("kind",kind);
+                intent.putExtra("userID",userID);
+                intent.putExtra("userName",userName);
+                intent.putExtra("address",address);
+                startActivity(intent);
+            }
+        });
+
 
         btn_editBin = findViewById(R.id.btn_editBin);
         btn_editBin.setOnClickListener(new View.OnClickListener() {    // 목록
@@ -186,15 +202,19 @@ public class BinMainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(BinMainActivity.this, SalesListActivity.class);
                 intent.putExtra("kind",kind);
+                intent.putExtra("binName",binName);
+                intent.putExtra("binLoc",binLoc);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
                 intent.putExtra("address",address);
-                intent.putExtra("binName",binName);
-                intent.putExtra("binLoc",binLoc);
                 intent.putExtra("glass",glass);
                 intent.putExtra("plastic",plastic);
                 intent.putExtra("paper",paper);
                 intent.putExtra("metal",metal);
+                intent.putExtra("glass_full",glass_full);
+                intent.putExtra("plastic_full",plastic_full);
+                intent.putExtra("paper_full",paper_full);
+                intent.putExtra("metal_full",metal_full);
                 startActivity(intent);
             }
         });
@@ -202,7 +222,7 @@ public class BinMainActivity extends AppCompatActivity {
 
 
 
-        btn_logout = findViewById(R.id.btn_logout);// 목록
+       /** btn_logout = findViewById(R.id.btn_logout);// 목록
         btn_logout.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
@@ -211,7 +231,7 @@ public class BinMainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        });
+        }); **/
 
         dialogItemList = new ArrayList<>();
 
@@ -228,11 +248,29 @@ public class BinMainActivity extends AppCompatActivity {
                             for(int i=0; i < jsonArray.length(); i++){
                                 JSONObject jsonObject= jsonArray.getJSONObject(i);
                                 String binName = jsonObject.getString(TAG_BinName);
-                                String full = jsonObject.getString(TAG_STATUS);
+                                String glass_full = jsonObject.getString("glass_full");
+                                String plastic_full = jsonObject.getString("plastic_full");
+                                String paper_full = jsonObject.getString("paper_full");
+                                String metal_full = jsonObject.getString("metal_full");
 
                                 Map<String, String> itemMap = new HashMap<>();
+                                if (glass_full.equals("1")) {
+                                    itemMap.put(TAG_TYPE, "유리병 수거함");
+                                    itemMap.put(TAG_STATUS, TAG_STATUS);
+
+                                } else if (plastic_full.equals("1")) {
+                                    itemMap.put(TAG_TYPE, "플라스틱 수거함");
+                                    itemMap.put(TAG_STATUS, TAG_STATUS);
+
+                                } else if(paper_full.equals("1")) {
+                                    itemMap.put(TAG_TYPE, "종이 수거함");
+                                    itemMap.put(TAG_STATUS, TAG_STATUS);
+
+                                } else if(metal_full.equals("1")) {
+                                    itemMap.put(TAG_TYPE, "고철 수거함");
+                                    itemMap.put(TAG_STATUS, TAG_STATUS);
+                                };
                                 itemMap.put(TAG_BinName, binName);
-                                itemMap.put(TAG_STATUS, full);
                                 dialogItemList.add(itemMap);
                             }
                             showAlertDialog();

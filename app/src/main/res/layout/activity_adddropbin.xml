@@ -6,17 +6,19 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
         android:padding="10dp"
         android:text="쓰레기통 목록"
         android:textSize="24sp" />
 
     <ListView
         android:id="@+id/bin_listview_innerframe"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="371dp"
+        android:layout_height="559dp"
         android:layout_margin="5dp"
         android:layout_weight="5"
         android:padding="10dp" />
@@ -32,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
+            android:background="@drawable/custom_button"
             android:text="메인" />
 
         <Button
@@ -39,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
+            android:background="@drawable/custom_button"
             android:text="추가" />
 
 
