@@ -17,15 +17,13 @@
         android:drawablePadding="5dp"
         android:textSize="24sp" />
 
-    <ListView
-        android:id="@+id/listview_rank_innerframe"
-        android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/custom_llayout"
-        android:layout_height="326dp"
-        android:layout_margin="5dp"
-        android:layout_weight="5"
-        android:padding="10dp" />
-
+        android:paddingVertical="20dp"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/textView2"
