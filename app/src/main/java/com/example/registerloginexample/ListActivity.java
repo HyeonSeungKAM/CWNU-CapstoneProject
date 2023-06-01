@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -320,14 +321,16 @@ public class ListActivity extends AppCompatActivity {
 
                 JSONObject  jsonObject = new JSONObject(response.toString());
                 JSONArray jsonArray = jsonObject.getJSONArray("webnautes");
+                int rank = 1;
                 List<DataItem> dataList = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject itemObject = jsonArray.getJSONObject(i);
                     String board_userID = itemObject.getString("userID");
                     String board_userName = itemObject.getString("userName");
                     String board_T_sales = itemObject.getString("T_sales");
+                    rank = rank + 1;
 
-                    DataItem dataItem = new DataItem(board_userID, board_userName, board_T_sales);
+                    DataItem dataItem = new DataItem(board_userID, board_userName, board_T_sales, rank);
                     dataList.add(dataItem);
                 }
                 return dataList;
@@ -360,11 +363,13 @@ public class ListActivity extends AppCompatActivity {
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public TextView tv_board_userName, tv_board_userID, tv_board_T_sales;
+            public ImageView rankImg;
             public ViewHolder(View itemView) {
                 super(itemView);
                 tv_board_userName = itemView.findViewById(R.id.tv_board_userName);
                 tv_board_userID = itemView.findViewById(R.id.tv_board_userID);
                 tv_board_T_sales = itemView.findViewById(R.id.tv_board_T_sales);
+                rankImg = itemView.findViewById(R.id.rankImg);
             }
         }
 
@@ -372,6 +377,7 @@ public class ListActivity extends AppCompatActivity {
         public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_ranklist, parent, false);
+
             return new MyAdapter.ViewHolder(view);
         }
 
@@ -381,6 +387,8 @@ public class ListActivity extends AppCompatActivity {
             holder.tv_board_userName.setText(item.getBoard_userName());
             holder.tv_board_userID.setText(item.getBoard_userID());
             holder.tv_board_T_sales.setText(item.getBoard_T_sales());
+            holder.rankImg.setImageResource();
+
 
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
             layoutParams.setMargins(5, 0, 5, 0); // 왼쪽과 오른쪽 마진을 16dp로 설정
@@ -396,13 +404,15 @@ public class ListActivity extends AppCompatActivity {
 
     private static class DataItem {
         private String board_userID;
+        private String image_url;
         private String board_userName;
         private String board_T_sales;
 
-        public DataItem(String board_userID, String board_userName, String board_T_sales) {
+        public DataItem(String board_userID, String board_userName, String board_T_sales, String image_url) {
             this.board_userID = board_userID;
             this.board_userName = board_userName;
             this.board_T_sales = board_T_sales;
+            this.image_url = image_url;
         }
         public String getBoard_userID() {
             return board_userID;
@@ -413,6 +423,7 @@ public class ListActivity extends AppCompatActivity {
         public String getBoard_T_sales() {
             return board_T_sales;
         }
+        public String getImage_url() { return image_url; }
 
 
     }
