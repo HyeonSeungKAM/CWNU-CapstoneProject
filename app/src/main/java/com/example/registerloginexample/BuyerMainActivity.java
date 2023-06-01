@@ -1,27 +1,20 @@
 package com.example.registerloginexample;
 
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -130,24 +123,8 @@ public class BuyerMainActivity extends AppCompatActivity {
                     String plastic_full = itemObject.getString("plastic_full");
                     String paper_full = itemObject.getString("paper_full");
                     String metal_full = itemObject.getString("metal_full");
-                    String status = null;
 
-                    if (glass_full.equals("1")) {
-                        status = "유리병 수거함 가득참";
-
-                    } else if (plastic_full.equals("1")) {
-                        status = "플라스틱 수거함 가득참";
-
-
-                    } else if(paper_full.equals("1")) {
-                        status = "종이 수거함 가득참";
-
-                    } else if(metal_full.equals("1")) {
-                        status = "고철 수거함 가득참";
-
-                    };
-
-                    DataItem dataItem = new DataItem(userID, binName, binLoc, status);
+                    DataItem dataItem = new DataItem(userID, binName, binLoc,glass_full,plastic_full,paper_full,metal_full);
                     dataList.add(dataItem);
                 }
                 return dataList;
@@ -182,16 +159,22 @@ public class BuyerMainActivity extends AppCompatActivity {
             public TextView tv_itm_userID, tv_itm_binName, tv_itm_binLoc, tv_itm_glass_f,
                     tv_itm_plastic_f, tv_itm_paper_f, tv_itm_metal_f,tv_itm_status;
 
+            public LinearLayout glass_state,plastic_state,paper_state,metal_state;
+
             public ViewHolder(View itemView) {
                 super(itemView);
                 tv_itm_userID = itemView.findViewById(R.id.tv_itm_userID);
                 tv_itm_binName = itemView.findViewById(R.id.tv_itm_binName);
                 tv_itm_binLoc = itemView.findViewById(R.id.tv_itm_binLoc);
-                tv_itm_status = itemView.findViewById(R.id.tv_itm_status);
-            /*    tv_itm_glass_f = itemView.findViewById(R.id.tv_itm_glass_f);
+                tv_itm_glass_f = itemView.findViewById(R.id.tv_itm_glass_f);
                 tv_itm_plastic_f = itemView.findViewById(R.id.tv_itm_plastic_f);
                 tv_itm_paper_f = itemView.findViewById(R.id.tv_itm_paper_f);
-                tv_itm_metal_f = itemView.findViewById(R.id.tv_itm_metal_f); */
+                tv_itm_metal_f = itemView.findViewById(R.id.tv_itm_metal_f);
+
+                glass_state = itemView.findViewById(R.id.glass_state);
+                plastic_state = itemView.findViewById(R.id.plastic_state);
+                paper_state = itemView.findViewById(R.id.paper_state);
+                metal_state = itemView.findViewById(R.id.metal_state);
             }
         }
 
@@ -206,13 +189,43 @@ public class BuyerMainActivity extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             DataItem item = data.get(position);
             holder.tv_itm_userID.setText(item.getUserID());
-            holder.tv_itm_binLoc.setText(item.getBinLoc());
+
+            int maxLength = 14;
+            if (item.getBinLoc().length() > maxLength) {
+                // 텍스트가 최대 길이보다 길 경우 일부만 표시하고 "..." 추가
+                String shortenedText = item.getBinLoc().substring(0, maxLength) + "...";
+                holder.tv_itm_binLoc.setText(shortenedText);
+            } else {
+                // 텍스트가 최대 길이보다 작거나 같은 경우 전체 텍스트 표시
+                holder.tv_itm_binLoc.setText(item.getBinLoc());
+            }
+
             holder.tv_itm_binName.setText(item.getBinName());
-            holder.tv_itm_status.setText(item.getStatus());
-          /*  holder.tv_itm_glass_f.setText(item.getGF());
-            holder.tv_itm_plastic_f.setText(item.getPLF());
-            holder.tv_itm_paper_f.setText(item.getPPF());
-            holder.tv_itm_metal_f.setText(item.getMF()); */
+
+
+
+            holder.glass_state.setVisibility(View.GONE);
+            holder.plastic_state.setVisibility(View.GONE);
+            holder.paper_state.setVisibility(View.GONE);
+            holder.metal_state.setVisibility(View.GONE);
+
+
+            if(item.getGF().equals("1")) {
+                holder.glass_state.setVisibility(View.VISIBLE);
+                holder.tv_itm_glass_f.setText("가득참");
+            }
+            if(item.getPLF().equals("1")) {
+                holder.plastic_state.setVisibility(View.VISIBLE);
+                holder.tv_itm_plastic_f.setText("가득참");
+            }
+            if(item.getPPF().equals("1")) {
+                holder.paper_state.setVisibility(View.VISIBLE);
+                holder.tv_itm_paper_f.setText("가득참");
+            }
+            if(item.getMF().equals("1")) {
+                holder.metal_state.setVisibility(View.VISIBLE);
+                holder.tv_itm_metal_f.setText("가득참");
+            }
 
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
             layoutParams.setMargins(80, 0, 80, 0); // 왼쪽과 오른쪽 마진을 16dp로 설정
@@ -236,17 +249,17 @@ public class BuyerMainActivity extends AppCompatActivity {
         private String paper_full;
         private String metal_full;
 
-        public DataItem(String userID, String binName, String binLoc, String status) {
+        public DataItem(String userID, String binName, String binLoc, String glass_full,
+                        String plastic_full, String paper_full, String metal_full) {
+
             this.userID = userID;
             this.binName = binName;
             this.binLoc = binLoc;
-            this.status = status;
-          /*  this.glass_full = glass_full;
+            this.glass_full = glass_full;
             this.plastic_full = plastic_full;
             this.paper_full = paper_full;
-            this.metal_full = metal_full; */
+            this.metal_full = metal_full;
         }
-
         public String getUserID() {
             return userID;
         }
@@ -258,13 +271,12 @@ public class BuyerMainActivity extends AppCompatActivity {
         public String getBinLoc() {
             return binLoc;
         }
-        public String getStatus() {return status;}
 
-       /* public String getGF() {
+        public String getGF() {
             return glass_full;
         }
 
-         public String getPLF() {
+        public String getPLF() {
             return plastic_full;
         }
 
@@ -273,7 +285,7 @@ public class BuyerMainActivity extends AppCompatActivity {
         }
         public String getMF() {
             return metal_full;
-        } */
+        }
 
     }
 

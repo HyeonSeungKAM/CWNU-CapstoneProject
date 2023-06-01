@@ -2,15 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/custom_llayout"
+    android:padding="10dp">
 
 
     <TextView
         android:id="@+id/tv_itm_userID"
+        android:drawableStart="@drawable/ic_member"
+        android:drawablePadding="5dp"
         android:textAlignment="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="22dp"
         android:text="userID"/>
 
     <TextView
@@ -19,15 +23,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="쓰레기통 이름"/>
+        android:text="쓰레기통 이름"
+        android:layout_marginTop="5dp"
+        android:drawableStart="@drawable/ic_bin"
+        android:drawablePadding="5dp"/>
 
     <TextView
         android:id="@+id/tv_itm_binLoc"
-        android:textAlignment="center"
-        android:layout_width="wrap_content"
+        android:layout_width="225dp"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:text="위치"/>
+        android:textSize="17dp"
+        android:text="위치"
+        android:layout_marginTop="5dp"
+        android:drawableStart="@drawable/ic_location"
+        android:drawablePadding="5dp"/>
 
     <TextView
         android:id="@+id/tv_itm_status"
@@ -35,39 +44,102 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18dp"
-        android:text="상태"/>
+        android:text="상태:"
+        android:drawableStart="@drawable/ic_type"
+        android:drawablePadding="5dp"
+        android:layout_marginTop="5dp"
+        />
 
-    <!-- <TextView
-        android:id="@+id/tv_itm_glass_f"
-        android:textAlignment="center"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:text="유리병"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_itm_plastic_f"
-        android:textAlignment="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:text="플라스틱"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/glass_state"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_itm_paper_f"
-        android:textAlignment="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:text="종이"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/img_glass" />
 
-    <TextView
-        android:id="@+id/tv_itm_metal_f"
-        android:textAlignment="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:text="고철"/>                                 -->
+            <TextView
+                android:id="@+id/tv_itm_glass_f"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="유리병" />
 
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/plastic_state"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/img_plastic" />
+
+            <TextView
+                android:id="@+id/tv_itm_plastic_f"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:text="플라스틱"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/paper_state"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/img_paper" />
+
+            <TextView
+                android:id="@+id/tv_itm_paper_f"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="종이"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/metal_state"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/img_metal" />
+
+            <TextView
+                android:id="@+id/tv_itm_metal_f"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="고철"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

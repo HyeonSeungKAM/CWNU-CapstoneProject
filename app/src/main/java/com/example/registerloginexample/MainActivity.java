@@ -4,11 +4,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -33,8 +35,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG_BinName = "binName";
-    private static final String TAG_STATUS = "full";
-    private static final String TAG_TYPE = "type";
+    private static final String TAG_STATUS = "status";
 
     private Button btn_list, btn_salesList,btn_logout, btn_binList;// 판매하기, 목록 버튼
     private String userID, userName, kind, address;
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     List<Map<String, String>> dialogItemList;
+    int[] image ={ R.drawable.img_glass, R.drawable.img_plastic,
+            R.drawable.img_paper, R.drawable.img_metal};
+    private List<Integer> full = new ArrayList<>();
 
 
     @Override
@@ -103,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         btn_binList = findViewById(R.id.btn_binList);
         btn_binList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,28 +120,18 @@ public class MainActivity extends AppCompatActivity {
                             for(int i=0; i < jsonArray.length(); i++){
                                 JSONObject jsonObject= jsonArray.getJSONObject(i);
                                 String binName = jsonObject.getString(TAG_BinName);
-                                String glass_full = jsonObject.getString("glass_full");
-                                String plastic_full = jsonObject.getString("plastic_full");
-                                String paper_full = jsonObject.getString("paper_full");
-                                String metal_full = jsonObject.getString("metal_full");
+                                int glass_full = Integer.parseInt(jsonObject.getString("glass_full"));
+                                int plastic_full = Integer.parseInt(jsonObject.getString("plastic_full"));
+                                int paper_full = Integer.parseInt(jsonObject.getString("paper_full"));
+                                int metal_full = Integer.parseInt(jsonObject.getString("metal_full"));
 
                                 Map<String, String> itemMap = new HashMap<>();
-                                if (glass_full.equals("1")) {
-                                    itemMap.put(TAG_TYPE, "유리병 수거함");
-                                    itemMap.put(TAG_STATUS, TAG_STATUS);
+                                if (glass_full == 1 || plastic_full == 1 || paper_full == 1 || metal_full == 1) {
+                                    itemMap.put(TAG_STATUS,"일부 수거함 가득참");
+                                } else if (glass_full == 1 && plastic_full == 1 && paper_full == 1 && metal_full == 1) {
+                                    itemMap.put(TAG_STATUS,"전체 수거함 가득참");
+                                }
 
-                                } else if (plastic_full.equals("1")) {
-                                    itemMap.put(TAG_TYPE, "플라스틱 수거함");
-                                    itemMap.put(TAG_STATUS, TAG_STATUS);
-
-                                } else if(paper_full.equals("1")) {
-                                    itemMap.put(TAG_TYPE, "종이 수거함");
-                                    itemMap.put(TAG_STATUS, TAG_STATUS);
-
-                                } else if(metal_full.equals("1")) {
-                                    itemMap.put(TAG_TYPE, "고철 수거함");
-                                    itemMap.put(TAG_STATUS, TAG_STATUS);
-                                };
                                 itemMap.put(TAG_BinName, binName);
                                 dialogItemList.add(itemMap);
                             }
@@ -182,8 +175,8 @@ public class MainActivity extends AppCompatActivity {
 
         SimpleAdapter simpleAdapter = new SimpleAdapter(MainActivity.this, dialogItemList,
                 R.layout.alert_dialog_row,
-                new String[]{TAG_BinName, TAG_TYPE, TAG_STATUS},
-                new int[]{R.id.alertDialogItemBins, R.id.alertDialogItemType, R.id.alertDialogItemStatus});
+                new String[]{TAG_BinName, TAG_STATUS},
+                new int[]{R.id.alertDialogItemBins, R.id.alertDialogItemStatus});
 
         listview.setAdapter(simpleAdapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

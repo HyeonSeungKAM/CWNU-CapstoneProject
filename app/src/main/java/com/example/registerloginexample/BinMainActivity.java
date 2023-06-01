@@ -60,6 +60,11 @@ public class BinMainActivity extends AppCompatActivity {
         TextView tv_paperW = findViewById(R.id.tv_paperW);
         TextView tv_metalW = findViewById(R.id.tv_metalW);
 
+        TextView ic_glass = findViewById(R.id.gf);
+        TextView ic_plastic = findViewById(R.id.plf);
+        TextView ic_paper = findViewById(R.id.pf);
+        TextView ic_metal = findViewById(R.id.mf);
+
         Intent intent = getIntent();
         kind = intent.getStringExtra("kind");
         userID = intent.getStringExtra("userID");
@@ -87,6 +92,27 @@ public class BinMainActivity extends AppCompatActivity {
         tv_plasticW.setText(plastic+"kg");
         tv_paperW.setText(paper+"kg");
         tv_metalW.setText(metal+"kg");
+
+
+        ic_glass.setVisibility(View.GONE);
+        ic_plastic.setVisibility(View.GONE);
+        ic_paper.setVisibility(View.GONE);
+        ic_metal.setVisibility(View.GONE);
+
+        if (glass_full.equals("1")) {
+            ic_glass.setVisibility(View.VISIBLE);
+        }
+        if (plastic_full.equals("1")) {
+            ic_plastic.setVisibility(View.VISIBLE);
+        }
+        if (paper_full.equals("1")) {
+            ic_paper.setVisibility(View.VISIBLE);
+        }
+        if (metal_full.equals("1")) {
+            ic_metal.setVisibility(View.VISIBLE);
+        }
+
+
 
         btn_main = findViewById(R.id.btn_main);
         btn_main.setOnClickListener(new View.OnClickListener() {    // 목록

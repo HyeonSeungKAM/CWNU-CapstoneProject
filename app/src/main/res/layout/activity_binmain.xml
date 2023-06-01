@@ -8,41 +8,6 @@
     android:gravity="center_horizontal"
     tools:context=".BinMainActivity">
 
-   <!-- <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp">
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="TextView"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/tv_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:text="TextView"
-            android:textSize="24sp"
-            />
-
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="41dp"
-            android:layout_marginStart="10dp"
-            android:text="로그아웃"
-            android:textSize="10dp" />
-
-    </LinearLayout> -->
-
     <LinearLayout
         android:layout_width="322dp"
         android:layout_height="wrap_content"
@@ -172,11 +137,34 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/img_glass" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
 
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/img_glass"
+                        android:src="@drawable/img_glass" />
+
+                    <TextView
+                        android:id="@+id/gf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/img_glass"
+                        android:layout_alignTop="@id/img_glass"
+                        android:layout_alignRight="@id/img_glass"
+                        android:layout_alignBottom="@id/img_glass"
+                        android:background="#59000000"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:shadowColor="#FFFFFF"
+                        android:text="가득참"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="25.3dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/textView3"
@@ -201,13 +189,36 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:gravity="center_horizontal"
-
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/img_plastic" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/img_plastic"
+                        android:src="@drawable/img_plastic" />
+
+                    <TextView
+                        android:id="@+id/plf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/img_plastic"
+                        android:layout_alignTop="@id/img_plastic"
+                        android:layout_alignRight="@id/img_plastic"
+                        android:layout_alignBottom="@id/img_plastic"
+                        android:background="#59000000"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:shadowColor="#FFFFFF"
+                        android:text="가득참"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="25.3dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/textView"
@@ -239,10 +250,35 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/img_paper" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/img_paper"
+                        android:src="@drawable/img_paper" />
+
+                    <TextView
+                        android:id="@+id/pf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/img_paper"
+                        android:layout_alignTop="@id/img_paper"
+                        android:layout_alignRight="@id/img_paper"
+                        android:layout_alignBottom="@id/img_paper"
+                        android:background="#59000000"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:shadowColor="#FFFFFF"
+                        android:text="가득참"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="25.3dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/textView4"
@@ -267,10 +303,36 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/img_metal" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/img_metal"
+                        android:src="@drawable/img_metal" />
+
+
+                    <TextView
+                        android:id="@+id/mf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/img_metal"
+                        android:layout_alignTop="@id/img_metal"
+                        android:layout_alignRight="@id/img_metal"
+                        android:layout_alignBottom="@id/img_metal"
+                        android:background="#59000000"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:shadowColor="#FFFFFF"
+                        android:text="가득참"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="25.3dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/textView7"
@@ -323,7 +385,6 @@
         android:background="@drawable/custom_button_below"
         android:drawableTop="@drawable/ic_sell"
         android:textSize="14dp" />
-
 
     <Button
         android:id="@+id/btn_salesList"

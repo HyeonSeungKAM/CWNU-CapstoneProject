@@ -77,10 +77,12 @@
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginStart="10dp"
             android:gravity="center_vertical"
             android:text="가득 찬 쓰레기통 목록"
             android:drawableStart="@drawable/ic_bins"
+            android:drawablePadding="10dp"
             android:textSize="20sp"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -88,7 +90,7 @@
             android:layout_width="297dp"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_llayout"
-            android:padding="5dp"
+            android:paddingVertical="20dp"
             android:gravity="center" />
 
 
@@ -96,9 +98,9 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:orientation="horizontal">
 

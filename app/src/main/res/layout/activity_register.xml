@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".RegisterActivity">
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="회원가입"
+        android:textSize="35dp" />
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="416dp"
-        android:layout_height="574dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="410dp"
+        android:layout_height="428dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView21">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,13 +37,9 @@
                 android:id="@+id/radio_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="76dp"
-                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
                 android:checkedButton="@id/radio_button_user"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radio_button_user"
@@ -54,61 +62,68 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
+                android:background="@drawable/custom_llayout"
+                android:drawableStart="@drawable/ic_member"
+                android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="아이디"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="@+id/radio_group"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="@+id/radio_group"
-                app:layout_constraintTop_toBottomOf="@+id/radio_group" />
-
-            <EditText
-                android:id="@+id/et_pass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:hint="비밀번호"
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="@+id/et_id"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/et_id"
-                app:layout_constraintTop_toBottomOf="@+id/et_id" />
+                android:padding="5dp" />
 
             <EditText
                 android:id="@+id/et_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/custom_llayout"
+                android:drawableStart="@drawable/ic_member"
+                android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="이름"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="@+id/et_pass"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/et_pass"
-                app:layout_constraintTop_toBottomOf="@+id/et_pass" />
+                android:padding="5dp" />
+
+            <EditText
+                android:id="@+id/et_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_llayout"
+                android:drawableStart="@drawable/ic_pass"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:padding="5dp" />
+
 
             <EditText
                 android:id="@+id/et_phoneNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/custom_llayout"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="전화번호"
                 android:inputType="textPersonName"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:padding="5dp" />
 
 
             <Spinner
                 android:id="@+id/spinner_bankMenu"
-                android:ems="10"
                 android:layout_width="210dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:background="@drawable/custom_llayout"
+                android:ems="10"
                 android:minHeight="48dp"
+                android:padding="5dp"
                 android:spinnerMode="dialog" />
 
             <EditText
@@ -116,22 +131,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:background="@drawable/custom_llayout"
                 android:ems="10"
                 android:hint="계좌번호"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="@+id/et_accountBank"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/et_accountBank"
-                app:layout_constraintTop_toBottomOf="@+id/et_accountBank" />
+                android:padding="10dp" />
 
             <EditText
                 android:id="@+id/et_address"
                 android:layout_width="208dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:hint="주소를 입력해주세요." />
-
+                android:layout_marginTop="15dp"
+                android:background="@drawable/custom_llayout"
+                android:hint="주소를 입력해주세요."
+                android:padding="10dp" />
 
         </LinearLayout>
     </ScrollView>
@@ -149,4 +163,4 @@
         app:layout_constraintVertical_bias="0.424" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
