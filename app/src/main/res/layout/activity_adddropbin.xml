@@ -4,24 +4,45 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="20dp"
-        android:padding="10dp"
-        android:text="쓰레기통 목록"
-        android:textSize="24sp" />
+        android:orientation="horizontal"
+        android:background="@drawable/custom_llayout"
+        android:layout_margin="20dp">
 
-    <ListView
-        android:id="@+id/bin_listview_innerframe"
-        android:layout_gravity="center"
-        android:layout_width="371dp"
-        android:layout_height="559dp"
-        android:layout_margin="5dp"
-        android:layout_weight="5"
-        android:padding="10dp" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@drawable/ic_bins" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="쓰레기통 목록"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="452dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/custom_llayout"
+        android:orientation="horizontal">
+
+        <ListView
+            android:id="@+id/bin_listview_innerframe"
+            android:layout_width="371dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="5"
+            android:padding="10dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

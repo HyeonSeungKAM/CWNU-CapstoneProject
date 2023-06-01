@@ -45,15 +45,17 @@
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".BinEditActivity"
+            android:label="쓰레기통 정보 수정"
             android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
         <activity android:name=".BinMainActivity" />
         <activity android:name=".SalesListActivity" />
         <activity android:name=".BuyerMainActivity" />
         <activity android:name=".BuyActivity" />
         <activity android:name=".PurchasedListActivity" />
-        <activity android:name=".AddDropBinActivity" />
+        <activity android:name=".AddDropBinActivity"/>
         <activity
             android:name=".BinAddActivity"
+            android:label="쓰레기통 정보  추가"
             android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
         <activity android:name=".MapActivity" />
 

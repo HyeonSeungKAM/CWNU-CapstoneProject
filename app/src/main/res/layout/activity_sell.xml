@@ -17,18 +17,11 @@
         >
 
         <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="쓰레기통"
-            android:textSize="18sp"/>
-
-        <TextView
             android:id="@+id/tv_binName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:hint="쓰레기통 이름"
+            android:drawableLeft="@drawable/ic_bin"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -40,19 +33,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="위치: "
+        android:drawableStart="@drawable/ic_location"
         android:layout_marginStart="20dp"
         android:textSize="18sp"/>
+
 
     <TextView
         android:id="@+id/tv_binLoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="쓰레기통 위치"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="45dp"
         android:layout_marginBottom="30dp"
+        android:hint="쓰레기통 위치"
         android:textSize="18sp" />
-
-
 
     <TableLayout
         android:layout_width="wrap_content"

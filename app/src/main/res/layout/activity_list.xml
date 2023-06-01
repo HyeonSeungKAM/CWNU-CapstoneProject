@@ -13,11 +13,14 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="랭킹"
+        android:drawableStart="@drawable/ic_rank"
+        android:drawablePadding="5dp"
         android:textSize="24sp" />
 
     <ListView
         android:id="@+id/listview_rank_innerframe"
         android:layout_width="match_parent"
+        android:background="@drawable/custom_llayout"
         android:layout_height="326dp"
         android:layout_margin="5dp"
         android:layout_weight="5"
@@ -30,12 +33,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:drawableStart="@drawable/ic_saleboard"
+        android:drawablePadding="5dp"
         android:text="판매목록"
         android:textSize="24sp" />
 
     <ListView
         android:id="@+id/listview_innerframe"
         android:layout_width="match_parent"
+        android:background="@drawable/custom_llayout"
+        android:drawablePadding="5dp"
         android:layout_height="326dp"
         android:layout_margin="5dp"
         android:layout_weight="5"
@@ -44,7 +51,7 @@
     <LinearLayout
         android:id="@+id/ll_buttons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
@@ -59,7 +66,7 @@
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="70dp">
 
             <Button
                 android:id="@+id/btn_sell2"

@@ -4,51 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:padding="20dp"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/et_binName"
+        <EditText
+            android:id="@+id/et_binName"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/custom_llayout"
+            android:hint="쓰레기통 이름"
+            android:padding="10dp"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/cb_loc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="쓰레기통 이름"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="40dp"
-        android:textSize="20sp"
-        />
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="10dp"
+        android:checked="false"
+        android:text="사용자 거주지와 동일"
+        android:textSize="12sp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="40dp" >
-
-        <CheckBox
-            android:id="@+id/cb_loc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:checked="false"
-            android:text="사용자 거주지와 동일"
-            android:textSize="12sp" />
-
+        android:padding="20dp"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/et_binLoc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/custom_llayout"
             android:hint="쓰레기통 위치"
-            android:textSize="20sp" />
-
-
+            android:padding="10dp"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="73dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:orientation="horizontal">

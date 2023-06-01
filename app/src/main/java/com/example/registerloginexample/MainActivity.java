@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         userName = intent.getStringExtra("userName");
         address = intent.getStringExtra("address");
 
-        tv_id.setText(userID);
+        tv_id.setText("(ID:"+userID+")");
         tv_name.setText(userName);
 
         btn_salesList = findViewById(R.id.btn_salesList);
