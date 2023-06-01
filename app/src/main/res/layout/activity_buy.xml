@@ -11,13 +11,16 @@
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="12dp"
         android:orientation="vertical">
 
 
         <TableLayout
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:background="@drawable/custom_llayout">
 
             <TableRow>
 
@@ -27,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:text="분류"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -35,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:text="중량(kg)"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -43,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:text="kg당 가격(원)"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -52,7 +55,7 @@
                     android:layout_marginStart="10dp"
                     android:text="합계(원)"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
             </TableRow>
 
@@ -73,26 +76,26 @@
                     android:layout_height="wrap_content"
                     android:text="유리"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/tv_glassW"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="50"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/tv_totalGlassPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
             </TableRow>
 
             <TableRow
@@ -103,26 +106,26 @@
                     android:layout_height="wrap_content"
                     android:text="플라스틱"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/tv_plasticW"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="50"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/tv_totalPlasticPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
             </TableRow>
 
             <TableRow
@@ -133,26 +136,26 @@
                     android:layout_height="wrap_content"
                     android:text="종이"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/tv_paperW"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/tv_totalPaperPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
             </TableRow>
 
             <TableRow
@@ -164,26 +167,26 @@
                     android:layout_height="wrap_content"
                     android:text="고철"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/tv_metalW"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="500"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/tv_totalMetalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
             </TableRow>
 
             <View
@@ -219,6 +222,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="결제금액"
+                    android:layout_marginStart="5dp"
                     android:textStyle="bold"
                     android:textSize="20sp"/>
 
@@ -237,11 +241,12 @@
 
 
         <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp">
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="5dp"
+            android:background="@drawable/custom_llayout">
 
             <TableRow
                 android:layout_span="2">
@@ -267,6 +272,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ID(이름)"
+                    android:paddingStart="5dp"
                     android:textSize="18sp"
                     />
 
@@ -288,6 +294,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="전화번호"
+                    android:paddingStart="5dp"
                     android:textSize="18sp"
                     />
 
@@ -309,6 +316,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="입금계좌"
+                    android:paddingStart="5dp"
                     android:textSize="18sp"
                     />
 
@@ -331,6 +339,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="판매자 주소"
+                    android:paddingStart="5dp"
                     android:textSize="18sp"
                     />
 

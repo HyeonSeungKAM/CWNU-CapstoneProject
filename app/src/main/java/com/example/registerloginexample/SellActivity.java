@@ -28,6 +28,8 @@ public class SellActivity extends AppCompatActivity {
 
     private Button btn_sellContinue, btn_cancel; // 판매하기, 취소
 
+    private float glassW, glassTP, plasticW, plasticTP, paperW, paperTP, metalW, metalTP;
+
 
     // 날짜 -----------------------------------------------------------
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -70,16 +72,49 @@ public class SellActivity extends AppCompatActivity {
         String plastic = intent.getStringExtra("plastic");
         String paper = intent.getStringExtra("paper");
         String metal = intent.getStringExtra("metal");
+        String glass_full = intent.getStringExtra("glass_full");
+        String plastic_full = intent.getStringExtra("plastic_full");
+        String paper_full = intent.getStringExtra("paper_full");
+        String metal_full = intent.getStringExtra("metal_full");
 
-        float glassW = Float.parseFloat(glass);
-        float plasticW = Float.parseFloat(plastic);
-        float paperW = Float.parseFloat(paper);
-        float metalW = Float.parseFloat(metal);
 
-        float glassTP = glassW * 50;
-        float plasticTP = plasticW * 50;
-        float paperTP = paperW * 10;
-        float metalTP = metalW * 500;
+
+        if (glass_full.equals("1")) {
+            glassW = Float.parseFloat(glass);
+            glassTP = glassW * 10;
+
+        } else {
+            glassW = 0;
+            glassTP = 0;
+        }
+
+        if (plastic_full.equals("1")) {
+            plasticW = Float.parseFloat(plastic);
+            plasticTP = plasticW * 50;
+
+        } else {
+            plasticW = 0;
+            plasticTP = 0;
+        }
+
+        if (paper_full.equals("1")) {
+            paperW = Float.parseFloat(paper);
+            paperTP = paperW * 50;
+
+        } else {
+            paperW = 0;
+            paperTP = 0;
+        }
+
+        if (metal_full.equals("1")) {
+            metalW = Float.parseFloat(metal);
+            metalTP = metalW * 500;
+
+        } else {
+            metalW = 0;
+            metalTP = 0;
+        }
+
         float TotalPrice = glassTP + glassTP + paperTP + metalTP;
 
         String str_glassTP = Float.toString(glassTP);
@@ -87,6 +122,8 @@ public class SellActivity extends AppCompatActivity {
         String str_paperTP = Float.toString(paperTP);
         String str_metalTP = Float.toString(metalTP);
         String str_TotalPrice = Float.toString(TotalPrice);
+
+
 
         String contents = glass + "," + str_glassTP + "," + plastic + "," + str_plasticTP + "," +
                 paper + "," + str_paperTP + "," + metal + ',' + str_metalTP + "," + str_TotalPrice; // sellBoard에 전송할 contents 내용
@@ -99,10 +136,10 @@ public class SellActivity extends AppCompatActivity {
         tv_binName.setText(binName);
         tv_binLoc.setText(binLoc);
 
-        tv_glass.setText(glass);
-        tv_plastic.setText(plastic);
-        tv_paper.setText(paper);
-        tv_metal.setText(metal);
+        tv_glass.setText(Float.toString(glassW));
+        tv_plastic.setText(Float.toString(plasticW));
+        tv_paper.setText(Float.toString(paperW));
+        tv_metal.setText(Float.toString(metalW));
 
         tv_totalGlassPrice.setText(str_glassTP);
         tv_totalPlasticPrice.setText(str_plasticTP);

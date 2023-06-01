@@ -1,4 +1,4 @@
-package com.example.registerloginexample;
+/** package com.example.registerloginexample;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -39,7 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity_recent_backup extends AppCompatActivity {
 
     // ------------- DB로 부터 데이터 불러오기 -----------------
     private static String TAG = "php_ListAcitivity";
@@ -123,7 +122,7 @@ public class ListActivity extends AppCompatActivity {
                                 String board_contents = jsonObject.getString("contents");
                                 String board_Date = jsonObject.getString("Date");
 
-                                Intent intent = new Intent(ListActivity.this, SPageActivity.class);
+                                Intent intent = new Intent(ListActivity_recent_backup.this, SPageActivity.class);
                                 intent.putExtra("board_userID", board_userID);
                                 intent.putExtra("board_userName", board_userName);
                                 intent.putExtra("board_binName", board_binName);
@@ -152,7 +151,7 @@ public class ListActivity extends AppCompatActivity {
                     }
                 };
                 SPageRequest sPageRequest = new SPageRequest(board_id, board_userid, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(ListActivity.this);
+                RequestQueue queue = Volley.newRequestQueue(ListActivity_recent_backup.this);
                 queue.add(sPageRequest);
             }
         });
@@ -177,7 +176,7 @@ public class ListActivity extends AppCompatActivity {
         btn_purchasedlist.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ListActivity.this, PurchasedListActivity.class);
+                Intent intent = new Intent(ListActivity_recent_backup.this, PurchasedListActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
@@ -194,7 +193,7 @@ public class ListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // 판매하기(올리기)
 
-                Intent intent = new Intent(ListActivity.this, SellActivity.class);
+                Intent intent = new Intent(ListActivity_recent_backup.this, SellActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID", userID);
                 intent.putExtra("userName", userName);
@@ -215,7 +214,7 @@ public class ListActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(kind.equals("buyer")){
-                    Intent intent = new Intent(ListActivity.this, BuyerMainActivity.class);
+                    Intent intent = new Intent(ListActivity_recent_backup.this, BuyerMainActivity.class);
                     intent.putExtra("kind",kind);
                     intent.putExtra("userID", userID);
                     intent.putExtra("userName", userName);
@@ -223,7 +222,7 @@ public class ListActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 } else if(kind.equals("user")){
-                    Intent intent = new Intent(ListActivity.this, MainActivity.class);
+                    Intent intent = new Intent(ListActivity_recent_backup.this, MainActivity.class);
                 //    intent.putExtra("binName", binName);
                     intent.putExtra("kind",kind);
                     intent.putExtra("userID", userID);
@@ -252,7 +251,7 @@ public class ListActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(ListActivity.this,
+            progressDialog = ProgressDialog.show(ListActivity_recent_backup.this,
                     "Please Wait", null, true, true);
         }
 
@@ -342,7 +341,7 @@ public class ListActivity extends AppCompatActivity {
             }
 
             ListAdapter adapter = new SimpleAdapter(
-                    ListActivity.this, mArrayList, R.layout.item_list,
+                    ListActivity_recent_backup.this, mArrayList, R.layout.item_list,
                     new String[]{TAG_ID, TAG_USERID, TAG_BINNAME},
                     new int[]{R.id.textView_list_id, R.id.textView_list_userid, R.id.textView_list_binname}
             );
@@ -429,15 +428,15 @@ public class ListActivity extends AppCompatActivity {
         }
 
         @Override
-        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_ranklist, parent, false);
 
-            return new MyAdapter.ViewHolder(view);
+            return new ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
+        public void onBindViewHolder(ViewHolder holder, int position) {
             DataItem item = data.get(position);
             holder.tv_board_userName.setText(item.getBoard_userName());
             holder.tv_board_userID.setText(item.getBoard_userID());
@@ -488,3 +487,4 @@ public class ListActivity extends AppCompatActivity {
 }
 
 
+**/
