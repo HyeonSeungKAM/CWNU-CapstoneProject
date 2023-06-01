@@ -50,15 +50,12 @@ public class ListActivity extends AppCompatActivity {
     private static final String TAG_BINNAME = "binName";
 
 
-
     private RecyclerView recyclerView;
 
 
     private TextView mTextViewResult;
     ArrayList<HashMap<String, String>> mArrayList;
     ListView mlistView;
-
-
 
     String mJsonString;
 // ------------- ----------------------------------
@@ -101,6 +98,64 @@ public class ListActivity extends AppCompatActivity {
 
         GetData task = new GetData();
         task.execute("http://gamhs44.ivyro.net/sellboardlist.php");
+
+        mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String board_id = ((TextView) view.findViewById(R.id.textView_list_id)).getText().toString();
+                String board_userid = ((TextView) view.findViewById(R.id.textView_list_userid)).getText().toString();
+                System.out.println(board_id);
+                System.out.println(board_userid);
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            System.out.println(response);
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean success = jsonObject.getBoolean("success");
+                            if (success) {
+                                String board_userID = jsonObject.getString("userID");
+                                String board_userName = jsonObject.getString("userName");
+                                String board_binName = jsonObject.getString("binName");
+                                String board_binLoc = jsonObject.getString("binLoc");
+                                String board_contents = jsonObject.getString("contents");
+                                String board_Date = jsonObject.getString("Date");
+
+                                Intent intent = new Intent(ListActivity.this, SPageActivity.class);
+                                intent.putExtra("board_userID", board_userID);
+                                intent.putExtra("board_userName", board_userName);
+                                intent.putExtra("board_binName", board_binName);
+                                intent.putExtra("board_binLoc", board_binLoc);
+                                intent.putExtra("board_contents",board_contents);
+                                intent.putExtra("board_Date", board_Date);
+
+                                // 로그인한 유저 정보들
+                                intent.putExtra("kind",kind);
+                                intent.putExtra("userID",userID);
+                                intent.putExtra("userName",userName);
+                                intent.putExtra("address",address);
+
+
+                                startActivity(intent);
+                                finish();
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), "불러오기 실패", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (JSONException ex) {
+                            ex.printStackTrace();
+                        }
+
+                    }
+                };
+                SPageRequest sPageRequest = new SPageRequest(board_id, board_userid, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(ListActivity.this);
+                queue.add(sPageRequest);
+            }
+        });
 
 
 // ------------------ 버튼들 -----------------------------------------------
@@ -273,7 +328,6 @@ public class ListActivity extends AppCompatActivity {
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject item = jsonArray.getJSONObject(i);
-
                 String id = item.getString(TAG_ID);
                 String userID = item.getString(TAG_USERID);
                 String binName = item.getString(TAG_BINNAME);
@@ -292,6 +346,8 @@ public class ListActivity extends AppCompatActivity {
                     new String[]{TAG_ID, TAG_USERID, TAG_BINNAME},
                     new int[]{R.id.textView_list_id, R.id.textView_list_userid, R.id.textView_list_binname}
             );
+
+
 
             mlistView.setAdapter(adapter);
 
@@ -321,14 +377,13 @@ public class ListActivity extends AppCompatActivity {
 
                 JSONObject  jsonObject = new JSONObject(response.toString());
                 JSONArray jsonArray = jsonObject.getJSONArray("webnautes");
-                int rank = 1;
                 List<DataItem> dataList = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject itemObject = jsonArray.getJSONObject(i);
                     String board_userID = itemObject.getString("userID");
                     String board_userName = itemObject.getString("userName");
                     String board_T_sales = itemObject.getString("T_sales");
-                    rank = rank + 1;
+                    int rank = i;
 
                     DataItem dataItem = new DataItem(board_userID, board_userName, board_T_sales, rank);
                     dataList.add(dataItem);
@@ -386,9 +441,8 @@ public class ListActivity extends AppCompatActivity {
             DataItem item = data.get(position);
             holder.tv_board_userName.setText(item.getBoard_userName());
             holder.tv_board_userID.setText(item.getBoard_userID());
-            holder.tv_board_T_sales.setText(item.getBoard_T_sales());
-            holder.rankImg.setImageResource();
-
+            holder.tv_board_T_sales.setText(item.getBoard_T_sales() + " 원");
+            holder.rankImg.setImageResource(item.getRank());
 
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
             layoutParams.setMargins(5, 0, 5, 0); // 왼쪽과 오른쪽 마진을 16dp로 설정
@@ -404,15 +458,17 @@ public class ListActivity extends AppCompatActivity {
 
     private static class DataItem {
         private String board_userID;
-        private String image_url;
+        private int rank;
+
+        private int image[] = {R.drawable.img_first, R.drawable.img_second, R.drawable.img_third};
         private String board_userName;
         private String board_T_sales;
 
-        public DataItem(String board_userID, String board_userName, String board_T_sales, String image_url) {
+        public DataItem(String board_userID, String board_userName, String board_T_sales, int rank) {
             this.board_userID = board_userID;
             this.board_userName = board_userName;
             this.board_T_sales = board_T_sales;
-            this.image_url = image_url;
+            this.rank = rank;
         }
         public String getBoard_userID() {
             return board_userID;
@@ -423,7 +479,7 @@ public class ListActivity extends AppCompatActivity {
         public String getBoard_T_sales() {
             return board_T_sales;
         }
-        public String getImage_url() { return image_url; }
+        public int getRank() { return image[rank]; }
 
 
     }

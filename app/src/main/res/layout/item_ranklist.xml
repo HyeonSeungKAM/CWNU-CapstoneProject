@@ -22,17 +22,18 @@
             app:layout_constraintVertical_bias="0.4" >
 
             <ImageView
-                android:id="@+id/rankImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_member" />
-
-            <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_margin="9dp"
                 android:src="@drawable/ic_member"
                />
+
+            <ImageView
+                android:id="@+id/rankImg"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_member" />
 
         </FrameLayout>
 

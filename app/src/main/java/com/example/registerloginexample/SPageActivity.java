@@ -30,11 +30,11 @@ public class SPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spagetest);
 
+        TextView tv_b_userName = (TextView) findViewById(R.id.tv_b_userName);
         TextView tv_b_userID = (TextView) findViewById(R.id.tv_b_userID);
         TextView tv_b_binName = (TextView) findViewById(R.id.tv_b_binName);
         TextView tv_b_binLoc = (TextView) findViewById(R.id.tv_b_binLoc);
         TextView tv_b_Date = (TextView) findViewById(R.id.tv_b_Date);
-
 
         TextView tv_glassW = (TextView) findViewById(R.id.tv_glassW);
         TextView tv_plasticW = (TextView) findViewById(R.id.tv_plasticW);
@@ -49,6 +49,7 @@ public class SPageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String board_userID = intent.getExtras().getString("board_userID");
+        String board_userName = intent.getExtras().getString("board_userName");
         String board_binName = intent.getExtras().getString("board_binName");
         String board_binLoc = intent.getExtras().getString("board_binLoc");
         String board_contents = intent.getExtras().getString("board_contents");
@@ -60,7 +61,8 @@ public class SPageActivity extends AppCompatActivity {
         String userName = intent.getStringExtra("userName");
         String address = intent.getStringExtra("address");
 
-        tv_b_userID.setText(board_userID);
+        tv_b_userName.setText(board_userName);
+        tv_b_userID.setText("(" + board_userID + ")");
         tv_b_Date.setText(board_Date);
         tv_b_binName.setText(board_binName + " 쓰레기통");
         tv_b_binLoc.setText("("+board_binLoc+")");
