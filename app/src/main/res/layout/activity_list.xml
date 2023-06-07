@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -22,12 +22,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_llayout"
-        android:paddingVertical="20dp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:paddingVertical="20dp" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -36,15 +36,18 @@
         android:text="판매목록"
         android:textSize="24sp" />
 
-    <ListView
-        android:id="@+id/listview_innerframe"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/SellBoard_Recyclerview"
         android:layout_width="match_parent"
-        android:background="@drawable/custom_llayout"
-        android:drawablePadding="5dp"
         android:layout_height="326dp"
         android:layout_margin="5dp"
+        android:padding="10dp"
         android:layout_weight="5"
-        android:padding="10dp" />
+        android:drawablePadding="5dp"
+        android:background="@drawable/custom_llayout"
+        android:gravity="center"
+        android:paddingVertical="20dp" />
 
     <LinearLayout
         android:id="@+id/ll_buttons"

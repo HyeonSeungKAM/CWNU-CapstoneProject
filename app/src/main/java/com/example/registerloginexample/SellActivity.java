@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,9 @@ import java.util.Date;
 public class SellActivity extends AppCompatActivity {
 
     private Button btn_sellContinue, btn_cancel; // 판매하기, 취소
+    private String kind, userID, userName, binName, binLoc,
+                glass, plastic, paper, metal, glass_full, plastic_full,
+            paper_full ,metal_full;
 
     private float glassW, glassTP, plasticW, plasticTP, paperW, paperTP, metalW, metalTP;
 
@@ -61,61 +65,76 @@ public class SellActivity extends AppCompatActivity {
         TextView tv_binName = findViewById(R.id.tv_binName);
         TextView tv_binLoc = findViewById(R.id.tv_binLoc);
 
+        TableRow glass_row = findViewById(R.id.glass_row);
+        TableRow plastic_row = findViewById(R.id.plastic_row);
+        TableRow paper_row = findViewById(R.id.paper_row);
+        TableRow metal_row = findViewById(R.id.metal_row);
+
+
 
         Intent intent = getIntent();
-        String kind = intent.getStringExtra("kind");
-        String userID = intent.getStringExtra("userID");
-        String userName = intent.getStringExtra("userName");
-        String binName = intent.getStringExtra("binName");
-        String binLoc = intent.getStringExtra("binLoc");
-        String glass = intent.getStringExtra("glass");
-        String plastic = intent.getStringExtra("plastic");
-        String paper = intent.getStringExtra("paper");
-        String metal = intent.getStringExtra("metal");
-        String glass_full = intent.getStringExtra("glass_full");
-        String plastic_full = intent.getStringExtra("plastic_full");
-        String paper_full = intent.getStringExtra("paper_full");
-        String metal_full = intent.getStringExtra("metal_full");
+        kind = intent.getStringExtra("kind");
+        userID = intent.getStringExtra("userID");
+        userName = intent.getStringExtra("userName");
+        binName = intent.getStringExtra("binName");
+        binLoc = intent.getStringExtra("binLoc");
+        glass = intent.getStringExtra("glass");
+        plastic = intent.getStringExtra("plastic");
+        paper = intent.getStringExtra("paper");
+        metal = intent.getStringExtra("metal");
+        glass_full = intent.getStringExtra("glass_full");
+        plastic_full = intent.getStringExtra("plastic_full");
+        paper_full = intent.getStringExtra("paper_full");
+        metal_full = intent.getStringExtra("metal_full");
 
 
 
         if (glass_full.equals("1")) {
             glassW = Float.parseFloat(glass);
             glassTP = glassW * 10;
+            glass_row.setVisibility(View.VISIBLE);
 
         } else {
-            glassW = 0;
+            glass = "0";
             glassTP = 0;
+            glass_row.setVisibility(View.GONE);
+
         }
 
         if (plastic_full.equals("1")) {
             plasticW = Float.parseFloat(plastic);
             plasticTP = plasticW * 50;
+            plastic_row.setVisibility(View.VISIBLE);
 
         } else {
-            plasticW = 0;
+            plastic = "0";
             plasticTP = 0;
+            plastic_row.setVisibility(View.GONE);
         }
 
         if (paper_full.equals("1")) {
             paperW = Float.parseFloat(paper);
             paperTP = paperW * 50;
+            paper_row.setVisibility(View.VISIBLE);
 
         } else {
-            paperW = 0;
+            paper = "0";
             paperTP = 0;
+            paper_row.setVisibility(View.GONE);
         }
 
         if (metal_full.equals("1")) {
             metalW = Float.parseFloat(metal);
             metalTP = metalW * 500;
+            metal_row.setVisibility(View.VISIBLE);
 
         } else {
-            metalW = 0;
+            metal = "0";
             metalTP = 0;
+            metal_row.setVisibility(View.GONE);
         }
 
-        float TotalPrice = glassTP + glassTP + paperTP + metalTP;
+        float TotalPrice = glassTP + plasticTP + paperTP + metalTP;
 
         String str_glassTP = Float.toString(glassTP);
         String str_plasticTP = Float.toString(plasticTP);
@@ -124,6 +143,10 @@ public class SellActivity extends AppCompatActivity {
         String str_TotalPrice = Float.toString(TotalPrice);
 
 
+/** contents -- 유리병 무게(0), 유리병 총 가격(1),
+                    플라스틱 무게(2), 플라스틱 총 가격(3),
+                        종이 무게(4), 종이 총 가격(5),
+                            고철 무게(6), 고철 총 가격(7) **/
 
         String contents = glass + "," + str_glassTP + "," + plastic + "," + str_plasticTP + "," +
                 paper + "," + str_paperTP + "," + metal + ',' + str_metalTP + "," + str_TotalPrice; // sellBoard에 전송할 contents 내용
@@ -152,6 +175,7 @@ public class SellActivity extends AppCompatActivity {
         btn_cancel = findViewById(R.id.btn_cancel); // 목록
 
 
+        String finalPaper = paper;
         btn_sellContinue.setOnClickListener(new View.OnClickListener() {    // 판매하기
             @Override
             public void onClick(View view) {
@@ -175,7 +199,7 @@ public class SellActivity extends AppCompatActivity {
                                 intent.putExtra("binLoc", binLoc);
                                 intent.putExtra("glass",glass);
                                 intent.putExtra("plastic",plastic);
-                                intent.putExtra("paper",paper);
+                                intent.putExtra("paper", paper);
                                 intent.putExtra("metal",metal);
                                 startActivity(intent);
 
