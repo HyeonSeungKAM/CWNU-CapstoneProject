@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                                     String userID = jsonObject.getString("userID");
                                     String userName = jsonObject.getString("userName");
 
+                                    // BuyerMainActivity : 구매자 메인 페이지
                                     Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, BuyerMainActivity.class);
                                     intent.putExtra("kind",kind);
@@ -86,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                                     String userName = jsonObject.getString("userName");
                                     String address = jsonObject.getString("address");
 
+                                    // MainActivity : 관리자(사용자) 메인 페이지
                                     Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     intent.putExtra("kind",kind);
