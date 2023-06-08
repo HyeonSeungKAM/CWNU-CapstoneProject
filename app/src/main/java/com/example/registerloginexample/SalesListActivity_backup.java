@@ -1,19 +1,15 @@
-package com.example.registerloginexample;
+/** package com.example.registerloginexample;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,12 +26,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SalesListActivity extends AppCompatActivity {
+public class SalesListActivity_backup extends AppCompatActivity {
 
     private static String TAG = "php_SalesListAcitivity";
-
-    private LinearLayout tvg_glass, tvg_plastic, tvg_paper, tvg_metal;
-
 
     private static final String TAG_JSON = "webnautes";
     private static final String TAG_SDATE = "sdate";
@@ -74,7 +67,7 @@ public class SalesListActivity extends AppCompatActivity {
         slistView = (ListView) findViewById(R.id.listview_sales_innerframe);
         sArrayList = new ArrayList<>();
 
-        SalesListActivity.GetData task = new SalesListActivity.GetData();
+        SalesListActivity_backup.GetData task = new SalesListActivity_backup.GetData();
         task.execute(seller_ID);
 
 
@@ -86,7 +79,7 @@ public class SalesListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(SalesListActivity.this, MainActivity.class);
+                Intent intent = new Intent(SalesListActivity_backup.this, MainActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID", userID);
                 intent.putExtra("userName",userName);
@@ -103,7 +96,7 @@ public class SalesListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(SalesListActivity.this, ListActivity.class);
+                Intent intent = new Intent(SalesListActivity_backup.this, ListActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID", userID);
                 intent.putExtra("userName",userName);
@@ -124,7 +117,7 @@ public class SalesListActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(SalesListActivity.this,
+            progressDialog = ProgressDialog.show(SalesListActivity_backup.this,
                     "Please Wait", null, true, true);
         }
 
@@ -202,14 +195,7 @@ public class SalesListActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("ResourceType")
     private void showResult() {
-
-        tvg_glass = findViewById(R.id.tvg_glass);
-        tvg_plastic = findViewById(R.id.tvg_plastic);
-        tvg_paper = findViewById(R.id.tvg_paper);
-        tvg_metal = findViewById(R.id.tvg_metal);
-
         try {
             JSONObject jsonObject = new JSONObject(sJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
@@ -220,62 +206,30 @@ public class SalesListActivity extends AppCompatActivity {
 
                 String pdate = item.getString(TAG_SDATE);
                 String content = item.getString(TAG_CONTENTS);
+
+                String edit_con = "유리병"+content.split(",")[0]+"kg" + "플라스틱"+content.split(",")[2]+"kg"
+                        + "\n" +"종이"+content.split(",")[4]+"kg" + "고철"+content.split(",")[6]+"kg";
+
                 String tpayment = item.getString(TAG_TPAYMENT);
                 String buyer_ID = item.getString(TAG_BUYER);
+
 
                 HashMap<String, String> hashMap = new HashMap<>();
 
                 hashMap.put(TAG_SDATE, pdate);
-
-                if (!content.split(",")[0].equals("0")) {
-                    hashMap.put("glassW", "유리병:");
-                    hashMap.put("glassWV", content.split(",")[0]+" kg");
-                } else {
-                    hashMap.remove("glassW");
-                    hashMap.remove("glassWV");
-                }
-
-                if (!content.split(",")[2].equals("0")) {
-                    hashMap.put("plasticW", "플라스틱:");
-                    hashMap.put("plasticWV", content.split(",")[2]+" kg");
-                } else {
-                    hashMap.remove("plasticW");
-                    hashMap.remove("plasticWV");
-                }
-
-                if (!content.split(",")[4].equals("0")) {
-                    hashMap.put("paperW", "종이:");
-                    hashMap.put("paperWV",  content.split(",")[4]+" kg");
-                } else {
-                    hashMap.remove("paperW");
-                    hashMap.remove("glassWV");
-                }
-
-                if (!content.split(",")[6].equals("0")) {
-                    hashMap.put("metalW", "고철:");
-                    hashMap.put("metalWV", content.split(",")[6]+" kg");
-                } else {
-                    hashMap.remove("metalW");
-                    hashMap.remove("metalWV");
-                }
-
-                hashMap.put(TAG_TPAYMENT, tpayment +" 원");
+                hashMap.put(TAG_CONTENTS, edit_con);
+                hashMap.put(TAG_TPAYMENT, tpayment);
                 hashMap.put(TAG_BUYER, buyer_ID);
 
                 sArrayList.add(hashMap);
-
             }
 
             ListAdapter adapter = new SimpleAdapter(
-                    SalesListActivity.this, sArrayList, R.layout.item_saleslist,
-                    new String[]{TAG_SDATE, TAG_BUYER,
-                            "glassW","plasticW","paperW","metalW",
-                            "glassWV","plasticWV","paperWV","metalWV",TAG_TPAYMENT},
-                    new int[]{R.id.tv_sdate, R.id.tv_buyer,
-                            R.id.tv_glassW, R.id.tv_plasticW, R.id.tv_paperW, R.id.tv_metalW,
-                            R.id.tv_glassWV, R.id.tv_plasticWV, R.id.tv_paperWV, R.id.tv_metalWV,
-                            R.id.tv_tpayment}
+                    SalesListActivity_backup.this, sArrayList, R.layout.item_saleslist,
+                    new String[]{TAG_SDATE, TAG_BUYER, TAG_CONTENTS,TAG_TPAYMENT},
+                    new int[]{R.id.tv_sdate, R.id.tv_buyer, R.id.tv_content,R.id.tv_tpayment}
             );
+
             slistView.setAdapter(adapter);
 
         } catch (JSONException e) {
@@ -284,3 +238,4 @@ public class SalesListActivity extends AppCompatActivity {
 
     }
 }
+**/

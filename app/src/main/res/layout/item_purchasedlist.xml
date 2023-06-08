@@ -67,13 +67,66 @@
                 android:text="물품목록"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_content"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:hint="물품목록"
-                android:textSize="14sp" />
+                android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/tvg_glass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_glassW"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/tv_glassWV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/tvg_plastic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_plasticW"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/tv_plasticWV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/tvg_paper"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_paperW"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/tv_paperWV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+            </LinearLayout>
         </TableRow>
 
         <TableRow

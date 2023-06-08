@@ -126,10 +126,10 @@ public class MainActivity extends AppCompatActivity {
                                 int metal_full = Integer.parseInt(jsonObject.getString("metal_full"));
 
                                 Map<String, String> itemMap = new HashMap<>();
-                                if (glass_full == 1 || plastic_full == 1 || paper_full == 1 || metal_full == 1) {
-                                    itemMap.put(TAG_STATUS,"일부 수거함 가득참");
-                                } else if (glass_full == 1 && plastic_full == 1 && paper_full == 1 && metal_full == 1) {
+                                if (glass_full == 1 && plastic_full == 1 && paper_full == 1 && metal_full == 1) {
                                     itemMap.put(TAG_STATUS,"전체 수거함 가득참");
+                                } else if (glass_full == 1 || plastic_full == 1 || paper_full == 1 || metal_full == 1) {
+                                    itemMap.put(TAG_STATUS,"일부 수거함 가득참");
                                 }
 
                                 itemMap.put(TAG_BinName, binName);

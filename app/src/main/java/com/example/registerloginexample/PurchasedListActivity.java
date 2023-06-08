@@ -207,10 +207,6 @@ public class PurchasedListActivity extends AppCompatActivity {
 
                 String pdate = item.getString(TAG_PDATE);
                 String content = item.getString(TAG_CONTENTS);
-
-                String edit_con = "유리병"+content.split(",")[0]+"kg" + "플라스틱"+content.split(",")[2]+"kg" 
-                        + "\n" +"종이"+content.split(",")[4]+"kg" + "고철"+content.split(",")[6]+"kg";
-
                 String tpayment = item.getString(TAG_TPAYMENT);
                 String seller = item.getString(TAG_SELLER);
                 String saddress = item.getString(TAG_SADDRESS);
@@ -219,7 +215,40 @@ public class PurchasedListActivity extends AppCompatActivity {
                 HashMap<String, String> hashMap = new HashMap<>();
 
                 hashMap.put(TAG_PDATE, pdate);
-                hashMap.put(TAG_CONTENTS, edit_con);
+
+                if (!content.split(",")[0].equals("0")) {
+                    hashMap.put("glassW", "유리병:");
+                    hashMap.put("glassWV", content.split(",")[0]+" kg");
+                } else {
+                    hashMap.remove("glassW");
+                    hashMap.remove("glassWV");
+                }
+
+                if (!content.split(",")[2].equals("0")) {
+                    hashMap.put("plasticW", "플라스틱:");
+                    hashMap.put("plasticWV", content.split(",")[2]+" kg");
+                } else {
+                    hashMap.remove("plasticW");
+                    hashMap.remove("plasticWV");
+                }
+
+                if (!content.split(",")[4].equals("0")) {
+                    hashMap.put("paperW", "종이:");
+                    hashMap.put("paperWV",  content.split(",")[4]+" kg");
+                } else {
+                    hashMap.remove("paperW");
+                    hashMap.remove("glassWV");
+                }
+
+                if (!content.split(",")[6].equals("0")) {
+                    hashMap.put("metalW", "고철:");
+                    hashMap.put("metalWV", content.split(",")[6]+" kg");
+                } else {
+                    hashMap.remove("metalW");
+                    hashMap.remove("metalWV");
+                }
+
+
                 hashMap.put(TAG_TPAYMENT, tpayment);
                 hashMap.put(TAG_SELLER, seller);
                 hashMap.put(TAG_SADDRESS, saddress);
@@ -229,9 +258,14 @@ public class PurchasedListActivity extends AppCompatActivity {
             }
 
             ListAdapter adapter = new SimpleAdapter(
-                    PurchasedListActivity.this, pArrayList, R.layout.item_purchasedlist,
-                    new String[]{TAG_PDATE, TAG_SELLER, TAG_CONTENTS,TAG_TPAYMENT,TAG_SPHONENUM,TAG_SADDRESS},
-                    new int[]{R.id.tv_pdate, R.id.tv_seller, R.id.tv_content,R.id.tv_tpayment ,R.id.tv_sphoneNum ,R.id.tv_saddress}
+                    PurchasedListActivity.this, pArrayList, R.layout.item_saleslist,
+                    new String[]{TAG_PDATE, TAG_SELLER,
+                            "glassW","plasticW","paperW","metalW",
+                            "glassWV","plasticWV","paperWV","metalWV",TAG_TPAYMENT},
+                    new int[]{R.id.tv_sdate, R.id.tv_buyer,
+                            R.id.tv_glassW, R.id.tv_plasticW, R.id.tv_paperW, R.id.tv_metalW,
+                            R.id.tv_glassWV, R.id.tv_plasticWV, R.id.tv_paperWV, R.id.tv_metalWV,
+                            R.id.tv_tpayment}
             );
 
             plistView.setAdapter(adapter);
