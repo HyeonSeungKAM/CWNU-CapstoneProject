@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,19 +48,24 @@ public class SPageActivity extends AppCompatActivity {
         TextView tv_totalMetalPrice = (TextView) findViewById(R.id.tv_totalMetalPrice);
         TextView tv_Total = (TextView) findViewById(R.id.tv_Total);
 
+        TableRow glass_row = findViewById(R.id.glass_row);
+        TableRow plastic_row = findViewById(R.id.plastic_row);
+        TableRow paper_row = findViewById(R.id.paper_row);
+        TableRow metal_row = findViewById(R.id.metal_row);
+
+
         Intent intent = getIntent();
-        String board_userID = intent.getExtras().getString("board_userID");
-        String board_userName = intent.getExtras().getString("board_userName");
-        String board_binName = intent.getExtras().getString("board_binName");
-        String board_binLoc = intent.getExtras().getString("board_binLoc");
-        String board_contents = intent.getExtras().getString("board_contents");
-        String board_Date = intent.getExtras().getString("board_Date");
+        String board_userID = intent.getExtras().getString("s_board_userID");
+        String board_userName = intent.getExtras().getString("s_board_userName");
+        String board_binName = intent.getExtras().getString("s_board_binName");
+        String board_binLoc = intent.getExtras().getString("s_board_binLoc");
+        String board_Date = intent.getExtras().getString("s_board_date");
+        String board_contents = intent.getExtras().getString("s_board_contents");
 
         // 로그인한 유저 정보
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
-        String address = intent.getStringExtra("address");
 
         tv_b_userName.setText(board_userName);
         tv_b_userID.setText("(" + board_userID + ")");
@@ -81,6 +87,30 @@ public class SPageActivity extends AppCompatActivity {
 
         tv_Total.setText(board_contents.split(",")[8]);
 
+
+        if (board_contents.split(",")[0].equals("0")) {
+            glass_row.setVisibility(View.GONE);
+        } else {
+            glass_row.setVisibility(View.VISIBLE);
+        }
+
+        if (board_contents.split(",")[2].equals("0")) {
+            plastic_row.setVisibility(View.GONE);
+        } else {
+            plastic_row.setVisibility(View.VISIBLE);
+        }
+
+        if (board_contents.split(",")[4].equals("0")) {
+            paper_row.setVisibility(View.GONE);
+        } else {
+            paper_row.setVisibility(View.VISIBLE);
+        }
+
+        if (board_contents.split(",")[6].equals("0")) {
+            metal_row.setVisibility(View.GONE);
+        } else {
+            metal_row.setVisibility(View.VISIBLE);
+        }
 
 
         btn_buy = findViewById(R.id.btn_buy);
@@ -156,7 +186,6 @@ public class SPageActivity extends AppCompatActivity {
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
-                intent.putExtra("address",address);
 
                 startActivity(intent);
                 finish();

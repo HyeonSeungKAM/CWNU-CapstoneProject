@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,13 @@ public class BuyActivity extends AppCompatActivity {
         TextView tv_seller_address = (TextView) findViewById(R.id.tv_seller_address);
 
 
+
+        TableRow glass_row = findViewById(R.id.glass_row);
+        TableRow plastic_row = findViewById(R.id.plastic_row);
+        TableRow paper_row = findViewById(R.id.paper_row);
+        TableRow metal_row = findViewById(R.id.metal_row);
+
+
         Intent intent = getIntent();
         // 로그인한 유저 정보
         String kind = intent.getStringExtra("kind");
@@ -81,6 +89,30 @@ public class BuyActivity extends AppCompatActivity {
         tv_Total.setText(board_contents.split(",")[8] + " 원");
 
         tv_Total2.setText(board_contents.split(",")[8] + " 원");
+
+        if (board_contents.split(",")[0].equals("0")) {
+            glass_row.setVisibility(View.GONE);
+        } else {
+            glass_row.setVisibility(View.VISIBLE);
+        }
+
+        if (board_contents.split(",")[2].equals("0")) {
+            plastic_row.setVisibility(View.GONE);
+        } else {
+            plastic_row.setVisibility(View.VISIBLE);
+        }
+
+        if (board_contents.split(",")[4].equals("0")) {
+            paper_row.setVisibility(View.GONE);
+        } else {
+            paper_row.setVisibility(View.VISIBLE);
+        }
+
+        if (board_contents.split(",")[6].equals("0")) {
+            metal_row.setVisibility(View.GONE);
+        } else {
+            metal_row.setVisibility(View.VISIBLE);
+        }
 
 
 

@@ -49,6 +49,10 @@ public class ListActivity extends AppCompatActivity {
     private static final String TAG_PAPERW = "paperW";
     private static final String TAG_METALW = "metalW";
 
+    private static String kind;
+    private static String userID;
+    private static String userName;
+
 
     private RecyclerView recyclerView, sellBoard_Recyclerview;
 
@@ -87,9 +91,9 @@ public class ListActivity extends AppCompatActivity {
         
 
         Intent intent = getIntent();
-        String kind = intent.getStringExtra("kind");
-        String userID = intent.getStringExtra("userID");
-        String userName = intent.getStringExtra("userName");
+        kind = intent.getStringExtra("kind");
+        userID = intent.getStringExtra("userID");
+        userName = intent.getStringExtra("userName");
         String address = intent.getStringExtra("address");
         String binName = intent.getStringExtra("binName");
         String binLoc = intent.getStringExtra("binLoc");
@@ -351,16 +355,20 @@ public class ListActivity extends AppCompatActivity {
                     JSONObject itemObject = jsonArray.getJSONObject(i);
                     String s_board_ID = itemObject.getString("id");
                     String s_board_userID = itemObject.getString("userID");
+                    String s_board_userName = itemObject.getString("userName");
                     String s_board_binName = itemObject.getString("binName");
+                    String s_board_binLoc = itemObject.getString("binLoc");
                     String s_board_contents = itemObject.getString("contents");
+                    String s_board_date = itemObject.getString("Date");
 
                     String s_board_glassW = s_board_contents.split(",")[0];
                     String s_board_plasticW = s_board_contents.split(",")[2];
                     String s_board_paperW = s_board_contents.split(",")[4];
                     String s_board_metalW = s_board_contents.split(",")[6];
 
-
-                    SellBoard_DataItem sellBoard_dataItem = new SellBoard_DataItem(s_board_ID,s_board_userID, s_board_binName, s_board_glassW, s_board_plasticW, s_board_paperW, s_board_metalW);
+                    SellBoard_DataItem sellBoard_dataItem = new SellBoard_DataItem(s_board_ID,s_board_userID, s_board_userName,
+                            s_board_binName, s_board_binLoc, s_board_contents, s_board_date, s_board_glassW,
+                            s_board_plasticW, s_board_paperW, s_board_metalW);
 
                     dataList.add(sellBoard_dataItem);
                 }
@@ -388,11 +396,21 @@ public class ListActivity extends AppCompatActivity {
 
         private List<SellBoard_DataItem> sellboard_data;
 
+        public interface OnItemClickListener {
+            void onItemClicked(int position, String sellboard_data);
+        }
+
+        private OnItemClickListener itemClickListener;
+
+        public void setOnItemClickListener(OnItemClickListener listener) {
+            itemClickListener = listener;
+        }
+
         public Sellborad_MyAdapter (List<SellBoard_DataItem> sellboard_data) {
             this.sellboard_data = sellboard_data;
         }
 
-        public static class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolder extends RecyclerView.ViewHolder {
             public TextView textView_list_id, textView_list_userid, textView_list_binname;
             public TextView glass_weight, plastic_weight, paper_weight, metal_weight;
             public LinearLayout glass_row, plastic_row, paper_row, metal_row;
@@ -411,6 +429,37 @@ public class ListActivity extends AppCompatActivity {
                 plastic_row = itemView.findViewById(R.id.plastic_row);
                 paper_row = itemView.findViewById(R.id.paper_row);
                 metal_row = itemView.findViewById(R.id.metal_row);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int pos = getAbsoluteAdapterPosition();
+                        if(pos != RecyclerView.NO_POSITION) {
+                            SellBoard_DataItem item = sellboard_data.get(pos);
+                            String s_board_userID = item.getS_board_userID();
+                            String s_board_userName = item.getS_board_userName();
+                            String s_board_binName = item.getS_board_binName();
+                            String s_board_binLoc = item.getS_board_binLoc();
+                            String s_board_contents = item.getS_board_contents();
+                            String s_board_date = item.getS_board_date();
+
+                            Intent intent = new Intent(itemView.getContext(), SPageActivity.class);intent.putExtra("s_board_userName", s_board_userID);
+                            intent.putExtra("s_board_userID", s_board_userID);
+                            intent.putExtra("s_board_userName", s_board_userName);
+                            intent.putExtra("s_board_binName", s_board_binName);
+                            intent.putExtra("s_board_binLoc", s_board_binLoc);
+                            intent.putExtra("s_board_date", s_board_date);
+                            intent.putExtra("s_board_contents",s_board_contents);
+
+                            // 로그인한 유저 정보들
+                            intent.putExtra("kind",kind);
+                            intent.putExtra("userID",userID);
+                            intent.putExtra("userName",userName);
+
+                            itemView.getContext().startActivity(intent);
+                        }
+                    }
+                });
             }
         }
 
@@ -418,6 +467,8 @@ public class ListActivity extends AppCompatActivity {
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_list, parent, false);
+
+            Sellborad_MyAdapter.ViewHolder viewHolder = new Sellborad_MyAdapter.ViewHolder(view);
 
             return new ViewHolder(view);
         }
@@ -450,29 +501,34 @@ public class ListActivity extends AppCompatActivity {
             if(item.getS_board_metalW().equals("0")) {
                 holder.metal_row.setVisibility(View.INVISIBLE);
             }
-
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
             layoutParams.setMargins(5, 0, 5, 0); // 왼쪽과 오른쪽 마진을 16dp로 설정
             holder.itemView.setLayoutParams(layoutParams);
-
         }
 
+
+
         @Override
-        public int getItemCount() {
+        public int getItemCount()
+        {
             return sellboard_data.size();
         }
     }
 
     private static class SellBoard_DataItem {
-        private String s_board_ID, s_board_userID, s_board_binName, s_board_glassW, s_board_plasticW , s_board_paperW , s_board_metalW;
+        private String s_board_ID, s_board_userID, s_board_userName, s_board_binName, s_board_binLoc, s_board_contents, s_board_date, s_board_glassW, s_board_plasticW , s_board_paperW , s_board_metalW;
 
 
-        public SellBoard_DataItem(String s_board_ID, String s_board_userID, String s_board_binName,
+        public SellBoard_DataItem(String s_board_ID, String s_board_userID, String s_board_userName, String s_board_binName, String s_board_binLoc, String s_board_contents, String s_board_date,
                                   String s_board_glassW, String s_board_plasticW, String s_board_paperW, String s_board_metalW ) {
 
             this.s_board_ID = s_board_ID;
             this.s_board_userID = s_board_userID;
+            this.s_board_userName = s_board_userName;
             this.s_board_binName = s_board_binName;
+            this.s_board_binLoc = s_board_binLoc;
+            this.s_board_contents = s_board_contents;
+            this.s_board_date = s_board_date;
             this.s_board_glassW = s_board_glassW;
             this.s_board_plasticW = s_board_plasticW;
             this.s_board_paperW = s_board_paperW;
@@ -480,7 +536,11 @@ public class ListActivity extends AppCompatActivity {
         }
         public String getS_board_ID() {return s_board_ID;}
         public String getS_board_userID() {return s_board_userID;}
+        public String getS_board_userName() {return s_board_userName;}
         public String getS_board_binName() {return s_board_binName;}
+        public String getS_board_binLoc() {return s_board_binLoc;}
+        public String getS_board_contents() {return s_board_contents;}
+        public String getS_board_date() {return s_board_date;}
         public String getS_board_glassW() {return s_board_glassW;}
         public String getS_board_plasticW() {return s_board_plasticW;}
         public String getS_board_paperW() {return s_board_paperW;}

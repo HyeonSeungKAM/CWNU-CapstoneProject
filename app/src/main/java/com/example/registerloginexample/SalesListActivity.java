@@ -207,8 +207,21 @@ public class SalesListActivity extends AppCompatActivity {
                 String pdate = item.getString(TAG_SDATE);
                 String content = item.getString(TAG_CONTENTS);
 
-                String edit_con = "유리병"+content.split(",")[0]+"kg" + "플라스틱"+content.split(",")[2]+"kg"
-                        + "\n" +"종이"+content.split(",")[4]+"kg" + "고철"+content.split(",")[6]+"kg";
+                String edit_con = "유리병"+content.split(",")[0]+"kg " + "플라스틱"+content.split(",")[2]+"kg "
+                        + "\n" +"종이"+content.split(",")[4]+"kg " + "고철"+content.split(",")[6]+"kg ";
+
+                if (content.split(",")[0].equals("0")) {
+                    edit_con.split("유리병")[0] = "";
+                }
+                if (content.split(",")[2].equals("0")) {
+                    edit_con.split("\\s")[1] = "";
+                }
+                if (content.split(",")[4].equals("0")) {
+                    edit_con.split("\\s")[2] = "";
+                }
+                if (content.split(",")[6].equals("0")) {
+                    edit_con.split("\\s")[3] = "";
+                }
 
                 String tpayment = item.getString(TAG_TPAYMENT);
                 String buyer_ID = item.getString(TAG_BUYER);

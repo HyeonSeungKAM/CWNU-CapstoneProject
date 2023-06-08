@@ -1,4 +1,4 @@
-package com.example.registerloginexample;
+/** package com.example.registerloginexample;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -28,3 +28,4 @@ public class SPageRequest extends StringRequest {
         return map;
     }
 }
+**/

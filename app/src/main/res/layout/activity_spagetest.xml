@@ -148,7 +148,8 @@
                 android:background="#FF909090" />
 
             <TableRow
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:id="@+id/glass_row">
                 <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
@@ -178,7 +179,9 @@
             </TableRow>
 
             <TableRow
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:id="@+id/plastic_row"
+                >
                 <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
@@ -208,7 +211,9 @@
             </TableRow>
 
             <TableRow
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:id="@+id/paper_row"
+                >
                 <TextView
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
@@ -239,7 +244,8 @@
 
             <TableRow
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp">
+                android:id="@+id/metal_row"
+                >
                 <TextView
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
@@ -269,6 +275,7 @@
             </TableRow>
 
             <View
+                android:layout_marginTop="10dp"
                 android:layout_height="2dip"
                 android:background="#FF909090" />
             <TableRow
