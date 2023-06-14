@@ -169,8 +169,8 @@ public class BinMainActivity extends AppCompatActivity {
             }
         });
 
-
         btn_sell = findViewById(R.id.btn_sell); // 판매하기
+
         btn_sell.setOnClickListener(new View.OnClickListener() {    // 판매하기
             @Override
             public void onClick(View view) {
@@ -178,49 +178,54 @@ public class BinMainActivity extends AppCompatActivity {
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean success = jsonObject.getBoolean("success");
-                            if (success) {
-                                String glass = jsonObject.getString("glass");
-                                String plastic = jsonObject.getString("plastic");
-                                String paper = jsonObject.getString("paper");
-                                String metal = jsonObject.getString("metal");
 
-                                Intent intent = new Intent(BinMainActivity.this, SellActivity.class);
-                                intent.putExtra("kind",kind);
-                                intent.putExtra("binName",binName);
-                                intent.putExtra("binLoc",binLoc);
-                                intent.putExtra("userID",userID);
-                                intent.putExtra("userName",userName);
-                                intent.putExtra("address",address);
-                                intent.putExtra("glass",glass);
-                                intent.putExtra("plastic",plastic);
-                                intent.putExtra("paper",paper);
-                                intent.putExtra("metal",metal);
-                                intent.putExtra("glass_full",glass_full);
-                                intent.putExtra("plastic_full",plastic_full);
-                                intent.putExtra("paper_full",paper_full);
-                                intent.putExtra("metal_full",metal_full);
+                        if (glass_full.equals("0") && plastic_full.equals("0") && paper_full.equals("0") && metal_full.equals("0")) {
+                            Toast.makeText(getApplicationContext(),"수거함이 가득차지 않았습니다.",Toast.LENGTH_SHORT).show();
+                        } else {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                boolean success = jsonObject.getBoolean("success");
+                                if (success) {
+                                    String glass = jsonObject.getString("glass");
+                                    String plastic = jsonObject.getString("plastic");
+                                    String paper = jsonObject.getString("paper");
+                                    String metal = jsonObject.getString("metal");
 
-                                startActivity(intent);
+                                    Intent intent = new Intent(BinMainActivity.this, SellActivity.class);
+                                    intent.putExtra("kind",kind);
+                                    intent.putExtra("binName",binName);
+                                    intent.putExtra("binLoc",binLoc);
+                                    intent.putExtra("userID",userID);
+                                    intent.putExtra("userName",userName);
+                                    intent.putExtra("address",address);
+                                    intent.putExtra("glass",glass);
+                                    intent.putExtra("plastic",plastic);
+                                    intent.putExtra("paper",paper);
+                                    intent.putExtra("metal",metal);
+                                    intent.putExtra("glass_full",glass_full);
+                                    intent.putExtra("plastic_full",plastic_full);
+                                    intent.putExtra("paper_full",paper_full);
+                                    intent.putExtra("metal_full",metal_full);
 
-                            } else {
-                                Toast.makeText(getApplicationContext(),"정보를 불러오는데 실패하였습니다.",Toast.LENGTH_SHORT).show();
-                                return;
+                                    startActivity(intent);
+
+                                } else {
+                                    Toast.makeText(getApplicationContext(),"정보를 불러오는데 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-
                     }
                 };
                 SellInfoRequest sellinfoRequest = new SellInfoRequest(binName, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(BinMainActivity.this);
                 queue.add(sellinfoRequest);
-
             }
         });
+
+
 
         btn_salesList = findViewById(R.id.btn_salesList);
         btn_salesList.setOnClickListener(new View.OnClickListener() {
@@ -245,19 +250,6 @@ public class BinMainActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-       /** btn_logout = findViewById(R.id.btn_logout);// 목록
-        btn_logout.setOnClickListener(new View.OnClickListener() {    // 목록
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(BinMainActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-
-            }
-        }); **/
 
         dialogItemList = new ArrayList<>();
 
