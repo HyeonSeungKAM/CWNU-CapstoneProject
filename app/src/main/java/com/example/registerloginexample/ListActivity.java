@@ -417,8 +417,6 @@ public class ListActivity extends AppCompatActivity {
             public ViewHolder(View itemView) {
                 super(itemView);
                 textView_list_id = itemView.findViewById(R.id.textView_list_id);
-                textView_list_userid = itemView.findViewById(R.id.textView_list_userid);
-                textView_list_binname = itemView.findViewById(R.id.textView_list_binname);
 
                 glass_weight = itemView.findViewById(R.id.glass_weight);
                 plastic_weight = itemView.findViewById(R.id.plastic_weight);

@@ -10,7 +10,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="290dp"
+        android:layout_width="297dp"
         android:paddingRight="20dp"
         android:paddingVertical="20dp"
         android:layout_height="wrap_content"
@@ -71,29 +71,84 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:orientation="vertical"
+        android:gravity="center"
         android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="297dp"
+            android:layout_height="50dp"
             android:layout_marginVertical="10dp"
-            android:layout_marginStart="10dp"
             android:gravity="center_vertical"
-            android:text="가득 찬 쓰레기통 목록"
-            android:drawableStart="@drawable/ic_bins"
-            android:drawablePadding="10dp"
+            android:text="구매 항목"
+            android:paddingStart="5dp"
+            android:background="@drawable/custom_llayout"
+            android:drawablePadding="40dp"
             android:textSize="20sp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="297dp"
+        <TableLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_llayout"
-            android:paddingVertical="20dp"
-            android:gravity="center" />
+            android:padding="3dp"
+            android:gravity="center"
+            >
 
+            <TableRow
+                android:layout_width="116dp"
+                android:layout_height="wrap_content"
+                >
 
+                <Button
+                    android:id="@+id/glass_btn"
+                    android:layout_width="125dp"
+                    android:layout_height="135dp"
+                    android:padding="10dp"
+                    android:layout_margin="10dp"
+                    android:drawableTop="@drawable/img_glass_resize"
+                    android:background="@drawable/custom_llayout"
+                    android:text="유리병"
+                    android:textSize="25dp" />
+
+                <Button
+                    android:id="@+id/plastic_btn"
+                    android:layout_width="125dp"
+                    android:layout_height="135dp"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:drawableTop="@drawable/img_plastic_resize"
+                    android:background="@drawable/custom_llayout"
+                    android:text="플라스틱"
+                    android:textSize="25dp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/paper_btn"
+                    android:layout_width="125dp"
+                    android:layout_height="135dp"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:drawableTop="@drawable/img_paper_resize"
+                    android:background="@drawable/custom_llayout"
+                    android:text="종이"
+                    android:textSize="25dp" />
+
+                <Button
+                    android:id="@+id/metal_btn"
+                    android:layout_width="125dp"
+                    android:layout_height="135dp"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:drawableTop="@drawable/img_metal_resize"
+                    android:background="@drawable/custom_llayout"
+                    android:text="고철"
+                    android:textSize="25dp" />
+
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 
     <LinearLayout

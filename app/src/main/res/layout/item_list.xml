@@ -26,26 +26,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView_list_userid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:hint="userID"
-                    android:drawableStart="@drawable/ic_member"
-                    android:padding="5dp" />
-
-                <TextView
-                    android:id="@+id/textView_list_binname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:hint="binName"
-                    android:drawableStart="@drawable/ic_bin"
-                    android:padding="5dp" />
-            </LinearLayout>
+                android:orientation="vertical"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -68,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="가득참"/>
+                        android:text="유리병"/>
 
                     <TextView
                         android:id="@+id/glass_weight"
@@ -76,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:padding="5dp"
-                        android:text="glass_full"/>
+                        android:text="glass_weight"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -95,7 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="가득참"/>
+                        android:text="플라스틱"/>
 
                     <TextView
                         android:id="@+id/plastic_weight"
@@ -103,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:padding="5dp"
-                        android:text="plastic_full"/>
+                        android:text="plastic_wegiht"/>
 
                 </LinearLayout>
 
@@ -123,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="가득참"/>
+                        android:text="종이"/>
 
                     <TextView
                         android:id="@+id/paper_weight"
@@ -131,7 +112,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:padding="5dp"
-                        android:text="paper_full"/>
+                        android:text="paper_weight"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -151,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="가득참"/>
+                        android:text="고철"/>
 
                     <TextView
                         android:id="@+id/metal_weight"
@@ -159,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:padding="5dp"
-                        android:text="metal_full"/>
+                        android:text="metal_wegiht"/>
                 </LinearLayout>
             </LinearLayout>
     </LinearLayout>
