@@ -417,6 +417,8 @@ public class ListActivity extends AppCompatActivity {
             public ViewHolder(View itemView) {
                 super(itemView);
                 textView_list_id = itemView.findViewById(R.id.textView_list_id);
+                textView_list_userid = itemView.findViewById(R.id.textView_list_userid);
+                textView_list_binname = itemView.findViewById(R.id.textView_list_binname);
 
                 glass_weight = itemView.findViewById(R.id.glass_weight);
                 plastic_weight = itemView.findViewById(R.id.plastic_weight);
@@ -477,10 +479,10 @@ public class ListActivity extends AppCompatActivity {
             holder.textView_list_id.setText(item.getS_board_ID());
             holder.textView_list_userid.setText(item.getS_board_userID());
             holder.textView_list_binname.setText(item.getS_board_binName());
-            holder.glass_weight.setText(item.getS_board_glassW());
-            holder.plastic_weight.setText(item.getS_board_plasticW());
-            holder.paper_weight.setText(item.getS_board_paperW());
-            holder.metal_weight.setText(item.getS_board_metalW());
+            holder.glass_weight.setText(item.getS_board_glassW() + " kg");
+            holder.plastic_weight.setText(item.getS_board_plasticW() + " kg");
+            holder.paper_weight.setText(item.getS_board_paperW() + " kg");
+            holder.metal_weight.setText(item.getS_board_metalW() + " kg");
 
             holder.glass_row.setVisibility(View.VISIBLE);
             holder.plastic_row.setVisibility(View.VISIBLE);
@@ -488,16 +490,16 @@ public class ListActivity extends AppCompatActivity {
             holder.metal_row.setVisibility(View.VISIBLE);
 
             if(item.getS_board_glassW().equals("0")) {
-                holder.glass_row.setVisibility(View.INVISIBLE);
+                holder.glass_row.setVisibility(View.GONE);
             }
             if(item.getS_board_plasticW().equals("0")) {
-                holder.plastic_row.setVisibility(View.INVISIBLE);
+                holder.plastic_row.setVisibility(View.GONE);
             }
             if(item.getS_board_paperW().equals("0")) {
-                holder.paper_row.setVisibility(View.INVISIBLE);
+                holder.paper_row.setVisibility(View.GONE);
             }
             if(item.getS_board_metalW().equals("0")) {
-                holder.metal_row.setVisibility(View.INVISIBLE);
+                holder.metal_row.setVisibility(View.GONE);
             }
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
             layoutParams.setMargins(5, 0, 5, 0); // 왼쪽과 오른쪽 마진을 16dp로 설정

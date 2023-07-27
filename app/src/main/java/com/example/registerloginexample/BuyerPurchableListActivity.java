@@ -3,11 +3,11 @@ package com.example.registerloginexample;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -52,8 +53,9 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
         LinearLayoutManager sellBoard_layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         sellBoard_Recyclerview.setLayoutManager(sellBoard_layoutManager);
 
-        String sellboard_url = "http://gamhs44.ivyro.net/purchasablelist.php?p_type="+p_type; // PHP 파일의 URL
-        new GetSellboardDataTask().execute(sellboard_url);
+        String sellboard_url = "http://gamhs44.ivyro.net/purchasablelist.php"; // PHP 파일의 URL
+        Log.v("태그","sellboard_url 값" + sellboard_url);
+        new GetSellboardDataTask().execute(sellboard_url, p_type);
 
 
         // 메인 버튼
@@ -75,13 +77,30 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
 
 
     // 구매 가능한 재활용품 목록 불러오기 클래스
-        private class GetSellboardDataTask extends AsyncTask<String, Void, List<BuyerPurchableListActivity.SellBoard_DataItem>> {
+        private class GetSellboardDataTask extends AsyncTask<String, Void, List<SellBoard_DataItem>> {
             @Override
-            protected List<BuyerPurchableListActivity.SellBoard_DataItem> doInBackground(String... params) {
+            protected List<SellBoard_DataItem> doInBackground(String... params) {
                 HttpURLConnection connection = null;
+
+                String sellboard_url = params[0];
+                String p_type = params[1];
+
+                String postParameters = "p_type="+p_type;
+
                 try {
-                    URL url = new URL(params[0]);
+
+                    URL url = new URL(sellboard_url);
+
                     connection = (HttpURLConnection) url.openConnection();
+
+                    connection.setRequestMethod("POST");
+                    connection.setDoInput(true);
+                    connection.connect();
+
+                    OutputStream outputStream = connection.getOutputStream();
+                    outputStream.write(postParameters.getBytes("UTF-8"));
+                    outputStream.flush();
+                    outputStream.close();
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     StringBuilder response = new StringBuilder();
@@ -93,7 +112,7 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
 
                     JSONObject  jsonObject = new JSONObject(response.toString());
                     JSONArray jsonArray = jsonObject.getJSONArray("webnautes");
-                    List<BuyerPurchableListActivity.SellBoard_DataItem> dataList = new ArrayList<>();
+                    List<SellBoard_DataItem> dataList = new ArrayList<>();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject itemObject = jsonArray.getJSONObject(i);
                         String s_board_ID = itemObject.getString("id");
@@ -109,7 +128,7 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
                         String s_board_paperW = s_board_contents.split(",")[4];
                         String s_board_metalW = s_board_contents.split(",")[6];
 
-                        BuyerPurchableListActivity.SellBoard_DataItem sellBoard_dataItem = new BuyerPurchableListActivity.SellBoard_DataItem(s_board_ID,s_board_userID, s_board_userName,
+                        SellBoard_DataItem sellBoard_dataItem = new SellBoard_DataItem(s_board_ID,s_board_userID, s_board_userName,
                                 s_board_binName, s_board_binLoc, s_board_contents, s_board_date, s_board_glassW,
                                 s_board_plasticW, s_board_paperW, s_board_metalW);
 
@@ -127,29 +146,29 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onPostExecute(List<BuyerPurchableListActivity.SellBoard_DataItem> result2) {
+            protected void onPostExecute(List<SellBoard_DataItem> result2) {
                 if (result2 != null) {
-                    BuyerPurchableListActivity.Sellborad_MyAdapter sellboard_adapter = new BuyerPurchableListActivity.Sellborad_MyAdapter(result2);
+                    Sellborad_MyAdapter sellboard_adapter = new Sellborad_MyAdapter(result2);
                     sellBoard_Recyclerview.setAdapter(sellboard_adapter);
                 }
             }
         }
 
-        private static class Sellborad_MyAdapter extends RecyclerView.Adapter<BuyerPurchableListActivity.Sellborad_MyAdapter.ViewHolder> {
+        private static class Sellborad_MyAdapter extends RecyclerView.Adapter<Sellborad_MyAdapter.ViewHolder> {
 
-            private List<BuyerPurchableListActivity.SellBoard_DataItem> sellboard_data;
+            private List<SellBoard_DataItem> sellboard_data;
 
             public interface OnItemClickListener {
                 void onItemClicked(int position, String sellboard_data);
             }
 
-            private BuyerPurchableListActivity.Sellborad_MyAdapter.OnItemClickListener itemClickListener;
+            private Sellborad_MyAdapter.OnItemClickListener itemClickListener;
 
-            public void setOnItemClickListener(BuyerPurchableListActivity.Sellborad_MyAdapter.OnItemClickListener listener) {
+            public void setOnItemClickListener(Sellborad_MyAdapter.OnItemClickListener listener) {
                 itemClickListener = listener;
             }
 
-            public Sellborad_MyAdapter (List<BuyerPurchableListActivity.SellBoard_DataItem> sellboard_data) {
+            public Sellborad_MyAdapter (List<SellBoard_DataItem> sellboard_data) {
                 this.sellboard_data = sellboard_data;
             }
 
@@ -160,6 +179,8 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
                 public ViewHolder(View itemView) {
                     super(itemView);
                     textView_list_id = itemView.findViewById(R.id.textView_list_id);
+                    textView_list_userid = itemView.findViewById(R.id.textView_list_userid);
+                    textView_list_binname = itemView.findViewById(R.id.textView_list_binname);
 
                     glass_weight = itemView.findViewById(R.id.glass_weight);
                     plastic_weight = itemView.findViewById(R.id.plastic_weight);
@@ -176,7 +197,7 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
                         public void onClick(View view) {
                             int pos = getAbsoluteAdapterPosition();
                             if(pos != RecyclerView.NO_POSITION) {
-                                BuyerPurchableListActivity.SellBoard_DataItem item = sellboard_data.get(pos);
+                                SellBoard_DataItem item = sellboard_data.get(pos);
                                 String s_board_userID = item.getS_board_userID();
                                 String s_board_userName = item.getS_board_userName();
                                 String s_board_binName = item.getS_board_binName();
@@ -205,21 +226,22 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
             }
 
             @Override
-            public BuyerPurchableListActivity.Sellborad_MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            public Sellborad_MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_list, parent, false);
 
-                BuyerPurchableListActivity.Sellborad_MyAdapter.ViewHolder viewHolder = new BuyerPurchableListActivity.Sellborad_MyAdapter.ViewHolder(view);
+                Sellborad_MyAdapter.ViewHolder viewHolder = new Sellborad_MyAdapter.ViewHolder(view);
 
-                return new BuyerPurchableListActivity.Sellborad_MyAdapter.ViewHolder(view);
+                return new Sellborad_MyAdapter.ViewHolder(view);
             }
 
             @Override
-            public void onBindViewHolder(BuyerPurchableListActivity.Sellborad_MyAdapter.ViewHolder holder, int position) {
-                BuyerPurchableListActivity.SellBoard_DataItem item = sellboard_data.get(position);
+            public void onBindViewHolder(Sellborad_MyAdapter.ViewHolder holder, int position) {
+                SellBoard_DataItem item = sellboard_data.get(position);
                 holder.textView_list_id.setText(item.getS_board_ID());
                 holder.textView_list_userid.setText(item.getS_board_userID());
                 holder.textView_list_binname.setText(item.getS_board_binName());
+
                 holder.glass_weight.setText(item.getS_board_glassW());
                 holder.plastic_weight.setText(item.getS_board_plasticW());
                 holder.paper_weight.setText(item.getS_board_paperW());
@@ -231,16 +253,16 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
                 holder.metal_row.setVisibility(View.VISIBLE);
 
                 if(item.getS_board_glassW().equals("0")) {
-                    holder.glass_row.setVisibility(View.INVISIBLE);
+                    holder.glass_row.setVisibility(View.GONE);
                 }
                 if(item.getS_board_plasticW().equals("0")) {
-                    holder.plastic_row.setVisibility(View.INVISIBLE);
+                    holder.plastic_row.setVisibility(View.GONE);
                 }
                 if(item.getS_board_paperW().equals("0")) {
-                    holder.paper_row.setVisibility(View.INVISIBLE);
+                    holder.paper_row.setVisibility(View.GONE);
                 }
                 if(item.getS_board_metalW().equals("0")) {
-                    holder.metal_row.setVisibility(View.INVISIBLE);
+                    holder.metal_row.setVisibility(View.GONE);
                 }
                 ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
                 layoutParams.setMargins(5, 0, 5, 0); // 왼쪽과 오른쪽 마진을 16dp로 설정
