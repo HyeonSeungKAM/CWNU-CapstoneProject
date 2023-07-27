@@ -50,6 +50,7 @@
         <activity android:name=".BinMainActivity" />
         <activity android:name=".SalesListActivity" />
         <activity android:name=".BuyerMainActivity" />
+        <activity android:name=".BuyerPurchableListActivity" />
         <activity android:name=".BuyActivity" />
         <activity android:name=".PurchasedListActivity" />
         <activity android:name=".AddDropBinActivity"/>
