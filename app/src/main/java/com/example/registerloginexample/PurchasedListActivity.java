@@ -237,7 +237,7 @@ public class PurchasedListActivity extends AppCompatActivity {
                     hashMap.put("paperWV",  content.split(",")[4]+" kg");
                 } else {
                     hashMap.remove("paperW");
-                    hashMap.remove("glassWV");
+                    hashMap.remove("paperWV");
                 }
 
                 if (!content.split(",")[6].equals("0")) {

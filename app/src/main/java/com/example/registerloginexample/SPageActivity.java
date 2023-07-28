@@ -137,6 +137,7 @@ public class SPageActivity extends AppCompatActivity {
                         .setPositiveButton("예", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                String option = "yes";
                                 Response.Listener<String> responseListner = new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
@@ -158,6 +159,8 @@ public class SPageActivity extends AppCompatActivity {
                                                 intent.putExtra("kind",kind);
                                                 intent.putExtra("userID",userID);
                                                 intent.putExtra("userName",userName);
+                                                intent.putExtra("p_type",p_type);
+                                                intent.putExtra("option",option);
 
                                                 intent.putExtra("seller_userID",seller_userID);
                                                 intent.putExtra("seller_userName",seller_userName);
@@ -187,7 +190,55 @@ public class SPageActivity extends AppCompatActivity {
                         .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                String option = "no";
 
+                                Response.Listener<String> responseListner = new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(response);
+                                            boolean success = jsonObject.getBoolean("success");
+                                            if (success) {
+
+                                                String seller_userID = jsonObject.getString("seller_userID");
+                                                String seller_userName = jsonObject.getString("seller_userName");
+                                                String seller_address = jsonObject.getString("seller_address");
+                                                String seller_account = jsonObject.getString("seller_account");
+                                                String seller_phoneNum = jsonObject.getString("seller_phoneNum");
+
+                                                Toast.makeText(getApplicationContext(),"결제 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
+
+                                                intent.putExtra("kind",kind);
+                                                intent.putExtra("userID",userID);
+                                                intent.putExtra("userName",userName);
+                                                intent.putExtra("p_type",p_type);
+                                                intent.putExtra("option",option);
+
+                                                intent.putExtra("seller_userID",seller_userID);
+                                                intent.putExtra("seller_userName",seller_userName);
+                                                intent.putExtra("seller_address",seller_address);
+                                                intent.putExtra("seller_account",seller_account);
+                                                intent.putExtra("seller_phoneNum",seller_phoneNum);
+                                                intent.putExtra("board_contents",board_contents);
+
+                                                startActivity(intent);
+
+                                            } else {
+                                                Toast.makeText(getApplicationContext(),"구매에 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                                                return;
+
+                                            }
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                };
+                                BuyInfoRequest buyInfoRequest = new BuyInfoRequest(board_userID, responseListner);
+                                RequestQueue queue = Volley.newRequestQueue(SPageActivity.this);
+                                queue.add(buyInfoRequest);
                             }
                         });
                 AlertDialog msgDig = msgBuilder.create();

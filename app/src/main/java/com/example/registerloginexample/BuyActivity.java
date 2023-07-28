@@ -3,6 +3,7 @@ package com.example.registerloginexample;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableRow;
@@ -65,6 +66,8 @@ public class BuyActivity extends AppCompatActivity {
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
+        String p_type = intent.getStringExtra("p_type");
+        String option = intent.getStringExtra("option");
 
         String seller_userID = intent.getExtras().getString("seller_userID");
         String seller_userName = intent.getExtras().getString("seller_userName");
@@ -74,41 +77,104 @@ public class BuyActivity extends AppCompatActivity {
         String board_contents = intent.getExtras().getString("board_contents");
 
         // 쓰레기 정보표 구간 =========================================================
-        tv_glassW.setText(board_contents.split(",")[0]);
-        tv_totalGlassPrice.setText(board_contents.split(",")[1]);
 
-        tv_plasticW.setText(board_contents.split(",")[2]);
-        tv_totalPlasticPrice.setText(board_contents.split(",")[3]);
+        String[] contentsArray = board_contents.split(",");
 
-        tv_paperW.setText(board_contents.split(",")[4]);
-        tv_totalPaperPrice.setText(board_contents.split(",")[5]);
+        if (option.equals("no")) {
 
-        tv_metalW.setText(board_contents.split(",")[6]);
-        tv_totalMetalPrice.setText(board_contents.split(",")[7]);
+            switch(p_type) {
+                case "glass":
+                    for(int i = 2; i<=7; i++) {
+                        contentsArray[i] = "0";
+                    }
+                    contentsArray[8] = contentsArray[1];
+                    break;
 
-        tv_Total.setText(board_contents.split(",")[8] + " 원");
 
-        tv_Total2.setText(board_contents.split(",")[8] + " 원");
+                case"plastic":
+                    for (int i = 0; i<=1; i++) {
+                        contentsArray[i] = "0";
+                    }
+                    for (int i = 4; i<=7; i++) {
+                        contentsArray[i] = "0";
+                    }
+                    contentsArray[8] = contentsArray[3];
+                    break;
 
-        if (board_contents.split(",")[0].equals("0")) {
+
+                case "paper":
+                    for (int i = 0; i<=3; i++) {
+                        contentsArray[i] = "0";}
+
+                    for (int i = 6; i<=7; i++) {
+                        contentsArray[i] = "0";}
+                    contentsArray[8] = contentsArray[5];
+                    break;
+
+
+                case "metal":
+                    for(int i = 0; i<=5; i++) {
+                        contentsArray[i] = "0";
+                    }
+                    break;
+            }
+            board_contents = TextUtils.join(",", contentsArray);
+
+
+        } else if(option.equals("yes")) {
+            tv_glassW.setText(contentsArray[0]);
+            tv_totalGlassPrice.setText(contentsArray[1]);
+
+            tv_plasticW.setText(contentsArray[2]);
+            tv_totalPlasticPrice.setText(contentsArray[3]);
+
+            tv_paperW.setText(contentsArray[4]);
+            tv_totalPaperPrice.setText(contentsArray[5]);
+
+            tv_metalW.setText(contentsArray[6]);
+            tv_totalMetalPrice.setText(contentsArray[7]);
+
+            tv_Total.setText(contentsArray[8] + " 원");
+
+            tv_Total2.setText(contentsArray[8] + " 원");
+        }
+
+
+        tv_glassW.setText(contentsArray[0]);
+        tv_totalGlassPrice.setText(contentsArray[1]);
+
+        tv_plasticW.setText(contentsArray[2]);
+        tv_totalPlasticPrice.setText(contentsArray[3]);
+
+        tv_paperW.setText(contentsArray[4]);
+        tv_totalPaperPrice.setText(contentsArray[5]);
+
+        tv_metalW.setText(contentsArray[6]);
+        tv_totalMetalPrice.setText(contentsArray[7]);
+
+        tv_Total.setText(contentsArray[8] + " 원");
+
+        tv_Total2.setText(contentsArray[8] + " 원");
+
+        if (contentsArray[0].equals("0")) {
             glass_row.setVisibility(View.GONE);
         } else {
             glass_row.setVisibility(View.VISIBLE);
         }
 
-        if (board_contents.split(",")[2].equals("0")) {
+        if (contentsArray[2].equals("0")) {
             plastic_row.setVisibility(View.GONE);
         } else {
             plastic_row.setVisibility(View.VISIBLE);
         }
 
-        if (board_contents.split(",")[4].equals("0")) {
+        if (contentsArray[4].equals("0")) {
             paper_row.setVisibility(View.GONE);
         } else {
             paper_row.setVisibility(View.VISIBLE);
         }
 
-        if (board_contents.split(",")[6].equals("0")) {
+        if (contentsArray[6].equals("0")) {
             metal_row.setVisibility(View.GONE);
         } else {
             metal_row.setVisibility(View.VISIBLE);
@@ -130,12 +196,13 @@ public class BuyActivity extends AppCompatActivity {
         String purchase_date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")); // 현재 날짜
 
         String contents = board_contents;
-        String total_payment = board_contents.split(",")[8];
+        String total_payment = contentsArray[8];
 
         btn_buy = findViewById(R.id.btn_buy);
         btn_cancel = findViewById(R.id.btn_cancel);
 
 
+        String finalBoard_contents = board_contents;
         btn_buy.setOnClickListener(new View.OnClickListener() { // 결제하기
             @Override
             public void onClick(View view) {
@@ -168,7 +235,7 @@ public class BuyActivity extends AppCompatActivity {
 
                     }
                 };
-                PurchaseUpdateRequest purchaseUpdateRequest = new PurchaseUpdateRequest(seller_userID,  userID, purchase_date,board_contents,
+                PurchaseUpdateRequest purchaseUpdateRequest = new PurchaseUpdateRequest(seller_userID,  userID, purchase_date, contents,
                         total_payment, seller_userIDName, seller_address, seller_phoneNum, responseListner);
                 RequestQueue queue = Volley.newRequestQueue(BuyActivity.this);
                 queue.add(purchaseUpdateRequest);
