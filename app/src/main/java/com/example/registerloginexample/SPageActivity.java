@@ -1,15 +1,16 @@
 package com.example.registerloginexample;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
@@ -18,8 +19,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
 
 
 public class SPageActivity extends AppCompatActivity {
@@ -29,7 +28,7 @@ public class SPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_spagetest);
+        setContentView(R.layout.activity_spage);
 
         TextView tv_b_userName = (TextView) findViewById(R.id.tv_b_userName);
         TextView tv_b_userID = (TextView) findViewById(R.id.tv_b_userID);
@@ -66,6 +65,7 @@ public class SPageActivity extends AppCompatActivity {
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
+        String p_type = intent.getStringExtra("p_type");
 
         tv_b_userName.setText(board_userName);
         tv_b_userID.setText("(" + board_userID + ")");
@@ -128,56 +128,73 @@ public class SPageActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {    // 판매하기
             @Override
             public void onClick(View view) {
+                showDialog();
+            }
 
+            void showDialog() {
+                AlertDialog.Builder msgBuilder = new AlertDialog.Builder(SPageActivity.this)
+                        .setMessage(p_type + "외 다른 품목도 구매하시겠습니까?")
+                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Response.Listener<String> responseListner = new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
 
-                Response.Listener<String> responseListner = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(response);
+                                            boolean success = jsonObject.getBoolean("success");
+                                            if (success) {
 
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean success = jsonObject.getBoolean("success");
-                            if (success) {
+                                                String seller_userID = jsonObject.getString("seller_userID");
+                                                String seller_userName = jsonObject.getString("seller_userName");
+                                                String seller_address = jsonObject.getString("seller_address");
+                                                String seller_account = jsonObject.getString("seller_account");
+                                                String seller_phoneNum = jsonObject.getString("seller_phoneNum");
 
-                                String seller_userID = jsonObject.getString("seller_userID");
-                                String seller_userName = jsonObject.getString("seller_userName");
-                                String seller_address = jsonObject.getString("seller_address");
-                                String seller_account = jsonObject.getString("seller_account");
-                                String seller_phoneNum = jsonObject.getString("seller_phoneNum");
+                                                Toast.makeText(getApplicationContext(),"결제 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
 
-                                Toast.makeText(getApplicationContext(),"결제 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
+                                                intent.putExtra("kind",kind);
+                                                intent.putExtra("userID",userID);
+                                                intent.putExtra("userName",userName);
 
-                                intent.putExtra("kind",kind);
-                                intent.putExtra("userID",userID);
-                                intent.putExtra("userName",userName);
+                                                intent.putExtra("seller_userID",seller_userID);
+                                                intent.putExtra("seller_userName",seller_userName);
+                                                intent.putExtra("seller_address",seller_address);
+                                                intent.putExtra("seller_account",seller_account);
+                                                intent.putExtra("seller_phoneNum",seller_phoneNum);
+                                                intent.putExtra("board_contents",board_contents);
 
-                                intent.putExtra("seller_userID",seller_userID);
-                                intent.putExtra("seller_userName",seller_userName);
-                                intent.putExtra("seller_address",seller_address);
-                                intent.putExtra("seller_account",seller_account);
-                                intent.putExtra("seller_phoneNum",seller_phoneNum);
-                                intent.putExtra("board_contents",board_contents);
+                                                startActivity(intent);
 
-                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(getApplicationContext(),"구매에 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                                                return;
 
-                            } else {
-                                Toast.makeText(getApplicationContext(),"구매에 실패하였습니다.",Toast.LENGTH_SHORT).show();
-                                return;
+                                            }
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                };
+                                BuyInfoRequest buyInfoRequest = new BuyInfoRequest(board_userID, responseListner);
+                                RequestQueue queue = Volley.newRequestQueue(SPageActivity.this);
+                                queue.add(buyInfoRequest);
+                            }
+                        })
+                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
                             }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                BuyInfoRequest buyInfoRequest = new BuyInfoRequest(board_userID, responseListner);
-                RequestQueue queue = Volley.newRequestQueue(SPageActivity.this);
-                queue.add(buyInfoRequest);
-
+                        });
+                AlertDialog msgDig = msgBuilder.create();
+                msgDig.show();
             }
         });
+
 
         btn_list.setOnClickListener(new View.OnClickListener() {    // 취소
             @Override

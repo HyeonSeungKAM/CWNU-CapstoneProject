@@ -217,6 +217,7 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
                                 intent.putExtra("kind",kind);
                                 intent.putExtra("userID",userID);
                                 intent.putExtra("userName",userName);
+                                intent.putExtra("p_type",p_type);
 
                                 itemView.getContext().startActivity(intent);
                             }

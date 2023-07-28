@@ -58,7 +58,6 @@
             android:name=".BinAddActivity"
             android:label="쓰레기통 정보  추가"
             android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
-        <activity android:name=".MapActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
