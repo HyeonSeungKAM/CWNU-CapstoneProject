@@ -66,7 +66,7 @@ public class BuyActivity extends AppCompatActivity {
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
-        String p_type = intent.getStringExtra("p_type");
+        String p_type_kr = intent.getStringExtra("p_type_kr");
         String option = intent.getStringExtra("option");
 
         String seller_userID = intent.getExtras().getString("seller_userID");
@@ -82,8 +82,8 @@ public class BuyActivity extends AppCompatActivity {
 
         if (option.equals("no")) {
 
-            switch(p_type) {
-                case "glass":
+            switch(p_type_kr) {
+                case "유리":
                     for(int i = 2; i<=7; i++) {
                         contentsArray[i] = "0";
                     }
@@ -91,7 +91,7 @@ public class BuyActivity extends AppCompatActivity {
                     break;
 
 
-                case"plastic":
+                case"플라스틱":
                     for (int i = 0; i<=1; i++) {
                         contentsArray[i] = "0";
                     }
@@ -102,7 +102,7 @@ public class BuyActivity extends AppCompatActivity {
                     break;
 
 
-                case "paper":
+                case "종이":
                     for (int i = 0; i<=3; i++) {
                         contentsArray[i] = "0";}
 
@@ -112,7 +112,7 @@ public class BuyActivity extends AppCompatActivity {
                     break;
 
 
-                case "metal":
+                case "고철":
                     for(int i = 0; i<=5; i++) {
                         contentsArray[i] = "0";
                     }

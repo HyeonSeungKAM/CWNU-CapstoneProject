@@ -31,6 +31,8 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
     private static String kind;
     private static String userID;
     private static String userName;
+    private static String p_type_kr;
+
     private static String p_type;
 
     private RecyclerView recyclerView, sellBoard_Recyclerview;
@@ -46,7 +48,29 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
         kind = intent.getStringExtra("kind");
         userID = intent.getStringExtra("userID");
         userName = intent.getStringExtra("userName");
-        p_type = intent.getStringExtra("p_type");
+        p_type_kr = intent.getStringExtra("p_type_kr");
+
+
+        switch(p_type_kr) {
+            case "유리":
+                p_type = "glass";
+                break;
+
+
+            case"플라스틱":
+                p_type = "plastic";
+                break;
+
+
+            case "종이":
+                p_type = "paper";
+                break;
+
+
+            case "고철":
+                p_type = "metal";
+                break;
+        }
 
         // 구매 가능한 재활용품 목록 불러오기
         sellBoard_Recyclerview = findViewById(R.id.SellBoard_Recyclerview);
@@ -217,7 +241,7 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
                                 intent.putExtra("kind",kind);
                                 intent.putExtra("userID",userID);
                                 intent.putExtra("userName",userName);
-                                intent.putExtra("p_type",p_type);
+                                intent.putExtra("p_type_kr",p_type_kr);
 
                                 itemView.getContext().startActivity(intent);
                             }
@@ -243,10 +267,10 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
                 holder.textView_list_userid.setText(item.getS_board_userID());
                 holder.textView_list_binname.setText(item.getS_board_binName());
 
-                holder.glass_weight.setText(item.getS_board_glassW());
-                holder.plastic_weight.setText(item.getS_board_plasticW());
-                holder.paper_weight.setText(item.getS_board_paperW());
-                holder.metal_weight.setText(item.getS_board_metalW());
+                holder.glass_weight.setText(item.getS_board_glassW() + "kg");
+                holder.plastic_weight.setText(item.getS_board_plasticW() + "kg");
+                holder.paper_weight.setText(item.getS_board_paperW()+ "kg");
+                holder.metal_weight.setText(item.getS_board_metalW()+ "kg");
 
                 holder.glass_row.setVisibility(View.VISIBLE);
                 holder.plastic_row.setVisibility(View.VISIBLE);

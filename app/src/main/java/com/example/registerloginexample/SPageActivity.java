@@ -65,7 +65,8 @@ public class SPageActivity extends AppCompatActivity {
         String kind = intent.getStringExtra("kind");
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
-        String p_type = intent.getStringExtra("p_type");
+        String p_type_kr = intent.getStringExtra("p_type_kr");
+        
 
         tv_b_userName.setText(board_userName);
         tv_b_userID.setText("(" + board_userID + ")");
@@ -125,15 +126,20 @@ public class SPageActivity extends AppCompatActivity {
             btn_list.setVisibility(View.VISIBLE);
         }
 
-        btn_buy.setOnClickListener(new View.OnClickListener() {    // 판매하기
+
+        btn_buy.setOnClickListener(new View.OnClickListener() {    // 구매하기
+
             @Override
             public void onClick(View view) {
                 showDialog();
             }
 
             void showDialog() {
+
                 AlertDialog.Builder msgBuilder = new AlertDialog.Builder(SPageActivity.this)
-                        .setMessage(p_type + "외 다른 품목도 구매하시겠습니까?")
+                        
+                        
+                        .setMessage(p_type_kr + " 외 다른 품목도 구매하시겠습니까?")
                         .setPositiveButton("예", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -159,7 +165,7 @@ public class SPageActivity extends AppCompatActivity {
                                                 intent.putExtra("kind",kind);
                                                 intent.putExtra("userID",userID);
                                                 intent.putExtra("userName",userName);
-                                                intent.putExtra("p_type",p_type);
+                                                intent.putExtra("p_type_kr",p_type_kr);
                                                 intent.putExtra("option",option);
 
                                                 intent.putExtra("seller_userID",seller_userID);
@@ -213,7 +219,7 @@ public class SPageActivity extends AppCompatActivity {
                                                 intent.putExtra("kind",kind);
                                                 intent.putExtra("userID",userID);
                                                 intent.putExtra("userName",userName);
-                                                intent.putExtra("p_type",p_type);
+                                                intent.putExtra("p_type_kr",p_type_kr);
                                                 intent.putExtra("option",option);
 
                                                 intent.putExtra("seller_userID",seller_userID);

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class BuyerMainActivity extends AppCompatActivity {
 
     private Button btn_logout, btn_purchasedlist, btn_list, glass_btn, plastic_btn, paper_btn, metal_btn;
-    private String p_type;// 판매하기, 목록 버튼
+    private String p_type_kr;
 
     // 서버에서 가져온 내용 보여주기
     @Override
@@ -81,10 +81,10 @@ public class BuyerMainActivity extends AppCompatActivity {
         glass_btn.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
-                p_type = "glass";
+                p_type_kr = "유리병";
                 Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
                 intent.putExtra("kind",kind);
-                intent.putExtra("p_type",p_type);
+                intent.putExtra("p_type_kr",p_type_kr);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
                 startActivity(intent);
@@ -96,10 +96,10 @@ public class BuyerMainActivity extends AppCompatActivity {
         plastic_btn.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
-                p_type = "plastic";
+                p_type_kr = "플라스틱";
                 Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
                 intent.putExtra("kind",kind);
-                intent.putExtra("p_type",p_type);
+                intent.putExtra("p_type_kr",p_type_kr);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
                 startActivity(intent);
@@ -111,10 +111,10 @@ public class BuyerMainActivity extends AppCompatActivity {
         paper_btn.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
-                p_type = "paper";
+                p_type_kr = "p_type_kr";
                 Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
                 intent.putExtra("kind",kind);
-                intent.putExtra("p_type",p_type);
+                intent.putExtra("p_type_kr",p_type_kr);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
                 startActivity(intent);
@@ -126,10 +126,10 @@ public class BuyerMainActivity extends AppCompatActivity {
         metal_btn.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
-                p_type = "metal";
+                p_type_kr = "고철";
                 Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
                 intent.putExtra("kind",kind);
-                intent.putExtra("p_type",p_type);
+                intent.putExtra("p_type_kr",p_type_kr);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
                 startActivity(intent);
