@@ -27,13 +27,13 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_marginTop="15dp"
-        android:layout_width="wrap_content"
+        android:layout_width="243dp"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_marginTop="15dp"
         android:drawableStart="@drawable/ic_saleboard"
         android:drawablePadding="5dp"
-        android:text="판매목록"
+        android:padding="10dp"
+        android:text="구매 가능한 항목"
         android:textSize="24sp" />
 
 
