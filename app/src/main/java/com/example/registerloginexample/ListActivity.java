@@ -70,16 +70,7 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        
-        // 랭크 정보 리사이클러뷰
-        recyclerView = findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
 
-        String url = "http://gamhs44.ivyro.net/rank.php"; // PHP 파일의 URL
-        new GetRankDataTask().execute(url);
-        
-        
         // 셀보드 정보 리사이클러뷰
 
         sellBoard_Recyclerview = findViewById(R.id.SellBoard_Recyclerview);
@@ -190,136 +181,6 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 //------------------------- -----------------------------------------------
-
-
-    // --------------------------- 랭크 데이터 불러오기 -------------------------------------------
-
-    private class GetRankDataTask extends AsyncTask<String, Void, List<DataItem>> {
-        @Override
-        protected List<DataItem> doInBackground(String... params) {
-            HttpURLConnection connection = null;
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
-
-                JSONObject  jsonObject = new JSONObject(response.toString());
-                JSONArray jsonArray = jsonObject.getJSONArray("webnautes");
-                List<DataItem> dataList = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject itemObject = jsonArray.getJSONObject(i);
-                    String board_userID = itemObject.getString("userID");
-                    String board_userName = itemObject.getString("userName");
-                    String board_T_sales = itemObject.getString("T_sales");
-                    int rank = i;
-
-                    DataItem dataItem = new DataItem(board_userID, board_userName, board_T_sales, rank);
-                    dataList.add(dataItem);
-                }
-                return dataList;
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<DataItem> result) {
-            if (result != null) {
-                MyAdapter adapter = new MyAdapter(result);
-                recyclerView.setAdapter(adapter);
-            }
-        }
-    }
-
-    private static class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-
-        private List<DataItem> data;
-
-        public MyAdapter(List<DataItem> data) {
-            this.data = data;
-        }
-
-        public static class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView tv_board_userName, tv_board_userID, tv_board_T_sales;
-            public ImageView rankImg;
-            public ViewHolder(View itemView) {
-                super(itemView);
-                tv_board_userName = itemView.findViewById(R.id.tv_board_userName);
-                tv_board_userID = itemView.findViewById(R.id.tv_board_userID);
-                tv_board_T_sales = itemView.findViewById(R.id.tv_board_T_sales);
-                rankImg = itemView.findViewById(R.id.imageView);
-            }
-        }
-
-        @Override
-        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_ranklist, parent, false);
-
-            return new MyAdapter.ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
-            DataItem item = data.get(position);
-            holder.tv_board_userName.setText(item.getBoard_userName());
-            holder.tv_board_userID.setText(item.getBoard_userID());
-            holder.tv_board_T_sales.setText(item.getBoard_T_sales() + " 원");
-            holder.rankImg.setImageResource(item.getRank());
-
-            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
-            layoutParams.setMargins(5, 0, 5, 0); // 왼쪽과 오른쪽 마진을 16dp로 설정
-            holder.itemView.setLayoutParams(layoutParams);
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return data.size();
-        }
-    }
-
-    private static class DataItem {
-        private String board_userID;
-        private int rank;
-
-        private int image[] = {R.drawable.img_first, R.drawable.img_second, R.drawable.img_third};
-        private String board_userName;
-        private String board_T_sales;
-
-        public DataItem(String board_userID, String board_userName, String board_T_sales, int rank) {
-            this.board_userID = board_userID;
-            this.board_userName = board_userName;
-            this.board_T_sales = board_T_sales;
-            this.rank = rank;
-        }
-        public String getBoard_userID() {
-            return board_userID;
-        }
-        public String getBoard_userName() {
-            return board_userName;
-        }
-        public String getBoard_T_sales() {
-            return board_T_sales;
-        }
-        public int getRank() { return image[rank]; }
-
-
-    }
-
-
 
 
 
@@ -486,6 +347,7 @@ public class ListActivity extends AppCompatActivity {
 
             holder.glass_row.setVisibility(View.VISIBLE);
             holder.plastic_row.setVisibility(View.VISIBLE);
+            holder.paper_row.setVisibility(View.VISIBLE);
             holder.paper_row.setVisibility(View.VISIBLE);
             holder.metal_row.setVisibility(View.VISIBLE);
 
