@@ -66,11 +66,12 @@ public class BuyerMainActivity extends AppCompatActivity {
         btn_list.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BuyerMainActivity.this, ListActivity.class);
+                p_type_kr = "전체";
+                Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
                 intent.putExtra("kind",kind);
+                intent.putExtra("p_type_kr",p_type_kr);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
-
                 startActivity(intent);
 
             }
@@ -81,7 +82,7 @@ public class BuyerMainActivity extends AppCompatActivity {
         glass_btn.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
-                p_type_kr = "유리병";
+                p_type_kr = "유리";
                 Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("p_type_kr",p_type_kr);

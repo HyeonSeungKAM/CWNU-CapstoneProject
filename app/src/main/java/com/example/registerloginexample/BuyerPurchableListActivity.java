@@ -52,6 +52,10 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
 
 
         switch(p_type_kr) {
+            case "전체":
+                p_type = "all";
+                break;
+
             case "유리":
                 p_type = "glass";
                 break;
@@ -92,6 +96,7 @@ public class BuyerPurchableListActivity extends AppCompatActivity {
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID", userID);
                 intent.putExtra("userName", userName);
+                intent.putExtra("p_type_kr", p_type_kr);
 
                 startActivity(intent);
             }
