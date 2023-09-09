@@ -112,7 +112,7 @@ public class BuyerMainActivity extends AppCompatActivity {
         paper_btn.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
-                p_type_kr = "p_type_kr";
+                p_type_kr = "종이";
                 Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("p_type_kr",p_type_kr);
