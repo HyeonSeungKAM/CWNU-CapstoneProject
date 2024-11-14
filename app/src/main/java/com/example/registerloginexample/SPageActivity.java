@@ -66,7 +66,7 @@ public class SPageActivity extends AppCompatActivity {
         String userID = intent.getStringExtra("userID");
         String userName = intent.getStringExtra("userName");
         String p_type_kr = intent.getStringExtra("p_type_kr");
-        
+
 
         tv_b_userName.setText(board_userName);
         tv_b_userID.setText("(" + board_userID + ")");
@@ -124,193 +124,196 @@ public class SPageActivity extends AppCompatActivity {
         } else if (kind.equals("buyer")) {
             btn_buy.setVisibility(View.VISIBLE);
             btn_list.setVisibility(View.VISIBLE);
-        }
 
-        if (p_type_kr.equals("전체")) {
-            btn_buy.setOnClickListener(new View.OnClickListener() {    // 취소
-                @Override
-                public void onClick(View view) {
-                    String option = "yes";
+            if (p_type_kr.equals("전체")) {
+                btn_buy.setOnClickListener(new View.OnClickListener() {    // 취소
+                    @Override
+                    public void onClick(View view) {
+                        String option = "yes";
 
-                    Response.Listener<String> responseListner = new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
+                        Response.Listener<String> responseListner = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
 
-                            try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                boolean success = jsonObject.getBoolean("success");
-                                if (success) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    boolean success = jsonObject.getBoolean("success");
+                                    if (success) {
 
-                                    String seller_userID = jsonObject.getString("seller_userID");
-                                    String seller_userName = jsonObject.getString("seller_userName");
-                                    String seller_address = jsonObject.getString("seller_address");
-                                    String seller_account = jsonObject.getString("seller_account");
-                                    String seller_phoneNum = jsonObject.getString("seller_phoneNum");
+                                        String seller_userID = jsonObject.getString("seller_userID");
+                                        String seller_userName = jsonObject.getString("seller_userName");
+                                        String seller_address = jsonObject.getString("seller_address");
+                                        String seller_account = jsonObject.getString("seller_account");
+                                        String seller_phoneNum = jsonObject.getString("seller_phoneNum");
 
-                                    Toast.makeText(getApplicationContext(),"결제 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
+                                        Toast.makeText(getApplicationContext(),"결제 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
 
-                                    intent.putExtra("kind",kind);
-                                    intent.putExtra("userID",userID);
-                                    intent.putExtra("userName",userName);
-                                    intent.putExtra("p_type_kr",p_type_kr);
-                                    intent.putExtra("option",option);
+                                        intent.putExtra("kind",kind);
+                                        intent.putExtra("userID",userID);
+                                        intent.putExtra("userName",userName);
+                                        intent.putExtra("p_type_kr",p_type_kr);
+                                        intent.putExtra("option",option);
 
-                                    intent.putExtra("seller_userID",seller_userID);
-                                    intent.putExtra("seller_userName",seller_userName);
-                                    intent.putExtra("seller_address",seller_address);
-                                    intent.putExtra("seller_account",seller_account);
-                                    intent.putExtra("seller_phoneNum",seller_phoneNum);
-                                    intent.putExtra("board_contents",board_contents);
+                                        intent.putExtra("seller_userID",seller_userID);
+                                        intent.putExtra("seller_userName",seller_userName);
+                                        intent.putExtra("seller_address",seller_address);
+                                        intent.putExtra("seller_account",seller_account);
+                                        intent.putExtra("seller_phoneNum",seller_phoneNum);
+                                        intent.putExtra("board_contents",board_contents);
 
-                                    startActivity(intent);
+                                        startActivity(intent);
 
-                                } else {
-                                    Toast.makeText(getApplicationContext(),"구매에 실패하였습니다.",Toast.LENGTH_SHORT).show();
-                                    return;
+                                    } else {
+                                        Toast.makeText(getApplicationContext(),"구매에 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                                        return;
 
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
-                        }
-                    };
-                    BuyInfoRequest buyInfoRequest = new BuyInfoRequest(board_userID, responseListner);
-                    RequestQueue queue = Volley.newRequestQueue(SPageActivity.this);
-                    queue.add(buyInfoRequest);
+                        };
+                        BuyInfoRequest buyInfoRequest = new BuyInfoRequest(board_userID, responseListner);
+                        RequestQueue queue = Volley.newRequestQueue(SPageActivity.this);
+                        queue.add(buyInfoRequest);
 
-                }
-            });
+                    }
+                });
 
-        } else {
+            } else {
+                // 구매하기
+                btn_buy.setOnClickListener(new View.OnClickListener() {
 
-            // 구매하기
-            btn_buy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showDialog();
+                    }
 
-                @Override
-                public void onClick(View view) {
-                    showDialog();
-                }
+                    void showDialog() {
 
-                void showDialog() {
-
-                    AlertDialog.Builder msgBuilder = new AlertDialog.Builder(SPageActivity.this)
+                        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(SPageActivity.this)
 
 
-                            .setMessage(p_type_kr + " 외 다른 품목도 구매하시겠습니까?")
-                            .setPositiveButton("예", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    String option = "yes";
-                                    Response.Listener<String> responseListner = new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
+                                .setMessage(p_type_kr + " 외 다른 품목도 구매하시겠습니까?")
+                                .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        String option = "yes";
+                                        Response.Listener<String> responseListner = new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
 
-                                            try {
-                                                JSONObject jsonObject = new JSONObject(response);
-                                                boolean success = jsonObject.getBoolean("success");
-                                                if (success) {
+                                                try {
+                                                    JSONObject jsonObject = new JSONObject(response);
+                                                    boolean success = jsonObject.getBoolean("success");
+                                                    if (success) {
 
-                                                    String seller_userID = jsonObject.getString("seller_userID");
-                                                    String seller_userName = jsonObject.getString("seller_userName");
-                                                    String seller_address = jsonObject.getString("seller_address");
-                                                    String seller_account = jsonObject.getString("seller_account");
-                                                    String seller_phoneNum = jsonObject.getString("seller_phoneNum");
+                                                        String seller_userID = jsonObject.getString("seller_userID");
+                                                        String seller_userName = jsonObject.getString("seller_userName");
+                                                        String seller_address = jsonObject.getString("seller_address");
+                                                        String seller_account = jsonObject.getString("seller_account");
+                                                        String seller_phoneNum = jsonObject.getString("seller_phoneNum");
 
-                                                    Toast.makeText(getApplicationContext(),"결제 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
+                                                        Toast.makeText(getApplicationContext(),"결제 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
 
-                                                    intent.putExtra("kind",kind);
-                                                    intent.putExtra("userID",userID);
-                                                    intent.putExtra("userName",userName);
-                                                    intent.putExtra("p_type_kr",p_type_kr);
-                                                    intent.putExtra("option",option);
+                                                        intent.putExtra("kind",kind);
+                                                        intent.putExtra("userID",userID);
+                                                        intent.putExtra("userName",userName);
+                                                        intent.putExtra("p_type_kr",p_type_kr);
+                                                        intent.putExtra("option",option);
 
-                                                    intent.putExtra("seller_userID",seller_userID);
-                                                    intent.putExtra("seller_userName",seller_userName);
-                                                    intent.putExtra("seller_address",seller_address);
-                                                    intent.putExtra("seller_account",seller_account);
-                                                    intent.putExtra("seller_phoneNum",seller_phoneNum);
-                                                    intent.putExtra("board_contents",board_contents);
+                                                        intent.putExtra("seller_userID",seller_userID);
+                                                        intent.putExtra("seller_userName",seller_userName);
+                                                        intent.putExtra("seller_address",seller_address);
+                                                        intent.putExtra("seller_account",seller_account);
+                                                        intent.putExtra("seller_phoneNum",seller_phoneNum);
+                                                        intent.putExtra("board_contents",board_contents);
 
-                                                    startActivity(intent);
+                                                        startActivity(intent);
 
-                                                } else {
-                                                    Toast.makeText(getApplicationContext(),"구매에 실패하였습니다.",Toast.LENGTH_SHORT).show();
-                                                    return;
+                                                    } else {
+                                                        Toast.makeText(getApplicationContext(),"구매에 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                                                        return;
 
+                                                    }
+
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
                                                 }
-
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
                                             }
-                                        }
-                                    };
-                                    BuyInfoRequest buyInfoRequest = new BuyInfoRequest(board_userID, responseListner);
-                                    RequestQueue queue = Volley.newRequestQueue(SPageActivity.this);
-                                    queue.add(buyInfoRequest);
-                                }
-                            })
-                            .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    String option = "no";
+                                        };
+                                        BuyInfoRequest buyInfoRequest = new BuyInfoRequest(board_userID, responseListner);
+                                        RequestQueue queue = Volley.newRequestQueue(SPageActivity.this);
+                                        queue.add(buyInfoRequest);
+                                    }
+                                })
+                                .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        String option = "no";
 
-                                    Response.Listener<String> responseListner = new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
+                                        Response.Listener<String> responseListner = new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
 
-                                            try {
-                                                JSONObject jsonObject = new JSONObject(response);
-                                                boolean success = jsonObject.getBoolean("success");
-                                                if (success) {
+                                                try {
+                                                    JSONObject jsonObject = new JSONObject(response);
+                                                    boolean success = jsonObject.getBoolean("success");
+                                                    if (success) {
 
-                                                    String seller_userID = jsonObject.getString("seller_userID");
-                                                    String seller_userName = jsonObject.getString("seller_userName");
-                                                    String seller_address = jsonObject.getString("seller_address");
-                                                    String seller_account = jsonObject.getString("seller_account");
-                                                    String seller_phoneNum = jsonObject.getString("seller_phoneNum");
+                                                        String seller_userID = jsonObject.getString("seller_userID");
+                                                        String seller_userName = jsonObject.getString("seller_userName");
+                                                        String seller_address = jsonObject.getString("seller_address");
+                                                        String seller_account = jsonObject.getString("seller_account");
+                                                        String seller_phoneNum = jsonObject.getString("seller_phoneNum");
 
-                                                    Toast.makeText(getApplicationContext(),"결제 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
+                                                        Toast.makeText(getApplicationContext(),"결제 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(SPageActivity.this, BuyActivity.class);
 
-                                                    intent.putExtra("kind",kind);
-                                                    intent.putExtra("userID",userID);
-                                                    intent.putExtra("userName",userName);
-                                                    intent.putExtra("p_type_kr",p_type_kr);
-                                                    intent.putExtra("option",option);
+                                                        intent.putExtra("kind",kind);
+                                                        intent.putExtra("userID",userID);
+                                                        intent.putExtra("userName",userName);
+                                                        intent.putExtra("p_type_kr",p_type_kr);
+                                                        intent.putExtra("option",option);
 
-                                                    intent.putExtra("seller_userID",seller_userID);
-                                                    intent.putExtra("seller_userName",seller_userName);
-                                                    intent.putExtra("seller_address",seller_address);
-                                                    intent.putExtra("seller_account",seller_account);
-                                                    intent.putExtra("seller_phoneNum",seller_phoneNum);
-                                                    intent.putExtra("board_contents",board_contents);
+                                                        intent.putExtra("seller_userID",seller_userID);
+                                                        intent.putExtra("seller_userName",seller_userName);
+                                                        intent.putExtra("seller_address",seller_address);
+                                                        intent.putExtra("seller_account",seller_account);
+                                                        intent.putExtra("seller_phoneNum",seller_phoneNum);
+                                                        intent.putExtra("board_contents",board_contents);
 
-                                                    startActivity(intent);
+                                                        startActivity(intent);
 
-                                                } else {
-                                                    Toast.makeText(getApplicationContext(),"구매에 실패하였습니다.",Toast.LENGTH_SHORT).show();
-                                                    return;
+                                                    } else {
+                                                        Toast.makeText(getApplicationContext(),"구매에 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                                                        return;
 
+                                                    }
+
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
                                                 }
-
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
                                             }
-                                        }
-                                    };
-                                    BuyInfoRequest buyInfoRequest = new BuyInfoRequest(board_userID, responseListner);
-                                    RequestQueue queue = Volley.newRequestQueue(SPageActivity.this);
-                                    queue.add(buyInfoRequest);
-                                }
-                            });
-                    AlertDialog msgDig = msgBuilder.create();
-                    msgDig.show();
-                }
-            });
+                                        };
+                                        BuyInfoRequest buyInfoRequest = new BuyInfoRequest(board_userID, responseListner);
+                                        RequestQueue queue = Volley.newRequestQueue(SPageActivity.this);
+                                        queue.add(buyInfoRequest);
+                                    }
+                                });
+                        AlertDialog msgDig = msgBuilder.create();
+                        msgDig.show();
+                    }
+                });
+            }
+
         }
+
+
+
 
 
 

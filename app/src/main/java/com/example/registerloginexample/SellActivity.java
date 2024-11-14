@@ -143,10 +143,8 @@ public class SellActivity extends AppCompatActivity {
         String str_TotalPrice = Float.toString(TotalPrice);
 
 
-/** contents -- 유리병 무게(0), 유리병 총 가격(1),
-                    플라스틱 무게(2), 플라스틱 총 가격(3),
-                        종이 무게(4), 종이 총 가격(5),
-                            고철 무게(6), 고철 총 가격(7) **/
+/** contents 값 구성 :
+ 유리병 무게(0), 유리병 가격(1), 플라스틱 무게(2), 플라스틱 가격(3), 종이 무게(4), 종이 가격(5), 고철 무게(6), 고철 가격(7) **/
 
         String contents = glass + "," + str_glassTP + "," + plastic + "," + str_plasticTP + "," +
                 paper + "," + str_paperTP + "," + metal + ',' + str_metalTP + "," + str_TotalPrice; // sellBoard에 전송할 contents 내용
