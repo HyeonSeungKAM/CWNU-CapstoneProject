@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class PurchaseUpdateRequest extends StringRequest {
 
-    final static private String URL = "http://gamhs44.ivyro.net/PurchaseUpdate2.php";
+    final static private String URL = "http://gamhs44.ivyro.net/PurchaseUpdate.php";
 
     private Map<String, String> map;
 
