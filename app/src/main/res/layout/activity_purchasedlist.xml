@@ -11,29 +11,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:gravity="bottom"
-
-        android:text="구매내역"
         android:drawableStart="@drawable/ic_sdetail"
         android:drawablePadding="5dp"
-        android:textSize="24sp"
-       />
+        android:gravity="bottom"
+        android:text="구매내역"
+        android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-       >
+        android:layout_gravity="center">
 
         <ListView
-            android:dividerHeight="0px"
             android:id="@+id/listview_purchase_innerframe"
-            android:background="@drawable/custom_llayout"
             android:layout_width="320dp"
             android:layout_height="420dp"
             android:layout_margin="5dp"
             android:layout_marginTop="32dp"
             android:layout_weight="5"
+            android:background="@drawable/custom_llayout"
+            android:dividerHeight="0px"
             android:padding="10dp" />
     </LinearLayout>
 
@@ -48,8 +45,8 @@
             android:id="@+id/btn_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_button"
             android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_button"
             android:text="메인" />
 
         <Button
