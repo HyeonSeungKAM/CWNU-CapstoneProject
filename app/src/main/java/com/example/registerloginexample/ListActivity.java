@@ -49,10 +49,32 @@ public class ListActivity extends AppCompatActivity {
     private static final String TAG_PAPERW = "paperW";
     private static final String TAG_METALW = "metalW";
 
+    // 계정 유형, id, 이름
     private static String kind;
     private static String userID;
     private static String userName;
 
+    // 관리자 정보
+    private static String address;
+    private static String binName;
+    private static String binLoc;
+    private static String glass;
+    private static String plastic;
+    private static String paper;
+    private static String metal;
+    private static String glass_full;
+    private static String plastic_full;
+    private static String paper_full;
+    private static String metal_full;
+
+// 구매자 정보
+    private static String p_type_kr;
+
+    private static String p_type;
+
+// 판매게시판 데이터 처리 php 주소
+
+    private static String sellboard_url;
 
     private RecyclerView recyclerView, sellBoard_Recyclerview;
 
@@ -71,32 +93,63 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        // 셀보드 정보 리사이클러뷰
-
         sellBoard_Recyclerview = findViewById(R.id.SellBoard_Recyclerview);
         LinearLayoutManager sellBoard_layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         sellBoard_Recyclerview.setLayoutManager(sellBoard_layoutManager);
 
-        String sellboard_url = "http://gamhs44.ivyro.net/sellboardlist.php"; // PHP 파일의 URL
-        new GetSellboardDataTask().execute(sellboard_url);
-        
-
+        // 정보 가져오기
         Intent intent = getIntent();
         kind = intent.getStringExtra("kind");
         userID = intent.getStringExtra("userID");
         userName = intent.getStringExtra("userName");
-        String address = intent.getStringExtra("address");
-        String binName = intent.getStringExtra("binName");
-        String binLoc = intent.getStringExtra("binLoc");
-        String glass = intent.getStringExtra("glass");
-        String plastic = intent.getStringExtra("plastic");
-        String paper = intent.getStringExtra("paper");
-        String metal = intent.getStringExtra("metal");
-        String glass_full = intent.getStringExtra("glass_full");
-        String plastic_full = intent.getStringExtra("plastic_full");
-        String metal_full = intent.getStringExtra("metal_full");
-        String paper_full = intent.getStringExtra("paper_full");
 
+        if (kind.equals("user")) {
+            address = intent.getStringExtra("address");
+            binName = intent.getStringExtra("binName");
+            binLoc = intent.getStringExtra("binLoc");
+            glass = intent.getStringExtra("glass");
+            plastic = intent.getStringExtra("plastic");
+            paper = intent.getStringExtra("paper");
+            metal = intent.getStringExtra("metal");
+            glass_full = intent.getStringExtra("glass_full");
+            plastic_full = intent.getStringExtra("plastic_full");
+            metal_full = intent.getStringExtra("metal_full");
+            paper_full = intent.getStringExtra("paper_full");
+
+            sellboard_url = "http://gamhs44.ivyro.net/sellboardlist.php"; // 관리자 접속 시 접속할 PHP 파일
+
+        } else {
+            p_type_kr = intent.getStringExtra("p_type_kr");
+
+            sellboard_url = "http://gamhs44.ivyro.net/purchasablelist.php"; // 구매자 접속 시 접속할 PHP 파일
+            
+            switch(p_type_kr) {
+                case "전체":
+                    p_type = "all";
+                    break;
+
+                case "유리":
+                    p_type = "glass";
+                    break;
+
+
+                case"플라스틱":
+                    p_type = "plastic";
+                    break;
+
+
+                case "종이":
+                    p_type = "paper";
+                    break;
+
+
+                case "고철":
+                    p_type = "metal";
+                    break;
+            }
+        }
+
+        new GetSellboardDataTask().execute(sellboard_url);
 
 // ------------------ 버튼들 -----------------------------------------------
         btn_purchasedlist = findViewById(R.id.btn_purchasedlist);
@@ -121,7 +174,6 @@ public class ListActivity extends AppCompatActivity {
                 intent.putExtra("kind",kind);
                 intent.putExtra("userID",userID);
                 intent.putExtra("userName",userName);
-                intent.putExtra("address",address);
 
                 startActivity(intent);
 
@@ -181,10 +233,6 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 //------------------------- -----------------------------------------------
-
-
-
-
     /** contents -- 유리병 무게(0), 유리병 총 가격(1),
      플라스틱 무게(2), 플라스틱 총 가격(3),
      종이 무게(4), 종이 총 가격(5),
