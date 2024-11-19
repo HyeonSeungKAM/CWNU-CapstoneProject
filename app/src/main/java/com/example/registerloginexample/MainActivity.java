@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_BinName = "binName";
     private static final String TAG_STATUS = "status";
 
-    private Button btn_list, btn_salesList,btn_logout, btn_binList;// 판매하기, 목록 버튼
+    private Button btn_list, btn_salesList,btn_logout, btn_binList;
     private String userID, userName, kind, address;
 
 
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         tv_id.setText("(ID:"+userID+")");
         tv_name.setText(userName);
 
+        // 구매 내역 버튼
         btn_salesList = findViewById(R.id.btn_salesList);
         btn_salesList.setOnClickListener(new View.OnClickListener() {
 
@@ -79,8 +80,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn_logout = findViewById(R.id.btn_logout);// 목록
-        btn_logout.setOnClickListener(new View.OnClickListener() {    // 목록
+        // 로그아웃 버튼
+        btn_logout = findViewById(R.id.btn_logout);
+        btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -91,8 +93,9 @@ public class MainActivity extends AppCompatActivity {
 
         dialogItemList = new ArrayList<>();
 
-        btn_list = findViewById(R.id.btn_list); // 목록
-        btn_list.setOnClickListener(new View.OnClickListener() {    // 목록
+        // 판매 게시판 버튼
+        btn_list = findViewById(R.id.btn_list);
+        btn_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ListActivity.class);
@@ -107,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // 쓰레기통 목록 버튼
         btn_binList = findViewById(R.id.btn_binList);
         btn_binList.setOnClickListener(new View.OnClickListener() {
             @Override

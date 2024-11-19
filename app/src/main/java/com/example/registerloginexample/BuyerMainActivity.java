@@ -61,13 +61,13 @@ public class BuyerMainActivity extends AppCompatActivity {
             }
         });
 
-        // 목록 버튼
+        // 판매 게시판 접속 버튼
         btn_list = findViewById(R.id.btn_list); // 목록
         btn_list.setOnClickListener(new View.OnClickListener() {    // 목록
             @Override
             public void onClick(View view) {
                 p_type_kr = "전체";
-                Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
+                Intent intent = new Intent(BuyerMainActivity.this, ListActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("p_type_kr",p_type_kr);
                 intent.putExtra("userID",userID);
@@ -83,7 +83,7 @@ public class BuyerMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 p_type_kr = "유리";
-                Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
+                Intent intent = new Intent(BuyerMainActivity.this, ListActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("p_type_kr",p_type_kr);
                 intent.putExtra("userID",userID);
@@ -98,7 +98,7 @@ public class BuyerMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 p_type_kr = "플라스틱";
-                Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
+                Intent intent = new Intent(BuyerMainActivity.this, ListActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("p_type_kr",p_type_kr);
                 intent.putExtra("userID",userID);
@@ -113,7 +113,7 @@ public class BuyerMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 p_type_kr = "종이";
-                Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
+                Intent intent = new Intent(BuyerMainActivity.this, ListActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("p_type_kr",p_type_kr);
                 intent.putExtra("userID",userID);
@@ -128,7 +128,7 @@ public class BuyerMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 p_type_kr = "고철";
-                Intent intent = new Intent(BuyerMainActivity.this, BuyerPurchableListActivity.class);
+                Intent intent = new Intent(BuyerMainActivity.this, ListActivity.class);
                 intent.putExtra("kind",kind);
                 intent.putExtra("p_type_kr",p_type_kr);
                 intent.putExtra("userID",userID);
